@@ -6,9 +6,9 @@ import (
 )
 
 // 566
-func matrixReshape(nums [][]int, r int, c int) ([][]int) {
+func matrixReshape(nums [][]int, r int, c int) [][]int {
 	nR, nC := len(nums), len(nums[0])
-	if nR * nC != r * c {
+	if nR*nC != r*c {
 		return nums
 	}
 
@@ -24,31 +24,31 @@ func matrixReshape(nums [][]int, r int, c int) ([][]int) {
 	return result
 }
 
-var tests_566 = []struct{
+var tests_566 = []struct {
 	matrix [][]int
-	r int
-	c int
+	r      int
+	c      int
 	output [][]int
-} {
+}{
 	{
-		matrix: [][]int {
+		matrix: [][]int{
 			[]int{1, 2},
 			[]int{3, 4},
 		},
 		r: 1,
 		c: 4,
 		output: [][]int{
-			[]int{1,2,3,4},
+			[]int{1, 2, 3, 4},
 		},
 	},
 	{
-		matrix: [][]int {
+		matrix: [][]int{
 			[]int{1, 2},
 			[]int{3, 4},
 		},
 		r: 2,
 		c: 4,
-		output: [][]int {
+		output: [][]int{
 			[]int{1, 2},
 			[]int{3, 4},
 		},
