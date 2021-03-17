@@ -21,11 +21,11 @@ func Constructor(nums []int) NumArray {
 	}
 }
 
-func (this *NumArray) SumRange(i int, j int) int {
-	return this.preSum[j+1] - this.preSum[i]
+func (n *NumArray) SumRange(i int, j int) int {
+	return n.preSum[j+1] - n.preSum[i]
 }
 
-var tests_303 = []struct {
+var tests303 = []struct {
 	input  []int
 	output int
 }{
@@ -45,7 +45,7 @@ var tests_303 = []struct {
 
 func TestSumRange(t *testing.T) {
 	array := Constructor([]int{-2, 0, 3, -5, 2, -1})
-	for _, v := range tests_303 {
+	for _, v := range tests303 {
 		assert.Equal(t, array.SumRange(v.input[0], v.input[1]), v.output)
 	}
 }

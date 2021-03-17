@@ -5,7 +5,7 @@ import (
 	"testing"
 )
 
-var tests_1004 = []struct {
+var tests1004 = []struct {
 	a      []int
 	k      int
 	output int
@@ -42,7 +42,7 @@ func longestOnes(A []int, K int) int {
 }
 
 func TestLongestOnes(t *testing.T) {
-	for _, v := range tests_1004 {
+	for _, v := range tests1004 {
 		assert.Equal(t, longestOnes(v.a, v.k), v.output)
 	}
 }

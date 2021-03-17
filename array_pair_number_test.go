@@ -16,7 +16,7 @@ func arrayPairSum(nums []int) int {
 	return result
 }
 
-var tests_561 = []struct {
+var tests561 = []struct {
 	input  []int
 	output int
 }{
@@ -31,7 +31,7 @@ var tests_561 = []struct {
 }
 
 func TestArrayPairSum(t *testing.T) {
-	for _, v := range tests_561 {
+	for _, v := range tests561 {
 		assert.Equal(t, arrayPairSum(v.input), v.output)
 	}
 }

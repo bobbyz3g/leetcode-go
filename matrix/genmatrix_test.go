@@ -15,33 +15,33 @@ func generateMatrix(n int) [][]int {
 	for v := 1; v <= n*n; {
 		for i := left; i <= right; i++ {
 			result[top][i] = v
-			v += 1
+			v++
 		}
-		top += 1
+		top++
 
 		for i := top; i <= bottom; i++ {
 			result[i][right] = v
-			v += 1
+			v++
 		}
-		right -= 1
+		right--
 
 		for i := right; i >= left; i-- {
 			result[bottom][i] = v
-			v += 1
+			v++
 		}
-		bottom -= 1
+		bottom--
 
 		for i := bottom; i >= top; i-- {
 			result[i][left] = v
-			v += 1
+			v++
 		}
-		left += 1
+		left++
 	}
 
 	return result
 }
 
-var tests_59 = []struct {
+var tests59 = []struct {
 	n      int
 	matrix [][]int
 }{
@@ -66,7 +66,7 @@ var tests_59 = []struct {
 }
 
 func TestGeneratedMatrix(t *testing.T) {
-	for _, v := range tests_59 {
+	for _, v := range tests59 {
 		assert.Equal(t, v.matrix, generateMatrix(v.n))
 	}
 }

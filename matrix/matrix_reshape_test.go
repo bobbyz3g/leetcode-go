@@ -24,7 +24,7 @@ func matrixReshape(nums [][]int, r int, c int) [][]int {
 	return result
 }
 
-var tests_566 = []struct {
+var tests566 = []struct {
 	matrix [][]int
 	r      int
 	c      int
@@ -32,31 +32,31 @@ var tests_566 = []struct {
 }{
 	{
 		matrix: [][]int{
-			[]int{1, 2},
-			[]int{3, 4},
+			{1, 2},
+			{3, 4},
 		},
 		r: 1,
 		c: 4,
 		output: [][]int{
-			[]int{1, 2, 3, 4},
+			{1, 2, 3, 4},
 		},
 	},
 	{
 		matrix: [][]int{
-			[]int{1, 2},
-			[]int{3, 4},
+			{1, 2},
+			{3, 4},
 		},
 		r: 2,
 		c: 4,
 		output: [][]int{
-			[]int{1, 2},
-			[]int{3, 4},
+			{1, 2},
+			{3, 4},
 		},
 	},
 }
 
 func TestMatrixReshape(t *testing.T) {
-	for _, v := range tests_566 {
+	for _, v := range tests566 {
 		assert.Equal(t, matrixReshape(v.matrix, v.r, v.c), v.output)
 	}
 }

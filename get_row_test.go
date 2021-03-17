@@ -6,7 +6,7 @@ import (
 )
 
 // 119 Pascal's Traingle II
-var traingle_tests = []struct {
+var traingleTests = []struct {
 	a int
 	b []int
 }{
@@ -37,7 +37,7 @@ func getRow(rowIndex int) []int {
 }
 
 func TestGetRow(t *testing.T) {
-	for _, v := range traingle_tests {
+	for _, v := range traingleTests {
 		assert.Equal(t, getRow(v.a), v.b)
 	}
 }

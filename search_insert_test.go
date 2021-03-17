@@ -21,7 +21,7 @@ func searchInsert(nums []int, target int) int {
 	return result
 }
 
-var tests_995 = []struct {
+var tests995 = []struct {
 	nums   []int
 	target int
 	output int
@@ -49,7 +49,7 @@ var tests_995 = []struct {
 }
 
 func TestMinKBitFlips(t *testing.T) {
-	for _, v := range tests_995 {
+	for _, v := range tests995 {
 		assert.Equal(t, searchInsert(v.nums, v.target), v.output)
 	}
 }

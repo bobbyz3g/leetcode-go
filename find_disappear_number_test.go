@@ -25,7 +25,7 @@ func findDisappearedNumbers(nums []int) []int {
 	return result
 }
 
-var disappear_tests = []struct {
+var disappearTests = []struct {
 	a []int
 	b []int
 }{
@@ -36,7 +36,7 @@ var disappear_tests = []struct {
 }
 
 func TestFindDisappearedNumbers(t *testing.T) {
-	for _, v := range disappear_tests {
+	for _, v := range disappearTests {
 		assert.Equal(t, findDisappearedNumbers(v.a), v.b)
 	}
 }

@@ -13,7 +13,7 @@ func countBits(num int) []int {
 	return result
 }
 
-var tests_338 = []struct {
+var tests338 = []struct {
 	num    int
 	output []int
 }{
@@ -28,7 +28,7 @@ var tests_338 = []struct {
 }
 
 func TestCountBits(t *testing.T) {
-	for _, v := range tests_338 {
+	for _, v := range tests338 {
 		assert.Equal(t, countBits(v.num), v.output)
 	}
 }

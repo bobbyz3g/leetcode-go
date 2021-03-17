@@ -34,7 +34,7 @@ func longestPalindrome(s string) string {
 	return s[begin : begin+maxLen]
 }
 
-var tests_5 = []struct {
+var tests5 = []struct {
 	s   string
 	out string
 }{
@@ -53,7 +53,7 @@ var tests_5 = []struct {
 }
 
 func TestLongestPalindrome(t *testing.T) {
-	for _, v := range tests_5 {
+	for _, v := range tests5 {
 		assert.Equal(t, v.out, longestPalindrome(v.s))
 	}
 }

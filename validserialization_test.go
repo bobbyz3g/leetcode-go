@@ -9,7 +9,7 @@ import (
 func isValidSerialization(preorder string) bool {
 	diff := 1
 	for _, c := range strings.Split(preorder, ",") {
-		diff -= 1
+		diff--
 		if diff < 0 {
 			return false
 		}
@@ -20,7 +20,7 @@ func isValidSerialization(preorder string) bool {
 	return diff == 0
 }
 
-var tests_331 = []struct {
+var tests331 = []struct {
 	preorder string
 	ok       bool
 }{
@@ -43,7 +43,7 @@ var tests_331 = []struct {
 }
 
 func TestIsValidSerialization(t *testing.T) {
-	for _, v := range tests_331 {
+	for _, v := range tests331 {
 		assert.Equal(t, v.ok, isValidSerialization(v.preorder))
 	}
 }

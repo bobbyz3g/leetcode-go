@@ -29,12 +29,12 @@ func NewNumMatrix(matrix [][]int) NumMatrix {
 	}
 }
 
-func (this *NumMatrix) SumRegion(row1 int, col1 int, row2 int, col2 int) int {
-	return this.preSum[row2+1][col2+1] - this.preSum[row1][col2+1] - this.preSum[row2+1][col1] + this.preSum[row1][col1]
+func (n *NumMatrix) SumRegion(row1 int, col1 int, row2 int, col2 int) int {
+	return n.preSum[row2+1][col2+1] - n.preSum[row1][col2+1] - n.preSum[row2+1][col1] + n.preSum[row1][col1]
 
 }
 
-var tests_304 = []struct {
+var tests304 = []struct {
 	row1 int
 	col1 int
 	row2 int
@@ -75,7 +75,7 @@ func TestSumRegion(t *testing.T) {
 		{1, 0, 3, 0, 5},
 	}
 	numMatrix := NewNumMatrix(matrix)
-	for _, v := range tests_304 {
+	for _, v := range tests304 {
 		assert.Equal(t, numMatrix.SumRegion(v.row1, v.col1, v.row2, v.col2), v.sum)
 	}
 }

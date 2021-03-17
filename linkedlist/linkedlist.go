@@ -6,6 +6,7 @@ type ListNode struct {
 	Next *ListNode
 }
 
+// NewList build a new linked list from array.
 func NewList(vals []int) *ListNode {
 	head := &ListNode{}
 	pre := head

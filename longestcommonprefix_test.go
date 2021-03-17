@@ -23,7 +23,7 @@ func longestCommonPrefix(strs []string) string {
 	return result
 }
 
-var tests_14 = []struct {
+var tests14 = []struct {
 	strs   []string
 	output string
 }{
@@ -42,7 +42,7 @@ var tests_14 = []struct {
 }
 
 func TestLongestCommonPrefix(t *testing.T) {
-	for _, v := range tests_14 {
+	for _, v := range tests14 {
 		assert.Equal(t, longestCommonPrefix(v.strs), v.output)
 	}
 }

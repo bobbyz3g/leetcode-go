@@ -35,7 +35,7 @@ func lengthOfLIS(nums []int) int {
 	return result
 }
 
-var tests_300 = []struct {
+var tests300 = []struct {
 	nums []int
 	out  int
 }{
@@ -58,7 +58,7 @@ var tests_300 = []struct {
 }
 
 func TestLengthOfLIS(t *testing.T) {
-	for _, v := range tests_300 {
+	for _, v := range tests300 {
 		assert.Equal(t, v.out, lengthOfLIS(v.nums))
 	}
 }

@@ -54,7 +54,7 @@ func partition(s string) [][]string {
 	return result
 }
 
-var tests_131 = []struct {
+var tests131 = []struct {
 	s   string
 	out [][]string
 }{
@@ -69,7 +69,7 @@ var tests_131 = []struct {
 }
 
 func TestPartition(t *testing.T) {
-	for _, v := range tests_131 {
+	for _, v := range tests131 {
 		assert.Equal(t, v.out, partition(v.s))
 	}
 }
