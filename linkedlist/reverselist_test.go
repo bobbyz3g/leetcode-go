@@ -22,10 +22,5 @@ func TestReverseList(t *testing.T) {
 	expected := NewList([]int{5, 4, 3, 2, 1})
 	actual := reverseList(test)
 
-	i, j := actual, expected
-
-	for i != nil {
-		assert.Equal(t, j.Val, i.Val)
-		i, j = i.Next, j.Next
-	}
+	assert.Equal(t, true, expected.Equal(actual))
 }
