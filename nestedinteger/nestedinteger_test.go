@@ -25,14 +25,16 @@ func Constructor(nestedList []*NestedInteger) *NestedIterator {
 	return &NestedIterator{values}
 }
 
-func (this *NestedIterator) Next() int {
-	val := this.values[0]
-	this.values = this.values[1:]
+// Next returns the next value.
+func (n *NestedIterator) Next() int {
+	val := n.values[0]
+	n.values = n.values[1:]
 	return val
 }
 
-func (this *NestedIterator) HasNext() bool {
-	return len(this.values) > 0
+// HasNext returns true if there is a next value.
+func (n *NestedIterator) HasNext() bool {
+	return len(n.values) > 0
 }
 
 func TestNestedInteger(t *testing.T) {

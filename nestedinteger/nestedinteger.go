@@ -1,5 +1,6 @@
 package nestedinteger
 
+// NestedInteger holds a single integer or nested list.
 type NestedInteger interface {
 	// IsInteger returns true if this NestedInteger holds a single integer,
 	// rather than a nested list.
