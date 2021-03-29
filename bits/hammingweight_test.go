@@ -1,18 +1,9 @@
-package main
+package bits
 
 import (
 	"github.com/stretchr/testify/assert"
 	"testing"
 )
-
-func hammingWeight(num uint32) int {
-	var nums uint32
-	for num > 0 {
-		nums += (num & 1)
-		num = num >> 1
-	}
-	return int(nums)
-}
 
 var tests191 = []struct {
 	in  uint32
@@ -34,6 +25,6 @@ var tests191 = []struct {
 
 func TestHammingWeight(t *testing.T) {
 	for _, v := range tests191 {
-		assert.Equal(t, v.out, hammingWeight(v.in))
+		assert.Equal(t, v.out, HammingWeight(v.in))
 	}
 }
