@@ -5,25 +5,6 @@ import (
 	"testing"
 )
 
-// 566
-func matrixReshape(nums [][]int, r int, c int) [][]int {
-	nR, nC := len(nums), len(nums[0])
-	if nR*nC != r*c {
-		return nums
-	}
-
-	result := make([][]int, r)
-	for i := range result {
-		result[i] = make([]int, c)
-	}
-
-	for i := 0; i < nR*nC; i++ {
-		result[i/c][i%c] = nums[i/nC][i%nC]
-	}
-
-	return result
-}
-
 var tests566 = []struct {
 	matrix [][]int
 	r      int
@@ -57,6 +38,6 @@ var tests566 = []struct {
 
 func TestMatrixReshape(t *testing.T) {
 	for _, v := range tests566 {
-		assert.Equal(t, matrixReshape(v.matrix, v.r, v.c), v.output)
+		assert.Equal(t, Reshape(v.matrix, v.r, v.c), v.output)
 	}
 }

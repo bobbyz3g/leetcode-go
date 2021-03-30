@@ -1,5 +1,6 @@
 package bits
 
+// HammingWeight returns the hamming weight of a uint32 number.
 func HammingWeight(num uint32) int {
 	var nums uint32
 	for num > 0 {
@@ -9,6 +10,7 @@ func HammingWeight(num uint32) int {
 	return int(nums)
 }
 
+// ReverseBits revers all bits of given number.
 func ReverseBits(num uint32) uint32 {
 	var res uint32
 

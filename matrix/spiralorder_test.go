@@ -5,50 +5,6 @@ import (
 	"testing"
 )
 
-func spiralOrder(matrix [][]int) []int {
-	m, n := len(matrix), len(matrix[0])
-	result := make([]int, 0, m*n)
-
-	top, bottom, left, right := 0, m-1, 0, n-1
-
-	for {
-		// move to right
-		for i := left; i <= right; i++ {
-			result = append(result, matrix[top][i])
-		}
-
-		if top++; top > bottom {
-			break
-		}
-
-		for i := top; i <= bottom; i++ {
-			result = append(result, matrix[i][right])
-		}
-
-		if right--; right < left {
-			break
-		}
-
-		for i := right; i >= left; i-- {
-			result = append(result, matrix[bottom][i])
-		}
-
-		if bottom--; bottom < top {
-			break
-		}
-
-		for i := bottom; i >= top; i-- {
-			result = append(result, matrix[i][left])
-		}
-
-		if left++; left > right {
-			break
-		}
-	}
-
-	return result
-}
-
 var tests54 = []struct {
 	matrix [][]int
 	out    []int
@@ -73,6 +29,6 @@ var tests54 = []struct {
 
 func TestSpiralOrder(t *testing.T) {
 	for _, v := range tests54 {
-		assert.Equal(t, v.out, spiralOrder(v.matrix))
+		assert.Equal(t, v.out, SpiralOrder(v.matrix))
 	}
 }
