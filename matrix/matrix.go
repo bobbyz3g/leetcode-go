@@ -1,5 +1,7 @@
 package matrix
 
+import "sort"
+
 // Reshape reshapes the matrix from m * n to r * c
 func Reshape(nums [][]int, r int, c int) [][]int {
 	nR, nC := len(nums), len(nums[0])
@@ -17,6 +19,23 @@ func Reshape(nums [][]int, r int, c int) [][]int {
 	}
 
 	return result
+}
+
+// Search searches for a value in an m x n matrix.
+func Search(matrix [][]int, target int) bool {
+	// find the row of target maybe in.
+	row := sort.Search(len(matrix), func(i int) bool {
+		return matrix[i][0] > target
+	}) - 1
+
+	if row == -1 {
+		return false
+	}
+
+	// find the column.
+	col := sort.SearchInts(matrix[row], target)
+
+	return col < len(matrix[row]) && matrix[row][col] == target
 }
 
 // GenerateMatrix generates an n x n matrix filled with elements
