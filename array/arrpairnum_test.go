@@ -1,20 +1,9 @@
-package main
+package array
 
 import (
 	"github.com/stretchr/testify/assert"
-	"sort"
 	"testing"
 )
-
-// 561
-func arrayPairSum(nums []int) int {
-	sort.Ints(nums)
-	result := 0
-	for i := 0; i < len(nums); i += 2 {
-		result += nums[i]
-	}
-	return result
-}
 
 var tests561 = []struct {
 	input  []int
@@ -32,6 +21,6 @@ var tests561 = []struct {
 
 func TestArrayPairSum(t *testing.T) {
 	for _, v := range tests561 {
-		assert.Equal(t, arrayPairSum(v.input), v.output)
+		assert.Equal(t, PairSum(v.input), v.output)
 	}
 }
