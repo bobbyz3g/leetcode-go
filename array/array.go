@@ -44,3 +44,25 @@ func LengthOfLIS(nums []int) int {
 	}
 	return result
 }
+
+// SubsetsWithDup returns all possible subsets (the power set).
+// The result is not contain duplicate subsets.
+func SubsetsWithDup(nums []int) [][]int {
+	var res [][]int
+	sort.Ints(nums)
+	n := len(nums)
+outer:
+	for mask := 0; mask < 1<<n; mask++ {
+		t := []int{}
+		for i, v := range nums {
+			if mask>>i&1 > 0 {
+				if i > 0 && mask>>(i-1)&1 == 0 && v == nums[i-1] {
+					continue outer
+				}
+				t = append(t, v)
+			}
+		}
+		res = append(res, append([]int(nil), t...))
+	}
+	return res
+}
