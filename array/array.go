@@ -1,6 +1,8 @@
 package array
 
-import "sort"
+import (
+	"sort"
+)
 
 // PairSum groups these integers into n pairs (a1, b1), (a2, b2), ..., (an, bn)
 // such that the sum of min(ai, bi) for all i is maximized. Return the maximized sum.
@@ -65,4 +67,38 @@ outer:
 		res = append(res, append([]int(nil), t...))
 	}
 	return res
+}
+
+// RemoveDuplicates1 removes the duplicates in-place,
+// such that each element appears only once and returns the new length.
+// Given nums is sorted.
+func RemoveDuplicates1(nums []int) int {
+	return RemoveDuplicates(nums, 1)
+}
+
+// RemoveDuplicates2 removes the duplicates in-place such that duplicates appeared at most twice
+// and returns the new length slice.
+// Given nums is sorted.
+func RemoveDuplicates2(nums []int) int {
+	return RemoveDuplicates(nums, 2)
+}
+
+// RemoveDuplicates removes the duplicates in-place,
+// such that duplicates appeared at most appearNum and returns the new length.
+// Given nums is sorted.
+func RemoveDuplicates(nums []int, appearNum int) int {
+	if len(nums) < appearNum || appearNum < 1 {
+		return len(nums)
+	}
+	slow := appearNum - 1
+	prev := appearNum - 1
+
+	for fast := appearNum; fast < len(nums); fast++ {
+		if nums[slow-prev] != nums[fast] {
+			slow++
+			nums[slow] = nums[fast]
+		}
+	}
+
+	return slow + 1
 }
