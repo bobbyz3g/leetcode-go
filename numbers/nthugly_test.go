@@ -33,6 +33,7 @@ var tests263 = []struct {
 	{8, true},
 	{14, false},
 	{1, true},
+	{0, false},
 }
 
 func TestIsUgly(t *testing.T) {

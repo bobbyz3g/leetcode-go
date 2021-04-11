@@ -5,7 +5,7 @@ var factors = []int{2, 3, 5}
 // IsUgly returns true if n is a ugly number.
 // Ugly number is a positive number whose prime factors only include 2, 3, and/or 5
 func IsUgly(n int) bool {
-	if n < 0 {
+	if n <= 0 {
 		return false
 	}
 
