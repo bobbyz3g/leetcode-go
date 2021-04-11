@@ -24,3 +24,19 @@ func TestNthUglyNumber(t *testing.T) {
 		assert.Equal(t, v.num, NthUglyNumber(v.n))
 	}
 }
+
+var tests263 = []struct {
+	n  int
+	ok bool
+}{
+	{6, true},
+	{8, true},
+	{14, false},
+	{1, true},
+}
+
+func TestIsUgly(t *testing.T) {
+	for _, v := range tests263 {
+		assert.Equal(t, v.ok, IsUgly(v.n))
+	}
+}
