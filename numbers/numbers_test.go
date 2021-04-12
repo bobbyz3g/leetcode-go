@@ -9,14 +9,8 @@ var tests264 = []struct {
 	n   int
 	num int
 }{
-	{
-		10,
-		12,
-	},
-	{
-		1,
-		1,
-	},
+	{10, 12},
+	{1, 1},
 }
 
 func TestNthUglyNumber(t *testing.T) {
