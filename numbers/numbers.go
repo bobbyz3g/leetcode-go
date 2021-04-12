@@ -27,7 +27,7 @@ func NthUglyNumber(n int) int {
 	p2, p3, p5 := 1, 1, 1
 	for i := 2; i <= n; i++ {
 		x2, x3, x5 := dp[p2]*2, dp[p3]*3, dp[p5]*5
-		dp[i] = min(min(x2, x3), x5)
+		dp[i] = MinInt(MinInt(x2, x3), x5)
 		if dp[i] == x2 {
 			p2++
 		}
@@ -41,9 +41,18 @@ func NthUglyNumber(n int) int {
 	return dp[n]
 }
 
-func min(a, b int) int {
+// MinInt returns the minimum number.
+func MinInt(a, b int) int {
 	if a < b {
 		return a
 	}
 	return b
+}
+
+// MaxInt returns the maximum number.
+func MaxInt(a, b int) int {
+	if a < b {
+		return b
+	}
+	return a
 }

@@ -1,6 +1,7 @@
 package array
 
 import (
+	"leetcode-go/numbers"
 	"sort"
 )
 
@@ -22,13 +23,6 @@ func LengthOfLIS(nums []int) int {
 	if l == 0 {
 		return 0
 	}
-	max := func(a int, b int) int {
-		if a > b {
-			return a
-		}
-		return b
-	}
-
 	dp := make([]int, l)
 	dp[0] = 1
 	result := 1
@@ -38,11 +32,11 @@ func LengthOfLIS(nums []int) int {
 
 		for j := 0; j < i; j++ {
 			if nums[i] > nums[j] {
-				dp[i] = max(dp[i], dp[j]+1)
+				dp[i] = numbers.MaxInt(dp[i], dp[j]+1)
 			}
 		}
 
-		result = max(result, dp[i])
+		result = numbers.MaxInt(result, dp[i])
 	}
 	return result
 }
