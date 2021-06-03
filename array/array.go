@@ -49,7 +49,7 @@ func SubsetsWithDup(nums []int) [][]int {
 	n := len(nums)
 outer:
 	for mask := 0; mask < 1<<n; mask++ {
-		t := []int{}
+		var t []int
 		for i, v := range nums {
 			if mask>>i&1 > 0 {
 				if i > 0 && mask>>(i-1)&1 == 0 && v == nums[i-1] {
