@@ -161,3 +161,26 @@ func SearchInRotatedSorted(n int, f func(i int) int, cmp func(i, j int) int) int
 
 	return -1
 }
+
+// FindMaxLength returns the maximum length of
+// a contiguous subarray with an equal number of 0 and 1.
+func FindMaxLength(nums []int) (maxL int) {
+	if len(nums) < 2 {
+		return
+	}
+	mp := map[int]int{0: -1}
+	cnt := 0
+	for i, n := range nums {
+		if n == 1 {
+			cnt++
+		} else {
+			cnt--
+		}
+		if v, ok := mp[cnt]; ok {
+			maxL = numbers.MaxInt(maxL, i-v)
+		} else {
+			mp[cnt] = i
+		}
+	}
+	return
+}
