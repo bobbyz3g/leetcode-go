@@ -1,2 +1,3 @@
 # leetcode-go
-My leetcode solution of go.
+
+Solution of leetcode. All functions can be imported to use.

@@ -1,5 +1,7 @@
 package algebra
 
+import "strings"
+
 var factors = []int{2, 3, 5}
 
 // IsUgly returns true if n is a ugly number.
@@ -55,4 +57,92 @@ func MaxInt(a, b int) int {
 		return b
 	}
 	return a
+}
+
+// GetRow returns the nth (0-indexed) row of the Pascal's triangle.
+func GetRow(n int) []int {
+	l := n + 1
+	result := make([]int, l)
+	result[0] = 1
+
+	for i := 0; i < n; i++ {
+		pre := result[0]
+		for j := 1; j < l; j++ {
+			cur := result[j]
+			result[j] = cur + pre
+			pre = cur
+		}
+	}
+	return result
+}
+
+// FindDisappearedNumbers returns an array of all the integers
+// in the range [1, n] that do not appear in nums.
+func FindDisappearedNumbers(nums []int) []int {
+	result := make([]int, 0, 1)
+	l := len(nums)
+
+	// local array hash.
+	for _, v := range nums {
+		index := (v - 1) % l
+		nums[index] = nums[index] + l
+	}
+
+	for i, v := range nums {
+		if v <= l {
+			result = append(result, i+1)
+		}
+	}
+
+	return result
+}
+
+// LongestOnes return the maximum number of consecutive 1's
+// in the array if you can flip at most k 0's
+//
+// origin：https://leetcode-cn.com/problems/max-consecutive-ones-iii
+func LongestOnes(A []int, K int) int {
+	var result, left, leftZeroNum, rightZeroNum int
+	for right, v := range A {
+		rightZeroNum = 1 - v + rightZeroNum
+		for leftZeroNum < rightZeroNum-K {
+			leftZeroNum = 1 - A[left] + leftZeroNum
+			left++
+		}
+		result = MaxInt(result, right-left+1)
+	}
+	return result
+}
+
+// IsValidSerialization returns true if it is a correct preorder traversal serialization of a binary tree.
+func IsValidSerialization(preorder string) bool {
+	diff := 1
+	for _, c := range strings.Split(preorder, ",") {
+		diff--
+		if diff < 0 {
+			return false
+		}
+		if c != "#" {
+			diff += 2
+		}
+	}
+	return diff == 0
+}
+
+// SearchInsert return the index if the target is found.
+// If not, return the index where it would be if it were inserted in order
+func SearchInsert(nums []int, target int) int {
+	l := len(nums)
+	result := l
+	left, right := 0, l-1
+	for left <= right {
+		mid := (right-left)>>1 + left
+		if target <= nums[mid] {
+			result = mid
+			right = mid - 1
+		} else {
+			left = mid + 1
+		}
+	}
+	return result
 }

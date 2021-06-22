@@ -21,3 +21,13 @@ func ReverseBits(num uint32) uint32 {
 
 	return res
 }
+
+// CountBits returns an array ans of length n + 1 such that for each i (0 <= i <= n),
+// res[i] is the number of 1's in the binary representation of i.
+func CountBits(num int) []int {
+	result := make([]int, num+1)
+	for i := 1; i < num+1; i++ {
+		result[i] = result[i>>1] + (i & 1)
+	}
+	return result
+}
