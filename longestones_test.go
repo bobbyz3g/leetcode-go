@@ -2,7 +2,7 @@ package main
 
 import (
 	"github.com/stretchr/testify/assert"
-	"leetcode-go/numbers"
+	"leetcode-go/algebra"
 	"testing"
 )
 
@@ -31,7 +31,7 @@ func longestOnes(A []int, K int) int {
 			leftZeroNum = 1 - A[left] + leftZeroNum
 			left++
 		}
-		result = numbers.MaxInt(result, right-left+1)
+		result = algebra.MaxInt(result, right-left+1)
 	}
 	return result
 }

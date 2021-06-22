@@ -1,4 +1,4 @@
-package nestedinteger
+package nestedint
 
 import (
 	"github.com/stretchr/testify/assert"
@@ -39,12 +39,12 @@ func (n *NestedIterator) HasNext() bool {
 
 func TestNestedInteger(t *testing.T) {
 	tests := make([]NestedInteger, 0, 3)
-	elem0 := newNestedInteger()
+	elem0 := NewNestedInteger()
 	elem0.Add(&nestedInteger{true, 1, nil})
 	elem0.Add(&nestedInteger{true, 1, nil})
 	tests = append(tests, elem0)
 
-	elem1 := newNestedInteger()
+	elem1 := NewNestedInteger()
 	elem1.SetInteger(2)
 	tests = append(tests, elem1)
 	tests = append(tests, elem0)
@@ -56,12 +56,12 @@ func TestNestedInteger(t *testing.T) {
 
 func TestNestedIterator(t *testing.T) {
 	tests := make([]*NestedInteger, 0, 3)
-	elem0 := newNestedInteger()
+	elem0 := NewNestedInteger()
 	elem0.Add(&nestedInteger{true, 1, nil})
 	elem0.Add(&nestedInteger{true, 1, nil})
 	tests = append(tests, &elem0)
 
-	elem1 := newNestedInteger()
+	elem1 := NewNestedInteger()
 	elem1.SetInteger(2)
 	tests = append(tests, &elem1)
 	tests = append(tests, &elem0)

@@ -1,4 +1,4 @@
-package bits
+package bit
 
 // HammingWeight returns the hamming weight of a uint32 number.
 func HammingWeight(num uint32) int {

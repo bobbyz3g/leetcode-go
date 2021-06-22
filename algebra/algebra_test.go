@@ -1,4 +1,4 @@
-package numbers
+package algebra
 
 import (
 	"github.com/stretchr/testify/assert"

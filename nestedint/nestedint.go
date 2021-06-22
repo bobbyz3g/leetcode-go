@@ -1,4 +1,4 @@
-package nestedinteger
+package nestedint
 
 // NestedInteger holds a single integer or nested list.
 type NestedInteger interface {
@@ -29,7 +29,7 @@ type nestedInteger struct {
 	integers []*NestedInteger
 }
 
-func newNestedInteger() NestedInteger {
+func NewNestedInteger() NestedInteger {
 	return &nestedInteger{
 		false,
 		0,

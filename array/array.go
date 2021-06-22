@@ -1,7 +1,7 @@
 package array
 
 import (
-	"leetcode-go/numbers"
+	"leetcode-go/algebra"
 	"sort"
 )
 
@@ -32,11 +32,11 @@ func LengthOfLIS(nums []int) int {
 
 		for j := 0; j < i; j++ {
 			if nums[i] > nums[j] {
-				dp[i] = numbers.MaxInt(dp[i], dp[j]+1)
+				dp[i] = algebra.MaxInt(dp[i], dp[j]+1)
 			}
 		}
 
-		result = numbers.MaxInt(result, dp[i])
+		result = algebra.MaxInt(result, dp[i])
 	}
 	return result
 }
@@ -177,7 +177,7 @@ func FindMaxLength(nums []int) (maxL int) {
 			cnt--
 		}
 		if v, ok := mp[cnt]; ok {
-			maxL = numbers.MaxInt(maxL, i-v)
+			maxL = algebra.MaxInt(maxL, i-v)
 		} else {
 			mp[cnt] = i
 		}

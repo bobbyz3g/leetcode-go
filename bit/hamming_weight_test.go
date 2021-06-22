@@ -1,4 +1,4 @@
-package bits
+package bit
 
 import (
 	"github.com/stretchr/testify/assert"

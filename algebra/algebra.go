@@ -1,4 +1,4 @@
-package numbers
+package algebra
 
 var factors = []int{2, 3, 5}
 
