@@ -1,8 +1,9 @@
 package bit
 
 import (
-	"github.com/stretchr/testify/assert"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
 
 var tests191 = []struct {
