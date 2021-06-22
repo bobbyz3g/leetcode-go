@@ -46,3 +46,84 @@ func (l *ListNode) Len() int {
 	}
 	return lLen
 }
+
+// DeleteDuplicates deletes all duplicates such that each element appears only once.
+// Return the linked list sorted as well
+func DeleteDuplicates(head *ListNode) *ListNode {
+	if head == nil || head.Next == nil {
+		return head
+	}
+
+	dummy := &ListNode{-1, head}
+	cur := head
+	for cur.Next != nil {
+		if cur.Val == cur.Next.Val {
+			tmp := cur.Next
+			cur.Next = cur.Next.Next
+			tmp.Next = nil
+		} else {
+			cur = cur.Next
+		}
+	}
+	return dummy.Next
+}
+
+// DeleteDuplicates2 deletes all nodes that have duplicate numbers,
+// leaving only distinct numbers from the original list.
+// Return the linked list sorted as wel
+func DeleteDuplicates2(head *ListNode) *ListNode {
+	if head == nil || head.Next == nil {
+		return head
+	}
+
+	dummy := &ListNode{-1, head}
+
+	cur := dummy
+	next := cur.Next
+
+	for next != nil && next.Next != nil {
+		if next.Val == next.Next.Val {
+			val := next.Val
+			for next != nil && next.Val == val {
+				next = next.Next
+				cur.Next = next
+			}
+		} else {
+			cur = next
+			next = cur.Next
+		}
+	}
+
+	return dummy.Next
+}
+
+// ReverseList reverses the given list.
+func ReverseList(head *ListNode) *ListNode {
+	var prev *ListNode
+	cur := head
+	for cur != nil {
+		next := cur.Next
+		cur.Next = prev
+		prev = cur
+		cur = next
+	}
+	return prev
+}
+
+// ReverseBetween reverse the nodes of the list from position left to position right,
+// and return the reversed list
+func ReverseBetween(head *ListNode, left int, right int) *ListNode {
+	dummy := &ListNode{Val: -1, Next: head}
+	pre := dummy
+	for i := 0; i < left-1; i++ {
+		pre = pre.Next
+	}
+	cur := pre.Next
+	for i := 0; i < right-left; i++ {
+		next := cur.Next
+		cur.Next = next.Next
+		next.Next = pre.Next
+		pre.Next = next
+	}
+	return dummy.Next
+}
