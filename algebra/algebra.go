@@ -7,7 +7,13 @@ import (
 
 var ErrOutOfBound = errors.New("n must be less than 4000 and greater than 0")
 
-var factors = []int{2, 3, 5}
+var (
+	factors   = []int{2, 3, 5}
+	thousands = []string{"", "M", "MM", "MMM"}
+	hundreds  = []string{"", "C", "CC", "CCC", "CD", "D", "DC", "DCC", "DCCC", "CM"}
+	tens      = []string{"", "X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC"}
+	ones      = []string{"", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX"}
+)
 
 // IsUgly returns true if n is a ugly number.
 // Ugly number is a positive number whose prime factors only include 2, 3, and/or 5
@@ -151,13 +157,6 @@ func SearchInsert(nums []int, target int) int {
 	}
 	return result
 }
-
-var (
-	thousands = []string{"", "M", "MM", "MMM"}
-	hundreds  = []string{"", "C", "CC", "CCC", "CD", "D", "DC", "DCC", "DCCC", "CM"}
-	tens      = []string{"", "X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC"}
-	ones      = []string{"", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX"}
-)
 
 // IToR converts unsigned integer to a roman numeral.
 // 1 <= num <= 3999
