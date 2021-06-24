@@ -152,3 +152,48 @@ func TestMinKBitFlips(t *testing.T) {
 		assert.Equal(t, SearchInsert(v.nums, v.target), v.output)
 	}
 }
+
+func TestIToR(t *testing.T) {
+	var tests12 = []struct {
+		num int
+		r   string
+		err error
+	}{
+		{
+			3,
+			"III",
+			nil,
+		},
+		{
+			4,
+			"IV",
+			nil,
+		},
+		{
+			9,
+			"IX",
+			nil,
+		},
+		{
+			58,
+			"LVIII",
+			nil,
+		},
+		{
+			1994,
+			"MCMXCIV",
+			nil,
+		},
+		{
+			0,
+			"",
+			ErrOutOfBound,
+		},
+	}
+
+	for _, tt := range tests12 {
+		r, err := IToR(tt.num)
+		assert.Equal(t, tt.r, r)
+		assert.Equal(t, tt.err, err)
+	}
+}
