@@ -1,9 +1,11 @@
 package algebra
 
+// NumArray is used to calculate range sum of array.
 type NumArray struct {
 	preSum []int
 }
 
+// Constructor returns a new NumArray.
 func Constructor(nums []int) NumArray {
 	preSum := make([]int, len(nums)+1)
 
@@ -16,6 +18,7 @@ func Constructor(nums []int) NumArray {
 	}
 }
 
+// SumRange returns then sum of range (1, j).
 func (n *NumArray) SumRange(i int, j int) int {
 	return n.preSum[j+1] - n.preSum[i]
 }

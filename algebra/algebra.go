@@ -5,6 +5,7 @@ import (
 	"strings"
 )
 
+// ErrOutOfBound is a error that input number is not less than 4000 and greater than 0
 var ErrOutOfBound = errors.New("n must be less than 4000 and greater than 0")
 
 var (

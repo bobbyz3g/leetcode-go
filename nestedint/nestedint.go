@@ -29,6 +29,7 @@ type nestedInteger struct {
 	integers []*NestedInteger
 }
 
+// NewNestedInteger returns a zero value NestedInteger.
 func NewNestedInteger() NestedInteger {
 	return &nestedInteger{
 		false,
