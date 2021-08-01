@@ -1,8 +1,9 @@
 package array
 
 import (
-	"leetcode-go/algebra"
 	"sort"
+
+	"github.com/Kaiser925/leetcode-go/algebra"
 )
 
 // PairSum groups these integers into n pairs (a1, b1), (a2, b2), ..., (an, bn)

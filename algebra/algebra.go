@@ -16,6 +16,9 @@ var (
 	ones      = []string{"", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX"}
 )
 
+// IntPair represents a pair of two int nums.
+type IntPair struct{ Left, Right int }
+
 // IsUgly returns true if n is a ugly number.
 // Ugly number is a positive number whose prime factors only include 2, 3, and/or 5
 func IsUgly(n int) bool {

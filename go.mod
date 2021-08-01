@@ -1,4 +1,4 @@
-module leetcode-go
+module "github.com/Kaiser925/leetcode-go"
 
 go 1.15
 

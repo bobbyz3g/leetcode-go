@@ -1,6 +1,25 @@
+/*
+ * Developed by Kaiser925 on 2021/8/1.
+ * Lasted modified 2021/8/1.
+ * Copyright (c) 2021.  All rights reserved
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package matrix
 
-import "sort"
+import (
+	"sort"
+
+	"github.com/Kaiser925/leetcode-go/algebra"
+)
 
 // Reshape reshapes the matrix from m * n to r * c
 func Reshape(nums [][]int, r int, c int) [][]int {
@@ -150,5 +169,28 @@ func NewNumMatrix(matrix [][]int) NumMatrix {
 // SumRegion calculates the sum of matrix region.
 func (n *NumMatrix) SumRegion(row1 int, col1 int, row2 int, col2 int) int {
 	return n.preSum[row2+1][col2+1] - n.preSum[row1][col2+1] - n.preSum[row2+1][col1] + n.preSum[row1][col1]
+}
 
+// KWeakRows the indices of the k weakest rows in the matrix ordered from weakest to strongest,
+// mat is an m x n binary matrix.
+// A row i is weaker than a row j if one of the following is true:
+// - The number of 1 in row i is less than the number of 1 in row j.
+// - Both rows have the same number of 1 and i < j.
+func KWeakRows(mat [][]int, k int) []int {
+	ret := make([]int, k)
+	pairs := make([]algebra.IntPair, len(mat))
+	for i, row := range mat {
+		pow := sort.Search(len(row), func(j int) bool {
+			return row[j] == 0
+		})*100 + i
+		pow = pow*100 + 1 // avoid error order of same pow of line.
+		pairs[i] = algebra.IntPair{Left: pow, Right: i}
+	}
+	sort.Slice(pairs, func(i, j int) bool {
+		return pairs[j].Left-pairs[i].Left > 0
+	})
+	for i, pair := range pairs[:k] {
+		ret[i] = pair.Right
+	}
+	return ret
 }

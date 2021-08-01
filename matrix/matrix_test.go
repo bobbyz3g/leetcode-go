@@ -120,7 +120,6 @@ func TestMatrixReshape(t *testing.T) {
 }
 
 func TestSearch(t *testing.T) {
-
 	var tests74 = []struct {
 		matrix [][]int
 		target int
@@ -152,7 +151,6 @@ func TestSearch(t *testing.T) {
 }
 
 func TestSpiralOrder(t *testing.T) {
-
 	var tests54 = []struct {
 		matrix [][]int
 		out    []int
@@ -177,5 +175,40 @@ func TestSpiralOrder(t *testing.T) {
 
 	for _, v := range tests54 {
 		assert.Equal(t, v.out, SpiralOrder(v.matrix))
+	}
+}
+
+func TestKWeakRows(t *testing.T) {
+	tests := []struct {
+		mat [][]int
+		k   int
+		row []int
+	}{
+		{
+			mat: [][]int{{1, 1, 0, 0, 0},
+				{1, 1, 1, 1, 0},
+				{1, 0, 0, 0, 0},
+				{1, 1, 0, 0, 0},
+				{1, 1, 1, 1, 1},
+			},
+			k:   3,
+			row: []int{2, 0, 3},
+		},
+		{
+			mat: [][]int{
+				{1, 1, 0},
+				{1, 1, 0},
+				{1, 1, 1},
+				{1, 1, 1},
+				{0, 0, 0},
+				{1, 1, 1},
+				{1, 0, 0},
+			},
+			k:   6,
+			row: []int{4, 6, 0, 1, 2, 3},
+		},
+	}
+	for _, tt := range tests {
+		assert.Equal(t, tt.row, KWeakRows(tt.mat, tt.k))
 	}
 }
