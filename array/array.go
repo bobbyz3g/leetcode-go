@@ -185,3 +185,27 @@ func FindMaxLength(nums []int) (maxL int) {
 	}
 	return
 }
+
+// BinarySearch searches the index of element that value is equal target in nums.
+// If there is no element equal to target, returns -1.
+// Note: array should be sorted in asc.
+func BinarySearch(nums []int, target int) int {
+	if len(nums) == 0 {
+		return -1
+	}
+	left, right := 0, len(nums)-1
+
+	for left <= right {
+		i := left + (right-left)/2
+		if nums[i] == target {
+			return i
+		}
+
+		if nums[i] < target {
+			left = i + 1
+		} else {
+			right = i - 1
+		}
+	}
+	return -1
+}

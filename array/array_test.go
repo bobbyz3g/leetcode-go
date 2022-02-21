@@ -193,3 +193,46 @@ func TestSubsetsWithDup(t *testing.T) {
 		assert.Equal(t, v.res, SubsetsWithDup(v.nums))
 	}
 }
+
+func TestBinarySearch(t *testing.T) {
+	tests := []struct {
+		nums  []int
+		val   int
+		index int
+	}{
+		{
+			nums:  []int{-1, 0, 3, 5, 9, 12},
+			val:   9,
+			index: 4,
+		},
+		{
+			nums:  []int{-1, 0, 3, 5, 9, 12},
+			val:   2,
+			index: -1,
+		},
+		{
+			nums:  []int{},
+			val:   2,
+			index: -1,
+		},
+		{
+			nums:  []int{5},
+			val:   5,
+			index: 0,
+		},
+		{
+			nums:  []int{1},
+			val:   2,
+			index: -1,
+		},
+		{
+			nums:  []int{1, 2},
+			val:   2,
+			index: 1,
+		},
+	}
+
+	for _, tt := range tests {
+		assert.Equal(t, tt.index, BinarySearch(tt.nums, tt.val))
+	}
+}
