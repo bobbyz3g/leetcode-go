@@ -209,3 +209,33 @@ func BinarySearch(nums []int, target int) int {
 	}
 	return -1
 }
+
+// SortedSquares calculates the squares of slice element, and sort it.
+func SortedSquares(nums []int) []int {
+	n := len(nums)
+
+	index := -1
+	for i := 0; i < n && nums[i] < 0; i++ {
+		index = i
+	}
+	res := make([]int, 0, n)
+
+	neg, nonNeg := index, index+1
+	for neg >= 0 || nonNeg < n {
+		if neg < 0 {
+			res = append(res, nums[nonNeg]*nums[nonNeg])
+			nonNeg++
+		} else if nonNeg == n {
+			res = append(res, nums[neg]*nums[neg])
+			neg--
+		} else if nums[neg]*nums[neg] < nums[nonNeg]*nums[nonNeg] {
+			res = append(res, nums[neg]*nums[neg])
+			neg--
+		} else {
+			res = append(res, nums[nonNeg]*nums[nonNeg])
+			nonNeg++
+		}
+	}
+
+	return res
+}
