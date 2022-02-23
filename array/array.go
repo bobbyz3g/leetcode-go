@@ -242,6 +242,7 @@ func SortedSquares(nums []int) []int {
 
 // MoveZeroes moves all 0's to the end of it while maintaining the
 // relative order of the non-zero elements.
+// link: https://leetcode-cn.com/problems/move-zeroes/
 func MoveZeroes(nums []int) {
 	n := len(nums)
 	for i := range nums {
@@ -256,4 +257,22 @@ func MoveZeroes(nums []int) {
 			}
 		}
 	}
+}
+
+// TwoSumII returns the indices of the two numbers, index1 and index2,
+// added by one as an integer array [index1, index2] of length 2.
+// link：https://leetcode-cn.com/problems/two-sum-ii-input-array-is-sorted
+func TwoSumII(numbers []int, target int) []int {
+	left, right := 0, len(numbers)-1
+	for left < right {
+		s := numbers[left] + numbers[right]
+		if s == target {
+			return []int{left + 1, right + 1}
+		} else if s < target {
+			left++
+		} else {
+			right--
+		}
+	}
+	return []int{-1, -1}
 }

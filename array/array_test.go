@@ -276,3 +276,30 @@ func TestMoveZeroes(t *testing.T) {
 		assert.Equal(t, tt.want, tt.input)
 	}
 }
+
+func TestTwoSumII(t *testing.T) {
+	tests := []struct {
+		nums   []int
+		target int
+		want   []int
+	}{
+		{
+			nums:   []int{2, 7, 11, 15},
+			target: 9,
+			want:   []int{1, 2},
+		},
+		{
+			nums:   []int{2, 3, 4},
+			target: 6,
+			want:   []int{1, 3},
+		},
+		{
+			nums:   []int{-1, 0},
+			target: -1,
+			want:   []int{1, 2},
+		},
+	}
+	for _, tt := range tests {
+		assert.Equalf(t, tt.want, TwoSumII(tt.nums, tt.target), "test for %v %v", tt.nums, tt.target)
+	}
+}
