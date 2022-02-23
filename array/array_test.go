@@ -256,3 +256,23 @@ func TestSortedSquares(t *testing.T) {
 		assert.Equal(t, tt.want, SortedSquares(tt.input))
 	}
 }
+
+func TestMoveZeroes(t *testing.T) {
+	tests := []struct {
+		input []int
+		want  []int
+	}{
+		{
+			input: []int{0, 1, 0, 3, 12},
+			want:  []int{1, 3, 12, 0, 0},
+		},
+		{
+			input: []int{0},
+			want:  []int{0},
+		},
+	}
+	for _, tt := range tests {
+		MoveZeroes(tt.input)
+		assert.Equal(t, tt.want, tt.input)
+	}
+}

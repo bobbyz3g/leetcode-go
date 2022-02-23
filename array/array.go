@@ -239,3 +239,21 @@ func SortedSquares(nums []int) []int {
 
 	return res
 }
+
+// MoveZeroes moves all 0's to the end of it while maintaining the
+// relative order of the non-zero elements.
+func MoveZeroes(nums []int) {
+	n := len(nums)
+	for i := range nums {
+		if nums[i] == 0 {
+			left := i
+
+			for right := i + 1; right < n; right++ {
+				if nums[right] != 0 {
+					nums[left], nums[right] = nums[right], nums[left]
+					break
+				}
+			}
+		}
+	}
+}
