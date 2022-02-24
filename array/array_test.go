@@ -303,3 +303,32 @@ func TestTwoSumII(t *testing.T) {
 		assert.Equalf(t, tt.want, TwoSumII(tt.nums, tt.target), "test for %v %v", tt.nums, tt.target)
 	}
 }
+
+func TestReverseString(t *testing.T) {
+	tests := []struct {
+		s    []byte
+		want []byte
+	}{
+		{
+			s:    []byte{'h', 'e', 'l', 'l', 'o'},
+			want: []byte{'o', 'l', 'l', 'e', 'h'},
+		},
+		{
+			s:    []byte{'H', 'a', 'n', 'n', 'a', 'h'},
+			want: []byte{'h', 'a', 'n', 'n', 'a', 'H'},
+		},
+		{
+			s:    []byte{},
+			want: []byte{},
+		},
+		{
+			s:    []byte{'a'},
+			want: []byte{'a'},
+		},
+	}
+
+	for _, tt := range tests {
+		ReverseString(tt.s)
+		assert.Equal(t, tt.want, tt.s)
+	}
+}

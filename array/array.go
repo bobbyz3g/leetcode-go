@@ -276,3 +276,14 @@ func TwoSumII(numbers []int, target int) []int {
 	}
 	return []int{-1, -1}
 }
+
+// ReverseString reverses a string.
+// link: https://leetcode-cn.com/problems/reverse-string/
+func ReverseString(s []byte) {
+	l, r := 0, len(s)-1
+	for l < r {
+		s[l], s[r] = s[r], s[l]
+		l++
+		r--
+	}
+}
