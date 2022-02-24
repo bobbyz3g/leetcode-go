@@ -287,3 +287,29 @@ func ReverseString(s []byte) {
 		r--
 	}
 }
+
+// ReverseWord reverses every word in string.
+// link: https://leetcode-cn.com/problems/reverse-words-in-a-string-iii/
+func ReverseWord(s string) string {
+	b := make([]byte, 0, len(s))
+
+	n := len(s)
+	for i := 0; i < n; {
+		l := i
+
+		for i < n && s[i] != ' ' {
+			i++
+		}
+
+		for r := i - 1; r >= l; r-- {
+			b = append(b, s[r])
+		}
+
+		for i < n && s[i] == ' ' {
+			i++
+			b = append(b, ' ')
+		}
+	}
+
+	return string(b)
+}

@@ -332,3 +332,27 @@ func TestReverseString(t *testing.T) {
 		assert.Equal(t, tt.want, tt.s)
 	}
 }
+
+func TestReverseWord(t *testing.T) {
+	tests := []struct {
+		s    string
+		want string
+	}{
+		{
+			s:    "Let's take LeetCode contest",
+			want: "s'teL ekat edoCteeL tsetnoc",
+		},
+		{
+			s:    "God Ding",
+			want: "doG gniD",
+		},
+		{
+			s:    "God",
+			want: "doG",
+		},
+	}
+
+	for _, tt := range tests {
+		assert.Equal(t, tt.want, ReverseWord(tt.s))
+	}
+}
