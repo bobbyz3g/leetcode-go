@@ -96,3 +96,31 @@ func TestPartition(t *testing.T) {
 		assert.Equal(t, v.out, Partition(v.s))
 	}
 }
+
+func TestLengthOfLongestSubstring(t *testing.T) {
+	var tests = []struct {
+		s   string
+		out int
+	}{
+		{
+			s:   "abcabcbb",
+			out: 3,
+		},
+		{
+			s:   "bbbbb",
+			out: 1,
+		},
+		{
+			s:   "pwwkew",
+			out: 3,
+		},
+		{
+			s:   "a",
+			out: 1,
+		},
+	}
+
+	for _, v := range tests {
+		assert.Equal(t, v.out, LengthOfLongestSubstring(v.s))
+	}
+}
