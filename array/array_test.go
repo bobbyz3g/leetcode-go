@@ -356,3 +356,25 @@ func TestReverseWord(t *testing.T) {
 		assert.Equal(t, tt.want, ReverseWord(tt.s))
 	}
 }
+
+func TestFloodFill(t *testing.T) {
+	tests := []struct {
+		image    [][]int
+		sr       int
+		sc       int
+		newColor int
+		want     [][]int
+	}{
+		{
+			image:    [][]int{{1, 1, 1}, {1, 1, 0}, {1, 0, 1}},
+			sr:       1,
+			sc:       1,
+			newColor: 2,
+			want:     [][]int{{2, 2, 2}, {2, 2, 0}, {2, 0, 1}},
+		},
+	}
+
+	for _, tt := range tests {
+		assert.Equal(t, tt.want, FloodFill(tt.image, tt.sr, tt.sc, tt.newColor))
+	}
+}

@@ -313,3 +313,34 @@ func ReverseWord(s string) string {
 
 	return string(b)
 }
+
+var (
+	dx = []int{1, 0, 0, -1}
+	dy = []int{0, 1, -1, 0}
+)
+
+// FloodFill performs a flood fill on the image starting from the pixel image[sr][sc]
+// link: https://leetcode-cn.com/problems/flood-fill/
+func FloodFill(image [][]int, sr int, sc int, newColor int) [][]int {
+	curColor := image[sr][sc]
+
+	if curColor != newColor {
+		floodFillDfs(image, sr, sc, curColor, newColor)
+	}
+
+	return image
+}
+
+func floodFillDfs(image [][]int, x, y, color, newColor int) {
+	if image[x][y] == color {
+		image[x][y] = newColor
+		for i := 0; i < 4; i++ {
+			// get next position
+			moveX, moveY := x+dx[i], y+dy[i]
+			// if position is valid, continue make color.
+			if moveX >= 0 && moveX < len(image) && moveY >= 0 && moveY < len(image[0]) {
+				floodFillDfs(image, moveX, moveY, color, newColor)
+			}
+		}
+	}
+}
