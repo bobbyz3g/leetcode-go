@@ -378,3 +378,31 @@ func TestFloodFill(t *testing.T) {
 		assert.Equal(t, tt.want, FloodFill(tt.image, tt.sr, tt.sc, tt.newColor))
 	}
 }
+
+func TestMaxAreaOfIsland(t *testing.T) {
+	tests := []struct {
+		grid [][]int
+		want int
+	}{
+		{
+			grid: [][]int{{0, 0, 0, 0, 0}},
+			want: 0,
+		},
+		{
+			grid: [][]int{
+				{0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0},
+				{0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0},
+				{0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
+				{0, 1, 0, 0, 1, 1, 0, 0, 1, 0, 1, 0, 0},
+				{0, 1, 0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 0},
+				{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0},
+				{0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0},
+				{0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0},
+			},
+			want: 6,
+		},
+	}
+	for _, tt := range tests {
+		assert.Equal(t, tt.want, MaxAreaOfIsland(tt.grid))
+	}
+}

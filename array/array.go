@@ -344,3 +344,38 @@ func floodFillDfs(image [][]int, x, y, color, newColor int) {
 		}
 	}
 }
+
+// MaxAreaOfIsland returns the maximum area of an island in grid.
+// If there is no island, return 0.
+// An island is a group of 1's (representing land) connected 4-directionally (horizontal or vertical.)
+//
+// link：https://leetcode-cn.com/problems/max-area-of-island
+func MaxAreaOfIsland(grid [][]int) int {
+	res := 0
+
+	max := func(a, b int) int {
+		if a > b {
+			return a
+		}
+		return b
+	}
+	for i, s := range grid {
+		for j := range s {
+			res = max(maxAreaOfIslandDfs(grid, i, j), res)
+		}
+	}
+	return res
+}
+
+func maxAreaOfIslandDfs(grid [][]int, i, j int) int {
+	if i < 0 || i == len(grid) || j < 0 || j == len(grid[0]) || grid[i][j] != 1 {
+		return 0
+	}
+	grid[i][j] = 0
+	res := 1
+	for _, pos := range [][]int{{1, 0}, {0, 1}, {-1, 0}, {0, -1}} {
+		nextI, nextJ := i+pos[0], j+pos[1]
+		res += maxAreaOfIslandDfs(grid, nextI, nextJ)
+	}
+	return res
+}
