@@ -197,3 +197,19 @@ func TestIToR(t *testing.T) {
 		assert.Equal(t, tt.err, err)
 	}
 }
+
+func TestMaximumUnits(t *testing.T) {
+	testcases := []struct {
+		boxes    [][]int
+		size     int
+		maxUnits int
+	}{
+		{boxes: [][]int{{1, 3}, {2, 2}, {3, 1}}, size: 4, maxUnits: 8},
+		{boxes: [][]int{{5, 10}, {2, 5}, {4, 7}, {3, 9}}, size: 10, maxUnits: 91},
+		{boxes: [][]int{{1, 3}, {2, 2}, {3, 1}}, size: 20, maxUnits: 10},
+	}
+
+	for _, tc := range testcases {
+		assert.Equal(t, tc.maxUnits, MaximumUnits(tc.boxes, tc.size))
+	}
+}

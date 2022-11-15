@@ -2,6 +2,7 @@ package algebra
 
 import (
 	"errors"
+	"sort"
 	"strings"
 )
 
@@ -169,4 +170,26 @@ func IToR(n int) (string, error) {
 		return "", ErrOutOfBound
 	}
 	return thousands[n/1000] + hundreds[n%1000/100] + tens[n%100/10] + ones[n%10], nil
+}
+
+// MaximumUnits returns the maximum number of boxes that can be put on the truck.
+// The numberOfBoxes[i] is the number of boxes of type i.
+// The numberOfUnitsPerBox[i] is the number of units in each box of the type i
+func MaximumUnits(boxTypes [][]int, truckSize int) int {
+	sort.Slice(boxTypes, func(i, j int) bool {
+		return boxTypes[i][1] > boxTypes[j][1]
+	})
+	res := 0
+	curSize := 0
+outer:
+	for i := 0; i < truckSize && i < len(boxTypes); i++ {
+		for j := 0; j < boxTypes[i][0]; j++ {
+			if curSize == truckSize {
+				break outer
+			}
+			res += boxTypes[i][1]
+			curSize++
+		}
+	}
+	return res
 }
