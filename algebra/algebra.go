@@ -193,3 +193,24 @@ outer:
 	}
 	return res
 }
+
+// PlusOne increments the large integer by one and
+// return the resulting array of digits.
+func PlusOne(digits []int) []int {
+	n := 1
+	for i := len(digits) - 1; i >= 0; i-- {
+		s := digits[i] + n
+		digits[i] = s % 10
+		n = s / 10
+	}
+	res := make([]int, len(digits)+1)
+	for i := 0; i < len(digits); i++ {
+		res[i+1] = digits[i]
+	}
+	res[0] = n
+
+	if res[0] == 0 {
+		return res[1:]
+	}
+	return res
+}

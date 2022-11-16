@@ -213,3 +213,20 @@ func TestMaximumUnits(t *testing.T) {
 		assert.Equal(t, tc.maxUnits, MaximumUnits(tc.boxes, tc.size))
 	}
 }
+
+func TestPlusOne(t *testing.T) {
+	tests := []struct {
+		name   string
+		digits []int
+		want   []int
+	}{
+		{"one", []int{1}, []int{2}},
+		{"nine", []int{9}, []int{1, 0}},
+		{"ten", []int{1, 0}, []int{1, 1}},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			assert.Equalf(t, tt.want, PlusOne(tt.digits), "PlusOne(%v)", tt.digits)
+		})
+	}
+}
