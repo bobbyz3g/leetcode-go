@@ -159,3 +159,23 @@ func max(a, b int) int {
 	}
 	return b
 }
+
+// LengthOfLastWord returns the length of the last word in the string.
+// A word is a maximal substring consisting of non-space characters only.
+func LengthOfLastWord(s string) int {
+	var end, i int
+	var found bool
+	for i = len(s) - 1; i >= 0; i-- {
+		if s[i] != ' ' && !found {
+			end = i
+			found = true
+		}
+		if s[i] == ' ' && found {
+			break
+		}
+	}
+	if found {
+		return end - i
+	}
+	return 0
+}

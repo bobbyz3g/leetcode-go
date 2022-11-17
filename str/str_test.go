@@ -124,3 +124,27 @@ func TestLengthOfLongestSubstring(t *testing.T) {
 		assert.Equal(t, v.out, LengthOfLongestSubstring(v.s))
 	}
 }
+
+func TestLengthOfLastWord(t *testing.T) {
+	tests := []struct {
+		name string
+		str  string
+		want int
+	}{
+		{name: "empty", str: "", want: 0},
+		{name: "one space", str: " ", want: 0},
+		{name: "two space", str: " ", want: 0},
+		{name: "only space", str: "    ", want: 0},
+		{name: "one rune", str: "a", want: 1},
+		{name: "two rune", str: "ab", want: 2},
+		{name: "two rune with space", str: "ab ab", want: 2},
+		{name: "end with space", str: "ab ", want: 2},
+		{name: "normal", str: "Hello World", want: 5},
+		{name: "   fly me   to   the moon  ", str: "   fly me   to   the moon  ", want: 4},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			assert.Equalf(t, tt.want, LengthOfLastWord(tt.str), "LengthOfLastWord(%v)", tt.str)
+		})
+	}
+}
