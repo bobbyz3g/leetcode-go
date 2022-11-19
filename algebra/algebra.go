@@ -2,6 +2,7 @@ package algebra
 
 import (
 	"errors"
+	"math"
 	"sort"
 	"strings"
 )
@@ -213,4 +214,16 @@ func PlusOne(digits []int) []int {
 		return res[1:]
 	}
 	return res
+}
+
+// SqrtX returns  the square root of x rounded down to the nearest integer.
+func SqrtX(x int) int {
+	var xHalf = 0.5 * float64(x)
+	var i = math.Float64bits(float64(x))
+	i = 0x1FF7A3BEA91D9B1B + (i >> 1)
+	var f = math.Float64frombits(i)
+	f = f*0.5 + xHalf/f
+	f = f*0.5 + xHalf/f
+	f = f*0.5 + xHalf/f
+	return int(f)
 }
