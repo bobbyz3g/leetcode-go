@@ -179,3 +179,41 @@ func LengthOfLastWord(s string) int {
 	}
 	return 0
 }
+
+// AddBinary return sum of given string as a binary string.
+func AddBinary(a string, b string) string {
+	la, lb := len(a), len(b)
+	if la > lb {
+		return addBinary(a, b)
+	} else {
+		return addBinary(b, a)
+	}
+}
+
+func addBinary(l string, s string) string {
+	sumStr := make([]byte, len(l)+1)
+	sumStr[0] = 48
+	for i := 1; i < len(l)+1; i++ {
+		sumStr[i] = l[i-1]
+	}
+
+	diff := len(sumStr) - len(s)
+	// '0': 48, '1': 49, '2': 50
+	var n uint8
+	for i := len(s) - 1; i >= 0; i-- {
+		sum := (s[i] - 48) + (sumStr[i+diff] - 48) + n
+		n = sum / 2
+		sumStr[i+diff] = sum%2 + 48
+	}
+
+	for i := diff - 1; i >= 0; i-- {
+		sum := (sumStr[i] - 48) + n
+		n = sum / 2
+		sumStr[i] = sum%2 + 48
+	}
+
+	if sumStr[0] == '0' {
+		return string(sumStr[1:])
+	}
+	return string(sumStr)
+}
