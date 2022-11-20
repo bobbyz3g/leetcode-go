@@ -227,3 +227,17 @@ func SqrtX(x int) int {
 	f = f*0.5 + xHalf/f
 	return int(f)
 }
+
+// ClimbStairs returns there are how many distinct ways
+// can you climb to the top. Each time you can either
+// climb 1 or 2 steps.
+// f(x) = f(x-1) + f(x-2)
+func ClimbStairs(x int) int {
+	fx2, fx1, fx := 0, 0, 1
+	for i := 1; i <= x; i++ {
+		fx2 = fx1
+		fx1 = fx
+		fx = fx2 + fx1
+	}
+	return fx
+}
