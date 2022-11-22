@@ -34,6 +34,20 @@ func IsSameTree(p *Node, q *Node) bool {
 	return IsSameTree(p.Left, q.Left) && IsSameTree(p.Right, q.Right)
 }
 
+func IsSymmetric(root *Node) bool {
+	return isSymmetric(root, root)
+}
+
+func isSymmetric(p, q *Node) bool {
+	if p == nil && q == nil {
+		return true
+	}
+	if p == nil || q == nil {
+		return false
+	}
+	return p.Val == q.Val && isSymmetric(p.Left, q.Right) && isSymmetric(p.Right, q.Left)
+}
+
 func InorderTraversal(root *Node) []int {
 	var res []int
 	var inorder func(*Node)
