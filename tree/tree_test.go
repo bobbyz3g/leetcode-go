@@ -51,3 +51,25 @@ func TestInorderTraversal(t *testing.T) {
 		})
 	}
 }
+
+func TestMaxDepth(t *testing.T) {
+	tests := []struct {
+		name string
+		root *Node
+		want int
+	}{
+		{
+			name: "first",
+			root: &Node{
+				Left:  &Node{},
+				Right: &Node{Left: &Node{}},
+			},
+			want: 3,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			assert.Equalf(t, tt.want, MaxDepth(tt.root), "MaxDepth(%v)", tt.root)
+		})
+	}
+}

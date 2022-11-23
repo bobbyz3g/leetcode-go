@@ -62,3 +62,24 @@ func InorderTraversal(root *Node) []int {
 	inorder(root)
 	return res
 }
+
+func MaxDepth(root *Node) int {
+	depth := 0
+	return getMaxDepth(root, depth)
+}
+
+func getMaxDepth(root *Node, depth int) int {
+	if root == nil {
+		return depth
+	}
+	depth++
+	if root.Left == nil && root.Right == nil {
+		return depth
+	}
+	l := getMaxDepth(root.Left, depth)
+	r := getMaxDepth(root.Right, depth)
+	if l > r {
+		return l
+	}
+	return r
+}
