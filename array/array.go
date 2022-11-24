@@ -1,6 +1,7 @@
 package array
 
 import (
+	"math"
 	"sort"
 
 	"github.com/Kaiser925/leetcode-go/algebra"
@@ -399,4 +400,24 @@ func MergeOrderArray(nums1 []int, m int, nums2 []int, n int) {
 			b--
 		}
 	}
+}
+
+// MaxProfit returns the maximum profit you can achieve from this transaction.
+// If you cannot achieve any profit, return 0.
+func MaxProfit(prices []int) int {
+	if len(prices) == 0 {
+		return 0
+	}
+
+	maxProfit := 0
+	minVal := math.MaxInt
+	for _, v := range prices {
+		if v < minVal {
+			minVal = v
+		} else if profit := v - minVal; profit > maxProfit {
+			maxProfit = profit
+		}
+	}
+
+	return maxProfit
 }
