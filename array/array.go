@@ -421,3 +421,20 @@ func MaxProfit(prices []int) int {
 
 	return maxProfit
 }
+
+// MajorityElement returns the majority element which appears more than ⌊n / 2⌋ times.
+func MajorityElement(nums []int) int {
+	winner := nums[0]
+	count := 0
+	for i := 0; i < len(nums); i++ {
+		if winner == nums[i] {
+			count++
+		} else if count == 0 {
+			winner = nums[i]
+			count++
+		} else {
+			count--
+		}
+	}
+	return winner
+}
