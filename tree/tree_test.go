@@ -74,6 +74,58 @@ func TestMaxDepth(t *testing.T) {
 	}
 }
 
+func TestFromSortedArray(t *testing.T) {
+	type args struct {
+		nums []int
+	}
+	tests := []struct {
+		name string
+		args args
+		want *Node
+	}{
+		{
+			name: "1",
+			args: args{
+				nums: []int{1},
+			},
+			want: &Node{Val: 1},
+		},
+		{
+			name: "[1,2]",
+			args: args{
+				nums: []int{1, 2},
+			},
+			want: &Node{Val: 1, Right: &Node{Val: 2}},
+		},
+		{
+			name: "[-10,-3,0,5,9]",
+			args: args{
+				nums: []int{-10, -3, 0, 5, 9},
+			},
+			want: &Node{
+				Left: &Node{
+					Right: &Node{Val: -3},
+					Val:   -10,
+				},
+				Val: 0,
+				Right: &Node{
+					Right: &Node{
+						Val: 9,
+					},
+					Val: 5,
+				},
+			},
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			bst := FromSortedArray(tt.args.nums)
+			equal := IsSameTree(bst, tt.want)
+			assert.Equalf(t, true, equal, "FromSortedArray(%v)", tt.args.nums)
+		})
+	}
+}
+
 func TestIsSameTree(t *testing.T) {
 	type args struct {
 		p *Node

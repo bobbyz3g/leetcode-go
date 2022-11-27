@@ -21,6 +21,33 @@ type Node struct {
 	Right *Node
 }
 
+// FromSortedArray returns a binary search tree from given sorted array.
+func FromSortedArray(nums []int) *Node {
+	n := len(nums)
+	if n == 0 {
+		return nil
+	}
+	if n == 1 {
+		return &Node{Val: nums[0]}
+	}
+
+	mid := 0
+	if n%2 == 0 {
+		mid = n/2 - 1
+	} else {
+		mid = n / 2
+	}
+
+	root := &Node{Val: nums[mid]}
+
+	if mid > 0 {
+		root.Left = FromSortedArray(nums[:mid])
+	}
+
+	root.Right = FromSortedArray(nums[mid+1:])
+	return root
+}
+
 func IsSameTree(p *Node, q *Node) bool {
 	if p == nil && q == nil {
 		return true
