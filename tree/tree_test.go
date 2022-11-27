@@ -73,3 +73,45 @@ func TestMaxDepth(t *testing.T) {
 		})
 	}
 }
+
+func TestIsSameTree(t *testing.T) {
+	type args struct {
+		p *Node
+		q *Node
+	}
+	tests := []struct {
+		name string
+		args args
+		want bool
+	}{
+		{
+			name: "same",
+			args: args{
+				p: &Node{Val: 1},
+				q: &Node{Val: 1},
+			},
+			want: true,
+		},
+		{
+			name: "not same",
+			args: args{
+				p: &Node{Val: 1},
+				q: &Node{Val: 1, Left: &Node{Val: 2}},
+			},
+			want: false,
+		},
+		{
+			name: "both nil",
+			args: args{
+				p: nil,
+				q: nil,
+			},
+			want: true,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			assert.Equalf(t, tt.want, IsSameTree(tt.args.p, tt.args.q), "IsSameTree(%v, %v)", tt.args.p, tt.args.q)
+		})
+	}
+}
