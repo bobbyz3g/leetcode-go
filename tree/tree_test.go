@@ -167,3 +167,65 @@ func TestIsSameTree(t *testing.T) {
 		})
 	}
 }
+
+func TestIsBalanced(t *testing.T) {
+	type args struct {
+		root *Node
+	}
+	tests := []struct {
+		name string
+		args args
+		want bool
+	}{
+		{
+			name: "nil",
+			args: args{
+				root: nil,
+			},
+			want: true,
+		},
+		{
+			name: "3,9,20,null,null,15,7",
+			args: args{
+				root: &Node{
+					Right: &Node{
+						Right: &Node{Val: 7},
+						Val:   20,
+						Left:  &Node{Val: 15},
+					},
+					Val:  3,
+					Left: &Node{Val: 9},
+				},
+			},
+			want: true,
+		},
+		{
+			name: "1,2,2,3,3,null,null,4,4",
+			args: args{
+				root: &Node{
+					Right: &Node{
+						Val: 2,
+					},
+					Val: 1,
+					Left: &Node{
+						Right: &Node{
+							Val: 3,
+						},
+						Val: 2,
+						Left: &Node{
+							Right: &Node{Val: 4},
+							Val:   3,
+							Left:  &Node{Val: 4},
+						},
+					},
+				},
+			},
+			want: false,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			assert.Equalf(t, tt.want, IsBalanced(tt.args.root), "IsBalanced(%v)", tt.args.root)
+		})
+	}
+}

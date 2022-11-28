@@ -61,6 +61,35 @@ func IsSameTree(p *Node, q *Node) bool {
 	return IsSameTree(p.Left, q.Left) && IsSameTree(p.Right, q.Right)
 }
 
+// IsBalanced return true if given tree is balanced.
+func IsBalanced(root *Node) bool {
+	return height(root) >= 0
+}
+
+func height(root *Node) int {
+	if root == nil {
+		return 0
+	}
+	left := height(root.Left)
+	right := height(root.Right)
+	if left == -1 || right == -1 || abs(left-right) > 1 {
+		return -1
+	}
+	return max(left, right) + 1
+}
+func abs(x int) int {
+	if x < 0 {
+		return -1 * x
+	}
+	return x
+}
+func max(x, y int) int {
+	if x > y {
+		return x
+	}
+	return y
+}
+
 func IsSymmetric(root *Node) bool {
 	return isSymmetric(root, root)
 }
