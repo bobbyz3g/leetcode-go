@@ -252,9 +252,10 @@ func TestMinDepth(t *testing.T) {
 				root: &Node{
 					Right: &Node{Val: 3, Left: &Node{Val: 4}},
 					Val:   1,
+					Left:  &Node{Val: 2},
 				},
 			},
-			want: 1,
+			want: 2,
 		},
 		{
 			name: "[2,null,3,null,4,null,5,null,6]",
