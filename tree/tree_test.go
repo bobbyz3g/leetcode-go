@@ -229,3 +229,56 @@ func TestIsBalanced(t *testing.T) {
 		})
 	}
 }
+
+func TestMinDepth(t *testing.T) {
+	type args struct {
+		root *Node
+	}
+	tests := []struct {
+		name string
+		args args
+		want int
+	}{
+		{
+			name: "[null]",
+			args: args{
+				root: nil,
+			},
+			want: 0,
+		},
+		{
+			name: "[1,2,3,4]",
+			args: args{
+				root: &Node{
+					Right: &Node{Val: 3, Left: &Node{Val: 4}},
+					Val:   1,
+				},
+			},
+			want: 1,
+		},
+		{
+			name: "[2,null,3,null,4,null,5,null,6]",
+			args: args{
+				root: &Node{
+					Val: 1,
+					Left: &Node{
+						Val: 2,
+						Left: &Node{
+							Val: 3,
+							Left: &Node{
+								Val:   4,
+								Right: &Node{Val: 5},
+							},
+						},
+					},
+				},
+			},
+			want: 5,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			assert.Equalf(t, tt.want, MinDepth(tt.args.root), "MinDepth(%v)", tt.args.root)
+		})
+	}
+}
