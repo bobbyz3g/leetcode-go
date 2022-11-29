@@ -63,20 +63,21 @@ func IsSameTree(p *Node, q *Node) bool {
 
 // IsBalanced return true if given tree is balanced.
 func IsBalanced(root *Node) bool {
+	var height func(*Node) int
+	height = func(root *Node) int {
+		if root == nil {
+			return 0
+		}
+		left := height(root.Left)
+		right := height(root.Right)
+		if left == -1 || right == -1 || abs(left-right) > 1 {
+			return -1
+		}
+		return max(left, right) + 1
+	}
 	return height(root) >= 0
 }
 
-func height(root *Node) int {
-	if root == nil {
-		return 0
-	}
-	left := height(root.Left)
-	right := height(root.Right)
-	if left == -1 || right == -1 || abs(left-right) > 1 {
-		return -1
-	}
-	return max(left, right) + 1
-}
 func abs(x int) int {
 	if x < 0 {
 		return -1 * x
@@ -138,4 +139,8 @@ func getMaxDepth(root *Node, depth int) int {
 		return l
 	}
 	return r
+}
+
+func MinDepth(root *Node) int {
+	return 0
 }
