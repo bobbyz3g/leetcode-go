@@ -283,3 +283,78 @@ func TestMinDepth(t *testing.T) {
 		})
 	}
 }
+
+func TestHasPathSum(t *testing.T) {
+	type args struct {
+		root      *Node
+		targetSum int
+	}
+	tests := []struct {
+		name string
+		args args
+		want bool
+	}{
+		{
+			name: "nil",
+			args: args{
+				root:      nil,
+				targetSum: 0,
+			},
+			want: false,
+		},
+		{
+			name: "[1,2,3]",
+			args: args{
+				root: &Node{
+					Left:  &Node{Val: 2},
+					Val:   1,
+					Right: &Node{Val: 3},
+				},
+				targetSum: 5,
+			},
+			want: false,
+		},
+		{
+			name: "[1,2]",
+			args: args{
+				root: &Node{
+					Left: &Node{Val: 2},
+					Val:  1,
+				},
+				targetSum: 1,
+			},
+			want: false,
+		},
+		{
+			name: "[5,4,8,11,null,13,4,7,2,null,null,null,1]",
+			args: args{
+				root: &Node{
+					Left: &Node{
+						Left: &Node{
+							Left:  &Node{Val: 7},
+							Val:   11,
+							Right: &Node{Val: 2},
+						},
+						Val: 4,
+					},
+					Val: 5,
+					Right: &Node{
+						Left: &Node{Val: 13},
+						Val:  8,
+						Right: &Node{
+							Val:   4,
+							Right: &Node{Val: 1},
+						},
+					},
+				},
+				targetSum: 22,
+			},
+			want: true,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			assert.Equalf(t, tt.want, HasPathSum(tt.args.root, tt.args.targetSum), "HasPathSum(%v, %v)", tt.args.root, tt.args.targetSum)
+		})
+	}
+}

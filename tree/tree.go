@@ -164,3 +164,19 @@ func MinDepth(root *Node) int {
 	}
 	return 1 + min(MinDepth(root.Left), MinDepth(root.Right))
 }
+
+// HasPathSum returns true if the tree has a
+// root-to-leaf path such that adding up all
+// the values along the path equals targetSum.
+func HasPathSum(root *Node, targetSum int) bool {
+	if root == nil {
+		return false
+	}
+
+	// root is leaf node
+	if root.Left == nil && root.Right == nil {
+		return root.Val == targetSum
+	}
+
+	return HasPathSum(root.Left, targetSum-root.Val) || HasPathSum(root.Right, targetSum-root.Val)
+}
