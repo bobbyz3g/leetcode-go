@@ -438,3 +438,25 @@ func MajorityElement(nums []int) int {
 	}
 	return winner
 }
+
+// PascalTriangle returns the first numRows of Pascal's triangle.
+//
+// In Pascal's triangle, each number is the sum
+// of the two numbers directly above it
+func PascalTriangle(numRows int) [][]int {
+	if numRows == 0 {
+		return nil
+	}
+	rows := make([][]int, numRows)
+	rows[0] = []int{1}
+
+	for i := 1; i < numRows; i++ {
+		row := make([]int, i+1)
+		row[0], row[i] = 1, 1
+		for j := 1; j < i; j++ {
+			row[j] = rows[i-1][j] + rows[i-1][j-1]
+		}
+		rows[i] = row
+	}
+	return rows
+}
