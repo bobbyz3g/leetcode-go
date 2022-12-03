@@ -1,5 +1,7 @@
 package str
 
+import "unicode"
+
 // CheckInclusion returns true if s2 contains the permutation of s1.
 func CheckInclusion(s1 string, s2 string) bool {
 	l1, l2 := len(s1), len(s2)
@@ -216,4 +218,40 @@ func addBinary(l string, s string) string {
 		return string(sumStr[1:])
 	}
 	return string(sumStr)
+}
+
+// IsPalindrome returns true if s is palindrome.
+//
+// It will convert all uppercase letters into lowercase
+// letters and removing all non-alphanumeric characters.
+func IsPalindrome(s string) bool {
+	l := len(s)
+	if l == 0 { // emtpy string is palindrome
+		return true
+	}
+	i, j := 0, l-1
+	for j > i {
+		if !unicode.IsDigit(rune(s[i])) && !unicode.IsLetter(rune(s[i])) {
+			i++
+			continue
+		}
+
+		if !unicode.IsDigit(rune(s[j])) && !unicode.IsLetter(rune(s[j])) {
+			j--
+			continue
+		}
+		si, sj := s[i], s[j]
+		if 'a' <= si && si <= 'z' {
+			si = si - 32
+		}
+		if 'a' <= sj && sj <= 'z' {
+			sj = sj - 32
+		}
+		if si != sj {
+			return false
+		}
+		i++
+		j--
+	}
+	return true
 }

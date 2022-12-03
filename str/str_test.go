@@ -170,3 +170,45 @@ func TestAddBinary(t *testing.T) {
 		})
 	}
 }
+
+func TestIsPalindrome(t *testing.T) {
+	type args struct {
+		s string
+	}
+	tests := []struct {
+		name string
+		args args
+		want bool
+	}{
+		{
+			name: "1",
+			args: args{s: "1"},
+			want: true,
+		},
+		{
+			name: "race a car",
+			args: args{s: "race a cara"},
+			want: false,
+		},
+		{
+			name: "A man, a plan, a canal: Panama",
+			args: args{s: "A man, a plan, a canal: Panama"},
+			want: true,
+		},
+		{
+			name: "empty string",
+			args: args{"s"},
+			want: true,
+		},
+		{
+			name: "OP",
+			args: args{"0P"},
+			want: false,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			assert.Equalf(t, tt.want, IsPalindrome(tt.args.s), "IsPalindrome(%v)", tt.args.s)
+		})
+	}
+}
