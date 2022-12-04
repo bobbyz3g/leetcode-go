@@ -127,3 +127,19 @@ func ReverseBetween(head *ListNode, left int, right int) *ListNode {
 	}
 	return dummy.Next
 }
+
+// HasCycle return true  if the linked list has a cycle in it.
+func HasCycle(head *ListNode) bool {
+	slow, fast := head, head
+	for fast != nil && slow != nil {
+		slow, fast = slow.Next, fast.Next
+		if fast == nil || slow == nil {
+			break
+		}
+		fast = fast.Next
+		if slow == fast {
+			return true
+		}
+	}
+	return false
+}
