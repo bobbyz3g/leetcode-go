@@ -112,6 +112,7 @@ func isSymmetric(p, q *Node) bool {
 	return p.Val == q.Val && isSymmetric(p.Left, q.Right) && isSymmetric(p.Right, q.Left)
 }
 
+// InorderTraversal returns inorder traversal of its nodes' values.
 func InorderTraversal(root *Node) []int {
 	var res []int
 	var inorder func(*Node)
@@ -124,6 +125,22 @@ func InorderTraversal(root *Node) []int {
 		inorder(n.Right)
 	}
 	inorder(root)
+	return res
+}
+
+// PreorderTraversal returns preorder traversal of its nodes' values.
+func PreorderTraversal(root *Node) []int {
+	var res []int
+	var preorder func(*Node)
+	preorder = func(n *Node) {
+		if n == nil {
+			return
+		}
+		res = append(res, n.Val)
+		preorder(n.Left)
+		preorder(n.Right)
+	}
+	preorder(root)
 	return res
 }
 
