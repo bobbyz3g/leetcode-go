@@ -143,3 +143,31 @@ func HasCycle(head *ListNode) bool {
 	}
 	return false
 }
+
+func GetIntersectionNode(headA, headB *ListNode) *ListNode {
+	var la, lb int
+	for n := headA; n != nil; n = n.Next {
+		la++
+	}
+	for n := headB; n != nil; n = n.Next {
+		lb++
+	}
+
+	if la > lb {
+		for i := 0; i < la-lb; i++ {
+			headA = headA.Next
+		}
+	} else {
+		for i := 0; i < lb-la; i++ {
+			headB = headB.Next
+		}
+	}
+
+	for headA != nil && headB != nil {
+		if headA == headB {
+			return headA
+		}
+		headA, headB = headA.Next, headB.Next
+	}
+	return nil
+}
