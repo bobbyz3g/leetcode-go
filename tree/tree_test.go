@@ -395,3 +395,40 @@ func TestPreorderTraversal(t *testing.T) {
 		})
 	}
 }
+
+func TestPostorderTraversal(t *testing.T) {
+	type args struct {
+		root *Node
+	}
+	tests := []struct {
+		name string
+		args args
+		want []int
+	}{
+		{
+			name: "[1]",
+			args: args{
+				root: &Node{Val: 1},
+			},
+			want: []int{1},
+		},
+		{
+			name: "[1,null,2,3]",
+			args: args{
+				root: &Node{
+					Right: &Node{
+						Val:  2,
+						Left: &Node{Val: 3},
+					},
+					Val: 1,
+				},
+			},
+			want: []int{3, 2, 1},
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			assert.Equalf(t, tt.want, PostorderTraversal(tt.args.root), "PostorderTraversal(%v)", tt.args.root)
+		})
+	}
+}

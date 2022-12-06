@@ -144,6 +144,34 @@ func PreorderTraversal(root *Node) []int {
 	return res
 }
 
+// PostorderTraversal returns postorder traversal of
+// its nodes' values.
+func PostorderTraversal(root *Node) []int {
+	var res []int
+	var stack []*Node
+	var prevWalked *Node
+	for root != nil || len(stack) > 0 {
+		for root != nil { // push all left sub-nodes of current node into stack
+			stack = append(stack, root)
+			root = root.Left
+		}
+		// pop node from stack
+		root = stack[len(stack)-1]
+		stack = stack[:len(stack)-1]
+
+		if root.Right == nil || root.Right == prevWalked {
+			// root is a leaf node or the right sub-node has been prevWalked
+			res = append(res, root.Val)
+			prevWalked = root
+			root = nil
+		} else {
+			// there a right sub-node and it has not been prevWalked
+			stack = append(stack, root)
+			root = root.Right
+		}
+	}
+	return res
+}
 func MaxDepth(root *Node) int {
 	depth := 0
 	return getMaxDepth(root, depth)
