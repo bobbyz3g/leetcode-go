@@ -160,12 +160,12 @@ func PostorderTraversal(root *Node) []int {
 		stack = stack[:len(stack)-1]
 
 		if root.Right == nil || root.Right == prevWalked {
-			// root is a leaf node or the right sub-node has been prevWalked
+			// root is a leaf node or the right sub-node has been walked
 			res = append(res, root.Val)
 			prevWalked = root
 			root = nil
 		} else {
-			// there a right sub-node and it has not been prevWalked
+			// there is a right sub-node which has not been walked
 			stack = append(stack, root)
 			root = root.Right
 		}
