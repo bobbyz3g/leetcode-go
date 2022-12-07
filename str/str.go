@@ -1,6 +1,8 @@
 package str
 
-import "unicode"
+import (
+	"unicode"
+)
 
 // CheckInclusion returns true if s2 contains the permutation of s1.
 func CheckInclusion(s1 string, s2 string) bool {
@@ -254,4 +256,22 @@ func IsPalindrome(s string) bool {
 		j--
 	}
 	return true
+}
+
+// ConvertToTitle returns corresponding column title as
+// it appears in an Excel sheet.
+// e.g.
+// A -> 1, B -> 2 , C -> 3,Z -> 26
+// AA -> 27, AB -> 28
+func ConvertToTitle(column int) string {
+	var res []rune
+	for column > 0 {
+		column--
+		res = append(res, rune('A'+column%26))
+		column /= 26
+	}
+	for i, j := 0, len(res)-1; i < j; i, j = i+1, j-1 {
+		res[i], res[j] = res[j], res[i]
+	}
+	return string(res)
 }

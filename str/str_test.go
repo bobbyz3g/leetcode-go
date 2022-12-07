@@ -212,3 +212,40 @@ func TestIsPalindrome(t *testing.T) {
 		})
 	}
 }
+
+func TestConvertToTitle(t *testing.T) {
+	type args struct {
+		column int
+	}
+	tests := []struct {
+		name string
+		args args
+		want string
+	}{
+		{
+			name: "A",
+			args: args{column: 1},
+			want: "A",
+		},
+		{
+			name: "Z",
+			args: args{column: 26},
+			want: "Z",
+		},
+		{
+			name: "ZY",
+			args: args{column: 701},
+			want: "ZY",
+		},
+		{
+			name: "FXSHRXW",
+			args: args{column: 2147483647},
+			want: "FXSHRXW",
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			assert.Equalf(t, tt.want, ConvertToTitle(tt.args.column), "ConvertToTitle(%v)", tt.args.column)
+		})
+	}
+}
