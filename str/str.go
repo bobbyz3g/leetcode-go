@@ -1,6 +1,7 @@
 package str
 
 import (
+	"math"
 	"unicode"
 )
 
@@ -274,4 +275,16 @@ func ConvertToTitle(column int) string {
 		res[i], res[j] = res[j], res[i]
 	}
 	return string(res)
+}
+
+// TitleToNumber returns its corresponding column number.
+func TitleToNumber(title string) int {
+	num := 0
+	l := len(title)
+	for i := 0; i < l; i++ {
+		n := int(title[i] - 'A' + 1)
+		p := math.Pow(26, float64(l-i-1))
+		num += n * int(p)
+	}
+	return num
 }
