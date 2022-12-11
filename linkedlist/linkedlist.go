@@ -171,3 +171,16 @@ func GetIntersectionNode(headA, headB *ListNode) *ListNode {
 	}
 	return nil
 }
+
+// RemoveElements removes elements which value is val from head.
+func RemoveElements(head *ListNode, val int) *ListNode {
+	dummy := &ListNode{Next: head}
+	for cur := dummy; cur.Next != nil; {
+		if cur.Next.Val == val {
+			cur.Next = cur.Next.Next
+		} else {
+			cur = cur.Next
+		}
+	}
+	return dummy.Next
+}

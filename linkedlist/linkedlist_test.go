@@ -165,3 +165,53 @@ func TestHasCycle(t *testing.T) {
 		})
 	}
 }
+
+func TestRemoveElements(t *testing.T) {
+	type args struct {
+		head *ListNode
+		val  int
+	}
+	tests := []struct {
+		name string
+		args args
+		want *ListNode
+	}{
+		{
+			name: "empty",
+			args: args{
+				head: nil,
+				val:  0,
+			},
+			want: nil,
+		},
+		{
+			name: "remove all",
+			args: args{
+				head: NewList([]int{7, 7, 7, 7}),
+				val:  7,
+			},
+			want: nil,
+		},
+		{
+			name: "remove last",
+			args: args{
+				head: NewList([]int{7, 7, 7, 8}),
+				val:  8,
+			},
+			want: NewList([]int{7, 7, 7}),
+		},
+		{
+			name: "remove first",
+			args: args{
+				head: NewList([]int{8, 7, 7, 7}),
+				val:  8,
+			},
+			want: NewList([]int{7, 7, 7}),
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			assert.Equalf(t, tt.want, RemoveElements(tt.args.head, tt.args.val), "RemoveElements(%v, %v)", tt.args.head, tt.args.val)
+		})
+	}
+}
