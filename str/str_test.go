@@ -286,3 +286,45 @@ func TestTitleToNumber(t *testing.T) {
 		})
 	}
 }
+
+func TestIsIsomorphic(t *testing.T) {
+	type args struct {
+		s string
+		t string
+	}
+	tests := []struct {
+		name string
+		args args
+		want bool
+	}{
+		{
+			name: "egg-add",
+			args: args{
+				s: "egg",
+				t: "add",
+			},
+			want: true,
+		},
+		{
+			name: "foo-bar",
+			args: args{
+				s: "foo",
+				t: "bar",
+			},
+			want: false,
+		},
+		{
+			name: "paper-title",
+			args: args{
+				s: "paper",
+				t: "title",
+			},
+			want: true,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			assert.Equalf(t, tt.want, IsIsomorphic(tt.args.s, tt.args.t), "IsIsomorphic(%v, %v)", tt.args.s, tt.args.t)
+		})
+	}
+}
