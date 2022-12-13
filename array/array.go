@@ -460,3 +460,17 @@ func PascalTriangle(numRows int) [][]int {
 	}
 	return rows
 }
+
+// ContainsDuplicate reports whether any value appears at
+// least twice in the array
+func ContainsDuplicate(nums []int) bool {
+	m := make(map[int]struct{}, len(nums))
+	for _, v := range nums {
+		_, ok := m[v]
+		if ok {
+			return true
+		}
+		m[v] = struct{}{}
+	}
+	return false
+}
