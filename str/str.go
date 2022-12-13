@@ -304,3 +304,12 @@ func IsIsomorphic(s string, t string) bool {
 	}
 	return true
 }
+
+// CheckIfPangram reports whether sentence is pangram.
+func CheckIfPangram(sentence string) bool {
+	state := 0
+	for _, c := range sentence {
+		state |= 1 << (c - 'a')
+	}
+	return state == 1<<26-1
+}

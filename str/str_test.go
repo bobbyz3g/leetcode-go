@@ -328,3 +328,30 @@ func TestIsIsomorphic(t *testing.T) {
 		})
 	}
 }
+
+func TestCheckIfPangram(t *testing.T) {
+	type args struct {
+		sentence string
+	}
+	tests := []struct {
+		name string
+		args args
+		want bool
+	}{
+		{
+			name: "abcdd",
+			args: args{sentence: "abcdd"},
+			want: false,
+		},
+		{
+			name: "thequickbrownfoxjumpsoverthelazydog",
+			args: args{sentence: "thequickbrownfoxjumpsoverthelazydog"},
+			want: true,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			assert.Equalf(t, tt.want, CheckIfPangram(tt.args.sentence), "CheckIfPangram(%v)", tt.args.sentence)
+		})
+	}
+}
