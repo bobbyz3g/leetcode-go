@@ -474,3 +474,21 @@ func ContainsDuplicate(nums []int) bool {
 	}
 	return false
 }
+
+// ContainsNearbyDuplicate returns true if there are two distinct indices i
+// and j in the array such that nums[i] == nums[j] and abs(i - j) <= k
+func ContainsNearbyDuplicate(nums []int, k int) bool {
+	indexes := make(map[int]int, len(nums))
+	for i, v := range nums {
+		prev, ok := indexes[v]
+		if !ok {
+			indexes[v] = i
+			continue
+		}
+		if i-prev <= k {
+			return true
+		}
+		indexes[v] = i
+	}
+	return false
+}
