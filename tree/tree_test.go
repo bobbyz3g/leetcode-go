@@ -432,3 +432,51 @@ func TestPostorderTraversal(t *testing.T) {
 		})
 	}
 }
+
+func TestInvert(t *testing.T) {
+	type args struct {
+		root *Node
+	}
+	tests := []struct {
+		name string
+		args args
+		want *Node
+	}{
+		{
+			name: "4,2,7,1,3,6,9",
+			args: args{
+				root: &Node{
+					Right: &Node{
+						Right: &Node{Val: 9},
+						Val:   7,
+						Left:  &Node{Val: 6},
+					},
+					Val: 4,
+					Left: &Node{
+						Right: &Node{Val: 3},
+						Val:   2,
+						Left:  &Node{Val: 1},
+					},
+				},
+			},
+			want: &Node{
+				Left: &Node{
+					Left:  &Node{Val: 9},
+					Val:   7,
+					Right: &Node{Val: 6},
+				},
+				Val: 4,
+				Right: &Node{
+					Left:  &Node{Val: 3},
+					Val:   2,
+					Right: &Node{Val: 1},
+				},
+			},
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			assert.Equalf(t, tt.want, Invert(tt.args.root), "Invert(%v)", tt.args.root)
+		})
+	}
+}

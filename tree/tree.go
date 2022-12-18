@@ -225,3 +225,14 @@ func HasPathSum(root *Node, targetSum int) bool {
 
 	return HasPathSum(root.Left, targetSum-root.Val) || HasPathSum(root.Right, targetSum-root.Val)
 }
+
+// Invert inverts tree, and returns its root.
+func Invert(root *Node) *Node {
+	if root == nil {
+		return root
+	}
+	root.Left, root.Right = root.Right, root.Left
+	Invert(root.Left)
+	Invert(root.Right)
+	return root
+}
