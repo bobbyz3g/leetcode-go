@@ -492,3 +492,26 @@ func ContainsNearbyDuplicate(nums []int, k int) bool {
 	}
 	return false
 }
+
+// MinimumSize returns the minimum possible penalty after
+// performing the operations. Penalty is the maximum number of
+// balls in a bag.
+func MinimumSize(nums []int, maxOperations int) int {
+	max := 0
+	for _, v := range nums {
+		if v > max {
+			max = v
+		}
+	}
+
+	return sort.Search(max, func(i int) bool {
+		if i == 0 {
+			return false
+		}
+		ops := 0
+		for _, x := range nums {
+			ops += (x - 1) / i
+		}
+		return ops <= maxOperations
+	})
+}
