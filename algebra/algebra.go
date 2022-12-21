@@ -266,3 +266,20 @@ func IsHappyNum(n int) bool {
 	}
 	return fast == 1
 }
+
+// MaximumScore returns step tha make a, b c be zero.
+// Every step can minus two of a, b, c.
+func MaximumScore(a int, b int, c int) int {
+	max := func(a, b int) int {
+		if a > b {
+			return a
+		}
+		return b
+	}
+	maxNum := max(a, max(b, c))
+	s := a + b + c
+	if s-maxNum < maxNum {
+		return s - maxNum
+	}
+	return s / 2
+}

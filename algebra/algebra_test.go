@@ -292,3 +292,49 @@ func TestIsHappyNum(t *testing.T) {
 		})
 	}
 }
+
+func TestMaximumScore(t *testing.T) {
+	type args struct {
+		a int
+		b int
+		c int
+	}
+	tests := []struct {
+		name string
+		args args
+		want int
+	}{
+		{
+			name: "2,4,6",
+			args: args{
+				a: 2,
+				b: 4,
+				c: 6,
+			},
+			want: 6,
+		},
+		{
+			name: "4,4,6",
+			args: args{
+				a: 4,
+				b: 4,
+				c: 6,
+			},
+			want: 7,
+		},
+		{
+			name: "1,8,8",
+			args: args{
+				a: 1,
+				b: 8,
+				c: 8,
+			},
+			want: 8,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			assert.Equalf(t, tt.want, MaximumScore(tt.args.a, tt.args.b, tt.args.c), "MaximumScore(%v, %v, %v)", tt.args.a, tt.args.b, tt.args.c)
+		})
+	}
+}
