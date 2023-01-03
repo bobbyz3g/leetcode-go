@@ -2,6 +2,8 @@ package str
 
 import (
 	"math"
+	"strconv"
+	"strings"
 	"unicode"
 )
 
@@ -312,4 +314,24 @@ func CheckIfPangram(sentence string) bool {
 		state |= 1 << (c - 'a')
 	}
 	return state == 1<<26-1
+}
+
+// NumbersAscending returns true if all the numbers in
+// s are strictly increasing from left to right.
+// A sentence is a list of tokens separated by a single space with
+// no leading or trailing spaces.
+func NumbersAscending(s string) bool {
+	tokens := strings.Split(s, " ")
+	prev := -1
+	for _, v := range tokens {
+		cur, err := strconv.Atoi(v)
+		if err != nil { // not a number
+			continue
+		}
+		if cur <= prev {
+			return false
+		}
+		prev = cur
+	}
+	return true
 }

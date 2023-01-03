@@ -355,3 +355,49 @@ func TestCheckIfPangram(t *testing.T) {
 		})
 	}
 }
+
+func TestNumbersAscending(t *testing.T) {
+	type args struct {
+		s string
+	}
+	tests := []struct {
+		name string
+		args args
+		want bool
+	}{
+
+		{
+			name: "1 box has 3 blue 4 red 6 green and 12 yellow marbles",
+			args: args{
+				s: "1 box has 3 blue 4 red 6 green and 12 yellow marbles",
+			},
+			want: true,
+		},
+		{
+			name: "hello world 5 x 5",
+			args: args{
+				s: "hello world 5 x 5",
+			},
+			want: false,
+		},
+		{
+			name: "sunset is at 7 51 pm overnight lows will be in the low 50 and 60 s",
+			args: args{
+				s: "sunset is at 7 51 pm overnight lows will be in the low 50 and 60 s",
+			},
+			want: false,
+		},
+		{
+			name: "4 5 11 26",
+			args: args{
+				s: "4, 5, 11, 26",
+			},
+			want: true,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			assert.Equalf(t, tt.want, NumbersAscending(tt.args.s), "NumbersAscending(%v)", tt.args.s)
+		})
+	}
+}
