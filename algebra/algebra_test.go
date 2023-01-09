@@ -338,3 +338,35 @@ func TestMaximumScore(t *testing.T) {
 		})
 	}
 }
+
+func TestReinitializePermutation(t *testing.T) {
+	type args struct {
+		n int
+	}
+	tests := []struct {
+		name string
+		args args
+		want int
+	}{
+		{
+			name: "2",
+			args: args{n: 2},
+			want: 1,
+		},
+		{
+			name: "4",
+			args: args{n: 4},
+			want: 2,
+		},
+		{
+			name: "6",
+			args: args{n: 6},
+			want: 4,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			assert.Equalf(t, tt.want, ReinitializePermutation(tt.args.n), "ReinitializePermutation(%v)", tt.args.n)
+		})
+	}
+}
