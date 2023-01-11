@@ -335,3 +335,20 @@ func NumbersAscending(s string) bool {
 	}
 	return true
 }
+
+// DigitCount returns true if for every index i in the range 0 <= i < n,
+// the digit i occurs num[i] times in num, otherwise return false.
+func DigitCount(num string) bool {
+	counter := make(map[int32]int32)
+	for _, v := range num {
+		n := v - '0'
+		counter[n] = counter[n] + 1
+	}
+	for i, v := range num {
+		n := v - '0'
+		if counter[int32(i)] != n {
+			return false
+		}
+	}
+	return true
+}

@@ -401,3 +401,30 @@ func TestNumbersAscending(t *testing.T) {
 		})
 	}
 }
+
+func TestDigitCount(t *testing.T) {
+	type args struct {
+		num string
+	}
+	tests := []struct {
+		name string
+		args args
+		want bool
+	}{
+		{
+			name: "1210",
+			args: args{num: "1210"},
+			want: true,
+		},
+		{
+			name: "030",
+			args: args{num: "030"},
+			want: false,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			assert.Equalf(t, tt.want, DigitCount(tt.args.num), "DigitCount(%v)", tt.args.num)
+		})
+	}
+}
