@@ -352,3 +352,30 @@ func DigitCount(num string) bool {
 	}
 	return true
 }
+
+// Evaluate evaluates all the bracket pairs with key in knowledge.
+func Evaluate(s string, knowledge [][]string) string {
+	knowledgeMap := make(map[string]string, len(knowledge))
+	for _, v := range knowledge {
+		knowledgeMap[v[0]] = v[1]
+	}
+	builder := strings.Builder{}
+	for i := 0; i < len(s); i++ {
+		if s[i] != '(' {
+			builder.WriteByte(s[i])
+			continue
+		}
+		// get index of ')'
+		j := i + 1
+		for ; j < len(s) && s[j] != ')'; j++ {
+		}
+		val, ok := knowledgeMap[s[i+1:j]]
+		if ok {
+			builder.WriteString(val)
+		} else {
+			builder.WriteRune('?')
+		}
+		i = j
+	}
+	return builder.String()
+}

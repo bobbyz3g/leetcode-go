@@ -428,3 +428,52 @@ func TestDigitCount(t *testing.T) {
 		})
 	}
 }
+
+func TestEvaluate(t *testing.T) {
+	type args struct {
+		s         string
+		knowledge [][]string
+	}
+	tests := []struct {
+		name string
+		args args
+		want string
+	}{
+		{
+			name: "(name)is(age)yearsold",
+			args: args{
+				s: "(name)is(age)yearsold",
+				knowledge: [][]string{
+					{"name", "bob"},
+					{"age", "two"},
+				},
+			},
+			want: "bobistwoyearsold",
+		},
+		{
+			name: "hi(name)",
+			args: args{
+				s: "hi(name)",
+				knowledge: [][]string{
+					{"a", "b"},
+				},
+			},
+			want: "hi?",
+		},
+		{
+			name: "(a)(a)(a)aaa",
+			args: args{
+				s: "(a)(a)(a)aaa",
+				knowledge: [][]string{
+					{"a", "yes"},
+				},
+			},
+			want: "yesyesyesaaa",
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			assert.Equalf(t, tt.want, Evaluate(tt.args.s, tt.args.knowledge), "Evaluate(%v, %v)", tt.args.s, tt.args.knowledge)
+		})
+	}
+}
