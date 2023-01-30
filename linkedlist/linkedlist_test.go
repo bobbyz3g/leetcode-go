@@ -215,3 +215,43 @@ func TestRemoveElements(t *testing.T) {
 		})
 	}
 }
+
+func TestMergeInBetween(t *testing.T) {
+	type args struct {
+		list1 *ListNode
+		a     int
+		b     int
+		list2 *ListNode
+	}
+	tests := []struct {
+		name string
+		args args
+		want *ListNode
+	}{
+		{
+			name: "case 1",
+			args: args{
+				list1: NewList([]int{0, 1, 2, 3, 4, 5}),
+				a:     3,
+				b:     4,
+				list2: NewList([]int{1000000, 1000001, 1000002}),
+			},
+			want: NewList([]int{0, 1, 2, 1000000, 1000001, 1000002, 5}),
+		},
+		{
+			name: "case 2",
+			args: args{
+				list1: NewList([]int{0, 1, 2, 3, 4, 5, 6}),
+				a:     2,
+				b:     5,
+				list2: NewList([]int{1000000, 1000001, 1000002, 1000003, 1000004}),
+			},
+			want: NewList([]int{0, 1, 1000000, 1000001, 1000002, 1000003, 1000004, 6}),
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			assert.Equalf(t, tt.want, MergeInBetween(tt.args.list1, tt.args.a, tt.args.b, tt.args.list2), "MergeInBetween(%v, %v, %v, %v)", tt.args.list1, tt.args.a, tt.args.b, tt.args.list2)
+		})
+	}
+}

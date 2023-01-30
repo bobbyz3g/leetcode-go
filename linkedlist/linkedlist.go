@@ -184,3 +184,27 @@ func RemoveElements(head *ListNode, val int) *ListNode {
 	}
 	return dummy.Next
 }
+
+// MergeInBetween removes nodes that index between a, b in list1,
+// and put list2 in their place.
+func MergeInBetween(list1 *ListNode, a int, b int, list2 *ListNode) *ListNode {
+	dummy := &ListNode{Next: list1}
+	cur := dummy
+	var beforeA, afterB *ListNode
+	for i := 0; cur != nil; i++ {
+		if i == a {
+			beforeA = cur
+		}
+		if i == b+1 {
+			afterB = cur.Next
+		}
+		cur = cur.Next
+	}
+	beforeA.Next = list2
+	bTail := list2
+	for bTail.Next != nil {
+		bTail = bTail.Next
+	}
+	bTail.Next = afterB
+	return dummy.Next
+}
