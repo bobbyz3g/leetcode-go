@@ -255,3 +255,37 @@ func TestMergeInBetween(t *testing.T) {
 		})
 	}
 }
+
+func TestPartition(t *testing.T) {
+	type args struct {
+		head *ListNode
+		x    int
+	}
+	tests := []struct {
+		name string
+		args args
+		want *ListNode
+	}{
+		{
+			name: "case1",
+			args: args{
+				head: NewList([]int{1, 4, 3, 2, 5, 2}),
+				x:    3,
+			},
+			want: NewList([]int{1, 2, 2, 4, 3, 5}),
+		},
+		{
+			name: "case2",
+			args: args{
+				head: NewList([]int{2, 1}),
+				x:    2,
+			},
+			want: NewList([]int{1, 2}),
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			assert.Equalf(t, tt.want, Partition(tt.args.head, tt.args.x), "Partition(%v, %v)", tt.args.head, tt.args.x)
+		})
+	}
+}

@@ -208,3 +208,24 @@ func MergeInBetween(list1 *ListNode, a int, b int, list2 *ListNode) *ListNode {
 	bTail.Next = afterB
 	return dummy.Next
 }
+
+// Partition partitions list such that all nodes less than
+// x come before nodes greater than or equal to x.
+func Partition(head *ListNode, x int) *ListNode {
+	partOne, partTwo := &ListNode{}, &ListNode{}
+	oneTail, twoTail := partOne, partTwo
+	for n := head; n != nil; {
+		next := n.Next
+		n.Next = nil
+		if n.Val >= x {
+			twoTail.Next = n
+			twoTail = twoTail.Next
+		} else {
+			oneTail.Next = n
+			oneTail = oneTail.Next
+		}
+		n = next
+	}
+	oneTail.Next = partTwo.Next
+	return partOne.Next
+}
