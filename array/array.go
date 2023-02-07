@@ -3,6 +3,7 @@ package array
 import (
 	"math"
 	"sort"
+	"time"
 
 	"github.com/Kaiser925/leetcode-go/algebra"
 )
@@ -514,4 +515,30 @@ func MinimumSize(nums []int, maxOperations int) int {
 		}
 		return ops <= maxOperations
 	})
+}
+
+const hourMinute = "15:04"
+
+func AlertNames(keyName []string, keyTime []string) []string {
+	timeMap := make(map[string][]time.Time)
+	for i, name := range keyName {
+		t, _ := time.Parse(hourMinute, keyTime[i])
+		timeMap[name] = append(timeMap[name], t)
+	}
+
+	res := make([]string, 0, len(timeMap))
+	for name, times := range timeMap {
+		sort.Slice(times, func(i, j int) bool {
+			return times[i].Before(times[j])
+		})
+
+		for i, t := range times[2:] {
+			if t.Sub(times[i]).Hours() <= 1 {
+				res = append(res, name)
+				break
+			}
+		}
+	}
+	sort.Strings(res)
+	return res
 }

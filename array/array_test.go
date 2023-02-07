@@ -682,3 +682,53 @@ func TestMinimumSize(t *testing.T) {
 		})
 	}
 }
+
+func TestAlertNames(t *testing.T) {
+	type args struct {
+		keyName []string
+		keyTime []string
+	}
+	tests := []struct {
+		name string
+		args args
+		want []string
+	}{
+		{
+			name: "case1",
+			args: args{
+				keyName: []string{"daniel", "daniel", "daniel", "luis", "luis", "luis", "luis"},
+				keyTime: []string{"10:00", "10:40", "11:00", "09:00", "11:00", "13:00", "15:00"},
+			},
+			want: []string{"daniel"},
+		},
+		{
+			name: "case2",
+			args: args{
+				keyName: []string{"alice", "alice", "alice", "bob", "bob", "bob", "bob"},
+				keyTime: []string{"12:01", "12:00", "18:00", "21:00", "21:20", "21:30", "23:00"},
+			},
+			want: []string{"bob"},
+		},
+		{
+			name: "case3",
+			args: args{
+				keyName: []string{"john", "john", "john"},
+				keyTime: []string{"23:58", "23:59", "00:01"},
+			},
+			want: []string{},
+		},
+		{
+			name: "case4",
+			args: args{
+				keyName: []string{"leslie", "leslie", "leslie", "clare", "clare", "clare", "clare"},
+				keyTime: []string{"13:00", "13:20", "14:00", "18:00", "18:51", "19:30", "19:49"},
+			},
+			want: []string{"clare", "leslie"},
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			assert.Equalf(t, tt.want, AlertNames(tt.args.keyName, tt.args.keyTime), "AlertNames(%v, %v)", tt.args.keyName, tt.args.keyTime)
+		})
+	}
+}
