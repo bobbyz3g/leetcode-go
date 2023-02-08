@@ -3,6 +3,7 @@ package array
 import (
 	"math"
 	"sort"
+	"strings"
 	"time"
 
 	"github.com/Kaiser925/leetcode-go/algebra"
@@ -540,5 +541,19 @@ func AlertNames(keyName []string, keyTime []string) []string {
 		}
 	}
 	sort.Strings(res)
+	return res
+}
+
+// RemoveSubfolders returns the folders after removing all sub-folders in those folders.
+func RemoveSubfolders(folder []string) []string {
+	sort.Strings(folder)
+	res := make([]string, 0, len(folder))
+	res = append(res, folder[0])
+	for _, f := range folder[1:] {
+		last := res[len(res)-1]
+		if !strings.HasPrefix(f, last) || f[len(last)] != '/' {
+			res = append(res, f)
+		}
+	}
 	return res
 }
