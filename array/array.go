@@ -557,3 +557,37 @@ func RemoveSubfolders(folder []string) []string {
 	}
 	return res
 }
+
+// FourSum returns an array of all the unique quadruplets
+// [nums[a], nums[b], nums[c], nums[d]] such that
+// nums[a] + nums[b] + nums[c] + nums[d] == target, and
+// a, b, c and d are distinct.
+func FourSum(nums []int, target int) [][]int {
+	sort.Ints(nums)
+	n := len(nums)
+	res := make([][]int, 0, 5)
+	for i := 0; i < n-3 && nums[i]+nums[i+1]+nums[i+2]+nums[i+3] <= target; i++ {
+		if i > 0 && nums[i] == nums[i-1] || nums[i]+nums[n-3]+nums[n-2]+nums[n-1] < target {
+			continue
+		}
+		for j := i + 1; j < n-2 && nums[i]+nums[j]+nums[j+1]+nums[j+2] <= target; j++ {
+			if j > i+1 && nums[j] == nums[j-1] || nums[i]+nums[j]+nums[n-2]+nums[n-1] < target {
+				continue
+			}
+			for left, right := j+1, n-1; left < right; {
+				if sum := nums[i] + nums[j] + nums[left] + nums[right]; sum == target {
+					res = append(res, []int{nums[i], nums[j], nums[left], nums[right]})
+					for left++; left < right && nums[left] == nums[left-1]; left++ {
+					}
+					for right--; left < right && nums[right] == nums[right+1]; right-- {
+					}
+				} else if sum < target {
+					left++
+				} else {
+					right--
+				}
+			}
+		}
+	}
+	return res
+}

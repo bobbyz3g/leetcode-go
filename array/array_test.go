@@ -770,3 +770,37 @@ func TestRemoveSubfolders(t *testing.T) {
 		})
 	}
 }
+
+func TestFourSum(t *testing.T) {
+	type args struct {
+		nums   []int
+		target int
+	}
+	tests := []struct {
+		name string
+		args args
+		want [][]int
+	}{
+		{
+			name: "case1",
+			args: args{
+				nums:   []int{1, 0, -1, 0, -2, 2},
+				target: 0,
+			},
+			want: [][]int{{-2, -1, 1, 2}, {-2, 0, 0, 2}, {-1, 0, 0, 1}},
+		},
+		{
+			name: "case2",
+			args: args{
+				nums:   []int{2, 2, 2, 2, 2},
+				target: 8,
+			},
+			want: [][]int{{2, 2, 2, 2}},
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			assert.Equalf(t, tt.want, FourSum(tt.args.nums, tt.args.target), "FourSum(%v, %v)", tt.args.nums, tt.args.target)
+		})
+	}
+}
