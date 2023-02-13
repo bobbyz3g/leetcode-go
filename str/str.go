@@ -379,3 +379,44 @@ func Evaluate(s string, knowledge [][]string) string {
 	}
 	return builder.String()
 }
+
+func BalancedString(s string) int {
+	counter := map[rune]int{}
+	for _, c := range s {
+		counter[c]++
+	}
+	n := len(s)
+	partial := n / 4
+	balanced := func() bool {
+		if counter['Q'] > partial ||
+			counter['W'] > partial ||
+			counter['E'] > partial ||
+			counter['R'] > partial {
+			return false
+		}
+		return true
+	}
+	if balanced() {
+		return 0
+	}
+	min := func(a, b int) int {
+		if a < b {
+			return a
+		}
+		return b
+	}
+	r := 0
+	res := n
+	for l, c := range s {
+		for r < n && !balanced() {
+			counter[rune(s[r])]--
+			r += 1
+		}
+		if !balanced() {
+			break
+		}
+		res = min(res, r-l)
+		counter[c]++
+	}
+	return res
+}

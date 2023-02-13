@@ -477,3 +477,48 @@ func TestEvaluate(t *testing.T) {
 		})
 	}
 }
+
+func TestBalancedString(t *testing.T) {
+	type args struct {
+		s string
+	}
+	tests := []struct {
+		name string
+		args args
+		want int
+	}{
+		{
+			name: "case1",
+			args: args{
+				s: "QWER",
+			},
+			want: 0,
+		},
+		{
+			name: "case2",
+			args: args{
+				s: "QQWE",
+			},
+			want: 1,
+		},
+		{
+			name: "case3",
+			args: args{
+				s: "QQQW",
+			},
+			want: 2,
+		},
+		{
+			name: "case4",
+			args: args{
+				s: "QQQQ",
+			},
+			want: 3,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			assert.Equalf(t, tt.want, BalancedString(tt.args.s), "BalancedString(%v)", tt.args.s)
+		})
+	}
+}
