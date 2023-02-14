@@ -804,3 +804,30 @@ func TestFourSum(t *testing.T) {
 		})
 	}
 }
+
+func TestLongestWPI(t *testing.T) {
+	type args struct {
+		hours []int
+	}
+	tests := []struct {
+		name string
+		args args
+		want int
+	}{
+		{
+			name: "case1",
+			args: args{hours: []int{6, 6, 6}},
+			want: 0,
+		},
+		{
+			name: "case2",
+			args: args{hours: []int{9, 9, 6, 0, 6, 6, 9}},
+			want: 3,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			assert.Equalf(t, tt.want, LongestWPI(tt.args.hours), "LongestWPI(%v)", tt.args.hours)
+		})
+	}
+}

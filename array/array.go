@@ -591,3 +591,32 @@ func FourSum(nums []int, target int) [][]int {
 	}
 	return res
 }
+
+func LongestWPI(hours []int) int {
+	s := 0
+	pos := make(map[int]int)
+	max := func(a, b int) int {
+		if a > b {
+			return a
+		}
+		return b
+	}
+	res := 0
+	for i, v := range hours {
+		if v > 8 {
+			s++
+		} else {
+			s--
+		}
+
+		if s > 0 {
+			res = i + 1
+		} else if j, ok := pos[s-1]; ok {
+			res = max(res, i-j)
+		}
+		if _, ok := pos[s]; !ok {
+			pos[s] = i
+		}
+	}
+	return res
+}
