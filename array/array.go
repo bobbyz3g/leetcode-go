@@ -635,3 +635,22 @@ func NumberOfPairs(nums []int) []int {
 	}
 	return res
 }
+
+func GenerateParenthesis(n int) []string {
+	if n == 1 {
+		return []string{"()"}
+	}
+	m := make(map[string]struct{})
+	for _, v := range GenerateParenthesis(n - 1) {
+		for i := 0; i < 2*(n-1); i++ {
+			k := v[0:i] + "()" + v[i:]
+			m[k] = struct{}{}
+		}
+	}
+	res := make([]string, 0, len(m))
+	for k := range m {
+		res = append(res, k)
+	}
+	sort.Strings(res)
+	return res
+}

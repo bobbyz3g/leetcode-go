@@ -863,3 +863,35 @@ func TestNumberOfPairs(t *testing.T) {
 		})
 	}
 }
+
+func TestGenerateParenthesis(t *testing.T) {
+	type args struct {
+		n int
+	}
+	tests := []struct {
+		name string
+		args args
+		want []string
+	}{
+		{
+			name: "case1",
+			args: args{n: 1},
+			want: []string{"()"},
+		},
+		{
+			name: "case2",
+			args: args{n: 2},
+			want: []string{"()()", "(())"},
+		},
+		{
+			name: "case3",
+			args: args{n: 3},
+			want: []string{"((()))", "(()())", "(())()", "()(())", "()()()"},
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			assert.Equalf(t, tt.want, GenerateParenthesis(tt.args.n), "GenerateParenthesis(%v)", tt.args.n)
+		})
+	}
+}
