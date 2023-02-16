@@ -881,7 +881,7 @@ func TestGenerateParenthesis(t *testing.T) {
 		{
 			name: "case2",
 			args: args{n: 2},
-			want: []string{"()()", "(())"},
+			want: []string{"(())", "()()"},
 		},
 		{
 			name: "case3",
