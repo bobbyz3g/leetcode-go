@@ -620,3 +620,18 @@ func LongestWPI(hours []int) int {
 	}
 	return res
 }
+func NumberOfPairs(nums []int) []int {
+	res := []int{0, len(nums)}
+	m := make(map[int]struct{})
+	for _, v := range nums {
+		_, ok := m[v]
+		if ok {
+			delete(m, v)
+			res[1] -= 2
+			res[0] += 1
+		} else {
+			m[v] = struct{}{}
+		}
+	}
+	return res
+}
