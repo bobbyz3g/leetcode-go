@@ -229,3 +229,18 @@ func Partition(head *ListNode, x int) *ListNode {
 	oneTail.Next = partTwo.Next
 	return partOne.Next
 }
+
+// SwapPairs swaps every two adjacent nodes and return its head
+func SwapPairs(head *ListNode) *ListNode {
+	dummy := &ListNode{0, head}
+	tail := dummy
+	for tail.Next != nil && tail.Next.Next != nil {
+		n1 := tail.Next
+		n2 := tail.Next.Next
+		tail.Next = n2
+		n1.Next = n2.Next
+		n2.Next = n1
+		tail = n1
+	}
+	return dummy.Next
+}

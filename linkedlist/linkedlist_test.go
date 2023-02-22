@@ -289,3 +289,35 @@ func TestPartition(t *testing.T) {
 		})
 	}
 }
+
+func TestSwapPairs(t *testing.T) {
+	type args struct {
+		head *ListNode
+	}
+	tests := []struct {
+		name string
+		args args
+		want *ListNode
+	}{
+		{
+			name: "case1",
+			args: args{NewList([]int{1, 2, 3, 4})},
+			want: NewList([]int{2, 1, 4, 3}),
+		},
+		{
+			name: "case2",
+			args: args{NewList([]int{1})},
+			want: NewList([]int{1}),
+		},
+		{
+			name: "case2",
+			args: args{nil},
+			want: nil,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			assert.Equalf(t, tt.want, SwapPairs(tt.args.head), "SwapPairs(%v)", tt.args.head)
+		})
+	}
+}
