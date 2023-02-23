@@ -654,3 +654,32 @@ func GenerateParenthesis(n int) []string {
 	sort.Strings(res)
 	return res
 }
+
+// Permute returns all the possible permutations of nums.
+func Permute(nums []int) [][]int {
+	n := len(nums)
+	visited := make([]bool, n)
+	res := make([][]int, 0, n)
+	permute(nums, visited, make([]int, n), 0, &res)
+	return res
+}
+
+func permute(nums []int, visited []bool, walker []int, n int, res *[][]int) {
+	if n == len(nums) {
+		tmp := make([]int, n)
+		copy(tmp, walker)
+		*res = append(*res, tmp)
+		return
+	}
+	for i, v := range nums {
+		if visited[i] {
+			continue
+		}
+		visited[i] = true
+		walker[n] = v
+		n++
+		permute(nums, visited, walker, n, res)
+		n--
+		visited[i] = false
+	}
+}
