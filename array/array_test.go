@@ -934,3 +934,53 @@ func TestPermute(t *testing.T) {
 		})
 	}
 }
+
+func TestSearchRange(t *testing.T) {
+	type args struct {
+		arr    []int
+		target int
+	}
+	tests := []struct {
+		name string
+		args args
+		want []int
+	}{
+		{
+			name: "case1",
+			args: args{
+				arr:    []int{5, 7, 7, 8, 8, 10},
+				target: 8,
+			},
+			want: []int{3, 4},
+		},
+		{
+			name: "case2",
+			args: args{
+				arr:    []int{5, 7, 7, 8, 8, 10},
+				target: 6,
+			},
+			want: []int{-1, -1},
+		},
+		{
+			name: "case3",
+			args: args{
+				arr:    []int{},
+				target: 0,
+			},
+			want: []int{-1, -1},
+		},
+		{
+			name: "case4",
+			args: args{
+				arr:    []int{1},
+				target: 1,
+			},
+			want: []int{0, 0},
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			assert.Equalf(t, tt.want, SearchRange(tt.args.arr, tt.args.target), "SearchRange(%v, %v)", tt.args.arr, tt.args.target)
+		})
+	}
+}
