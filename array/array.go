@@ -694,3 +694,32 @@ func SearchRange(nums []int, target int) []int {
 	right := sort.SearchInts(nums, target+1)
 	return []int{left, right - 1}
 }
+
+func MovesToMakeZigzag(nums []int) int {
+	s := [2]int{}
+	for i, v := range nums {
+		left, right := math.MaxInt, math.MaxInt
+		if i > 0 {
+			left = nums[i-1]
+		}
+		if i < len(nums)-1 {
+			right = nums[i+1]
+		}
+		s[i%2] += max(v-min(left, right)+1, 0)
+
+	}
+	return min(s[0], s[1])
+}
+
+func max(a, b int) int {
+	if a > b {
+		return a
+	}
+	return b
+}
+func min(a, b int) int {
+	if a < b {
+		return a
+	}
+	return b
+}

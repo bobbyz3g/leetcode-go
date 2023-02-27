@@ -984,3 +984,30 @@ func TestSearchRange(t *testing.T) {
 		})
 	}
 }
+
+func TestMovesToMakeZigzag(t *testing.T) {
+	type args struct {
+		nums []int
+	}
+	tests := []struct {
+		name string
+		args args
+		want int
+	}{
+		{
+			name: "case1",
+			args: args{nums: []int{1, 2, 3}},
+			want: 2,
+		},
+		{
+			name: "case2",
+			args: args{nums: []int{9, 6, 1, 6, 2}},
+			want: 4,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			assert.Equalf(t, tt.want, MovesToMakeZigzag(tt.args.nums), "MovesToMakeZigzag(%v)", tt.args.nums)
+		})
+	}
+}
