@@ -723,3 +723,24 @@ func min(a, b int) int {
 	}
 	return b
 }
+
+func MergeSimilarItems(items1 [][]int, items2 [][]int) [][]int {
+	valWeights := make(map[int]int, len(items1)+len(items2))
+	for _, v := range items1 {
+		valWeights[v[0]] += v[1]
+	}
+
+	for _, v := range items2 {
+		valWeights[v[0]] += v[1]
+	}
+
+	res := make([][]int, 0, len(valWeights))
+	for k, v := range valWeights {
+		res = append(res, []int{k, v})
+	}
+
+	sort.Slice(res, func(i, j int) bool {
+		return res[i][0] < res[j][0]
+	})
+	return res
+}
