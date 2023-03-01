@@ -321,3 +321,65 @@ func TestSwapPairs(t *testing.T) {
 		})
 	}
 }
+
+func TestDetectCycle(t *testing.T) {
+	type args struct {
+		nodes []*ListNode
+		pos   int
+	}
+	tests := []struct {
+		name string
+		args args
+		want *int
+	}{
+		{
+			name: "case1",
+			args: args{
+				nodes: []*ListNode{{Val: 1}},
+				pos:   -1,
+			},
+			want: nil,
+		},
+		{
+			name: "case2",
+			args: args{
+				nodes: []*ListNode{{Val: 3}, {Val: 2}, {Val: 0}, {Val: -4}},
+				pos:   1,
+			},
+			want: intPtr(2),
+		},
+		{
+			name: "case3",
+			args: args{
+				nodes: []*ListNode{{Val: 1}, {Val: 2}},
+				pos:   0,
+			},
+			want: intPtr(1),
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			head := tt.args.nodes[0]
+			n := len(tt.args.nodes)
+			node := head
+			if tt.args.pos >= 0 {
+				tt.args.nodes[n-1].Next = tt.args.nodes[tt.args.pos]
+			}
+			for i := 1; i < n; i++ {
+				node.Next = tt.args.nodes[i]
+				node = node.Next
+			}
+			node = DetectCycle(head)
+			if node != nil && tt.want != nil {
+				assert.Equalf(t, *tt.want, node.Val, "DetectCycle(%v)", *tt.want)
+			} else if node == nil && tt.want == nil {
+			} else {
+				assert.Failf(t, "", "want %v, got %v", tt.want, node)
+			}
+		})
+	}
+}
+
+func intPtr(v int) *int {
+	return &v
+}

@@ -244,3 +244,17 @@ func SwapPairs(head *ListNode) *ListNode {
 	}
 	return dummy.Next
 }
+
+// DetectCycle returns the node where the cycle begins.
+// If there is no cycle, it returns nil.
+func DetectCycle(head *ListNode) *ListNode {
+	visited := make(map[*ListNode]struct{})
+	for head != nil {
+		if _, ok := visited[head]; ok {
+			return head
+		}
+		visited[head] = struct{}{}
+		head = head.Next
+	}
+	return nil
+}
