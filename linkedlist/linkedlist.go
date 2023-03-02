@@ -258,3 +258,30 @@ func DetectCycle(head *ListNode) *ListNode {
 	}
 	return nil
 }
+
+type Node struct {
+	Val    int
+	Next   *Node
+	Random *Node
+}
+
+func CopyRandomList(head *Node) *Node {
+	cache := make(map[*Node]*Node)
+	var deepCopy func(node *Node) *Node
+	deepCopy = func(node *Node) *Node {
+		if node == nil {
+			return nil
+		}
+		if n, ok := cache[node]; ok {
+			return n
+		}
+
+		n := &Node{Val: node.Val}
+		cache[node] = n
+		n.Next = deepCopy(node.Next)
+		n.Random = deepCopy(node.Random)
+		return n
+	}
+
+	return deepCopy(head)
+}
