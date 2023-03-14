@@ -13,7 +13,9 @@
 
 package stack
 
-import "math"
+import (
+	"math"
+)
 
 type MinStack struct {
 	arr      []int
@@ -61,4 +63,20 @@ func min(a, b int) int {
 		return a
 	}
 	return b
+}
+
+// ValidateStackSequences returns true if this could have been the result of
+// a sequence of push and pop operations on an initially empty stack,
+// or false otherwise. Elements are distinct in each sequence.
+func ValidateStackSequences(pushed []int, popped []int) bool {
+	stack := make([]int, 0, len(pushed))
+	var j int
+	for _, v := range pushed {
+		stack = append(stack, v)
+		for len(stack) > 0 && stack[len(stack)-1] == popped[j] {
+			stack = stack[:len(stack)-1]
+			j++
+		}
+	}
+	return len(stack) == 0
 }
