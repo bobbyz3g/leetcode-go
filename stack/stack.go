@@ -80,3 +80,24 @@ func ValidateStackSequences(pushed []int, popped []int) bool {
 	}
 	return len(stack) == 0
 }
+
+// DailyTemperatures returns an array answer such that
+// answer[i] is the number of days you have to wait after
+// the ith day to get a warmer temperature.
+// If there is no future day for which this is possible,
+// keep answer[i] == 0 instead.
+func DailyTemperatures(temperatures []int) []int {
+	// stack stores index of element inf temperatures
+	stack := make([]int, 0, len(temperatures))
+	res := make([]int, len(temperatures))
+	for i, v := range temperatures {
+		// stack is not empty, and top of stack is less than v.
+		for n := len(stack); n != 0 && temperatures[stack[n-1]] < v; n = len(stack) {
+			top := stack[n-1]
+			stack = stack[:n-1]
+			res[top] = i - top
+		}
+		stack = append(stack, i)
+	}
+	return res
+}
