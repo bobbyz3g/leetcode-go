@@ -101,3 +101,46 @@ func DailyTemperatures(temperatures []int) []int {
 	}
 	return res
 }
+
+// StackQueue is a queue implements by stack.
+type StackQueue struct {
+	inStack  []int
+	outStack []int
+}
+
+// Push pushes new element into queue.
+func (q *StackQueue) Push(x int) {
+	q.inStack = append(q.inStack, x)
+}
+
+// Pop pops the head element from queue.
+func (q *StackQueue) Pop() int {
+	if len(q.outStack) == 0 {
+		q.moveToOut()
+	}
+	top := q.outStack[len(q.outStack)-1]
+	q.outStack = q.outStack[:len(q.outStack)-1]
+	return top
+}
+
+// Peek returns head element of queue.
+func (q *StackQueue) Peek() int {
+	if len(q.outStack) == 0 {
+		q.moveToOut()
+	}
+
+	return q.outStack[len(q.outStack)-1]
+}
+
+// Empty returns true if queue is true.
+func (q *StackQueue) Empty() bool {
+	return len(q.inStack) == 0 && len(q.outStack) == 0
+}
+
+func (q *StackQueue) moveToOut() {
+	for len(q.inStack) != 0 {
+		n := len(q.inStack)
+		q.outStack = append(q.outStack, q.inStack[n-1])
+		q.inStack = q.inStack[:n-1]
+	}
+}
