@@ -285,3 +285,26 @@ func CopyRandomList(head *Node) *Node {
 
 	return deepCopy(head)
 }
+
+func OddEvenList(head *ListNode) *ListNode {
+	if head == nil {
+		return nil
+	}
+	odd, even := &ListNode{}, &ListNode{}
+	o, e := odd, even
+	i := 1
+	for cur := head; cur != nil; i++ {
+		next := cur.Next
+		cur.Next = nil
+		if i%2 == 1 {
+			o.Next = cur
+			o = o.Next
+		} else {
+			e.Next = cur
+			e = e.Next
+		}
+		cur = next
+	}
+	o.Next = even.Next
+	return odd.Next
+}

@@ -383,3 +383,35 @@ func TestDetectCycle(t *testing.T) {
 func intPtr(v int) *int {
 	return &v
 }
+
+func TestOddEvenList(t *testing.T) {
+	type args struct {
+		head *ListNode
+	}
+	tests := []struct {
+		name string
+		args args
+		want *ListNode
+	}{
+		{
+			name: "case1",
+			args: args{head: NewList([]int{1, 2, 3, 4, 5})},
+			want: NewList([]int{1, 3, 5, 2, 4}),
+		},
+		{
+			name: "case2",
+			args: args{head: NewList([]int{2, 1, 3, 5, 6, 4, 7})},
+			want: NewList([]int{2, 3, 6, 7, 1, 5, 4}),
+		},
+		{
+			name: "case3",
+			args: args{head: NewList([]int{1})},
+			want: NewList([]int{1}),
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			assert.Equalf(t, tt.want, OddEvenList(tt.args.head), "OddEvenList(%v)", tt.args.head)
+		})
+	}
+}
