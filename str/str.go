@@ -420,3 +420,38 @@ func BalancedString(s string) int {
 	}
 	return res
 }
+
+var letterTable = map[rune][]string{
+	'2': []string{"a", "b", "c"},
+	'3': []string{"d", "e", "f"},
+	'4': []string{"g", "h", "i"},
+	'5': []string{"j", "k", "l"},
+	'6': []string{"m", "n", "o"},
+	'7': []string{"p", "q", "r", "s"},
+	'8': []string{"t", "u", "v"},
+	'9': []string{"w", "x", "y", "z"},
+}
+
+var combinations []string
+
+func LetterCombinations(digits string) []string {
+	if digits == "" {
+		return []string{}
+	}
+	combinations = []string{}
+	backtrack(digits, 0, "")
+	return combinations
+}
+
+func backtrack(digits string, index int, combination string) {
+	if index == len(digits) {
+		combinations = append(combinations, combination)
+	} else {
+		digit := digits[index]
+		letters := letterTable[rune(digit)]
+		lettersCount := len(letters)
+		for i := 0; i < lettersCount; i++ {
+			backtrack(digits, index+1, combination+string(letters[i]))
+		}
+	}
+}

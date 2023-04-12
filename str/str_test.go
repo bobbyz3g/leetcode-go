@@ -1,6 +1,7 @@
 package str
 
 import (
+	"sort"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -519,6 +520,48 @@ func TestBalancedString(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			assert.Equalf(t, tt.want, BalancedString(tt.args.s), "BalancedString(%v)", tt.args.s)
+		})
+	}
+}
+
+func TestLetterCombinations(t *testing.T) {
+	type args struct {
+		digits string
+	}
+	tests := []struct {
+		name string
+		args args
+		want []string
+	}{
+		{
+			name: "case1",
+			args: args{
+				digits: "2",
+			},
+			want: []string{"a", "b", "c"},
+		},
+		{
+			name: "case2",
+			args: args{
+				digits: "",
+			},
+			want: []string{},
+		},
+		{
+			name: "case3",
+			args: args{
+				digits: "23",
+			},
+			want: []string{"ad", "ae", "af", "bd", "be", "bf", "cd", "ce", "cf"},
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			got := LetterCombinations(tt.args.digits)
+			sort.Slice(got, func(i, j int) bool {
+				return got[i] < got[j]
+			})
+			assert.Equalf(t, tt.want, got, "LetterCombinations(%v)", tt.args.digits)
 		})
 	}
 }
