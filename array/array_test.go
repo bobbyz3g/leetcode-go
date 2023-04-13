@@ -1011,3 +1011,41 @@ func TestMovesToMakeZigzag(t *testing.T) {
 		})
 	}
 }
+
+func TestMostFrequentEven(t *testing.T) {
+	type args struct {
+		nums []int
+	}
+	tests := []struct {
+		name string
+		args args
+		want int
+	}{
+		{
+			name: "case1",
+			args: args{
+				nums: []int{29, 47, 21, 41, 13, 37, 25, 7},
+			},
+			want: -1,
+		},
+		{
+			name: "case2",
+			args: args{
+				nums: []int{0, 1, 2, 2, 4, 4, 1},
+			},
+			want: 2,
+		},
+		{
+			name: "case3",
+			args: args{
+				nums: []int{4, 4, 4, 9, 2, 4},
+			},
+			want: 4,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			assert.Equalf(t, tt.want, MostFrequentEven(tt.args.nums), "MostFrequentEven(%v)", tt.args.nums)
+		})
+	}
+}

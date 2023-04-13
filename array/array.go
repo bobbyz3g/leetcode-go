@@ -744,3 +744,26 @@ func MergeSimilarItems(items1 [][]int, items2 [][]int) [][]int {
 	})
 	return res
 }
+
+func MostFrequentEven(nums []int) int {
+	count := make(map[int]int)
+
+	for _, v := range nums {
+		if v%2 == 1 {
+			continue
+		}
+		count[v] += 1
+	}
+	if len(count) == 0 {
+		return -1
+	}
+
+	res, ct := -1, 0
+	for k, v := range count {
+		if res == -1 || ct < v || ct == v && k < res {
+			res = k
+			ct = v
+		}
+	}
+	return res
+}
