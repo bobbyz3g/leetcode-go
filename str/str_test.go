@@ -565,3 +565,53 @@ func TestLetterCombinations(t *testing.T) {
 		})
 	}
 }
+
+func TestCountDaysTogether(t *testing.T) {
+	type args struct {
+		arriveAlice string
+		leaveAlice  string
+		arriveBob   string
+		leaveBob    string
+	}
+	tests := []struct {
+		name string
+		args args
+		want int
+	}{
+		{
+			name: "case1",
+			args: args{
+				arriveAlice: "08-15",
+				leaveAlice:  "08-18",
+				arriveBob:   "08-16",
+				leaveBob:    "08-19",
+			},
+			want: 3,
+		},
+		{
+			name: "case2",
+			args: args{
+				arriveAlice: "10-01",
+				leaveAlice:  "10-31",
+				arriveBob:   "11-01",
+				leaveBob:    "12-31",
+			},
+			want: 0,
+		},
+		{
+			name: "case3",
+			args: args{
+				arriveAlice: "08-15",
+				leaveAlice:  "08-18",
+				arriveBob:   "08-14",
+				leaveBob:    "08-20",
+			},
+			want: 4,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			assert.Equalf(t, tt.want, CountDaysTogether(tt.args.arriveAlice, tt.args.leaveAlice, tt.args.arriveBob, tt.args.leaveBob), "CountDaysTogether(%v, %v, %v, %v)", tt.args.arriveAlice, tt.args.leaveAlice, tt.args.arriveBob, tt.args.leaveBob)
+		})
+	}
+}

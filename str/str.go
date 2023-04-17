@@ -455,3 +455,38 @@ func backtrack(digits string, index int, combination string) {
 		}
 	}
 }
+
+var mounthDays = []int{31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31}
+
+func CountDaysTogether(arriveAlice string, leaveAlice string, arriveBob string, leaveBob string) int {
+	aa, la := parseDay(arriveAlice), parseDay(leaveAlice)
+	ab, lb := parseDay(arriveBob), parseDay(leaveBob)
+
+	if ab > la || aa > lb {
+		return 0
+	}
+
+	var l, r int
+	if aa >= ab {
+		l = aa
+	} else {
+		l = ab
+	}
+	if la <= lb {
+		r = la
+	} else {
+		r = lb
+	}
+	return r - l + 1
+}
+
+func parseDay(s string) int {
+	ss := strings.Split(s, "-")
+	b, _ := strconv.Atoi(ss[0])
+	e, _ := strconv.Atoi(ss[1])
+
+	for i := b - 2; i >= 0; i-- {
+		e += mounthDays[i]
+	}
+	return e
+}
