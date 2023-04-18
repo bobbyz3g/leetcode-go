@@ -480,3 +480,61 @@ func TestInvert(t *testing.T) {
 		})
 	}
 }
+
+func TestMaxAncestorDiff(t *testing.T) {
+	type args struct {
+		root *Node
+	}
+	tests := []struct {
+		name string
+		args args
+		want int
+	}{
+		{
+			name: "case1",
+			args: args{
+				root: &Node{
+					Right: &Node{
+						Right: &Node{
+							Val: 0,
+							Left: &Node{
+								Val: 3,
+							},
+						},
+						Val: 2,
+					},
+					Val: 1,
+				},
+			},
+			want: 3,
+		},
+		{
+			name: "case2",
+			args: args{
+				root: &Node{
+					Right: &Node{
+						Right: &Node{Val: 14,
+							Left: &Node{Val: 13},
+						},
+						Val: 10},
+					Val: 8,
+					Left: &Node{
+						Right: &Node{
+							Right: &Node{Val: 7},
+							Val:   6,
+							Left:  &Node{Val: 4},
+						},
+						Val:  3,
+						Left: &Node{Val: 1},
+					},
+				},
+			},
+			want: 7,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			assert.Equalf(t, tt.want, MaxAncestorDiff(tt.args.root), "MaxAncestorDiff(%v)", tt.args.root)
+		})
+	}
+}

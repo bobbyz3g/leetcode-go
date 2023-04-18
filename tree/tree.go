@@ -236,3 +236,18 @@ func Invert(root *Node) *Node {
 	Invert(root.Right)
 	return root
 }
+
+func MaxAncestorDiff(root *Node) int {
+	return walk(root, root.Val, root.Val)
+}
+
+func walk(root *Node, mi, ma int) int {
+	if root == nil {
+		return 0
+	}
+	diff := max(abs(root.Val-mi), abs(root.Val-ma))
+	mi, ma = min(mi, root.Val), max(ma, root.Val)
+	diff = max(diff, walk(root.Left, mi, ma))
+	diff = max(diff, walk(root.Right, mi, ma))
+	return diff
+}
