@@ -339,3 +339,50 @@ func SmallestRepunitDivByK(k int) int {
 		res++
 	}
 }
+
+// ThreeSsumClosest returns the closest sum of
+// three integers in nums to target
+func ThreeSumClosest(nums []int, target int) int {
+	sort.Ints(nums)
+	best := math.MaxInt
+	updateBest := func(cur int) {
+		if abs(cur-target) < abs(best-target) {
+			best = cur
+		}
+	}
+	n := len(nums)
+	for i := 0; i < n; i++ {
+		if i > 0 && nums[i] == nums[i-1] {
+			continue
+		}
+		p, q := i+1, n-1
+		for p < q {
+			s := nums[i] + nums[p] + nums[q]
+			if s == target {
+				return target
+			}
+			updateBest(s)
+			if s > target {
+				q1 := q - 1
+				for p < q1 && nums[q1] == nums[q] {
+					q1--
+				}
+				q = q1
+			} else {
+				p1 := p + 1
+				for p1 < q && nums[p1] == nums[p] {
+					p1++
+				}
+				p = p1
+			}
+		}
+	}
+	return best
+}
+
+func abs(x int) int {
+	if x < 0 {
+		return -1 * x
+	}
+	return x
+}

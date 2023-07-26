@@ -402,3 +402,37 @@ func TestSmallestRepunitDivByK(t *testing.T) {
 		})
 	}
 }
+
+func TestThreeSumClosest(t *testing.T) {
+	type args struct {
+		nums   []int
+		target int
+	}
+	tests := []struct {
+		name string
+		args args
+		want int
+	}{
+		{
+			name: "case1",
+			args: args{
+				nums:   []int{-1, 1, -4, 2},
+				target: 1,
+			},
+			want: 2,
+		},
+		{
+			name: "case2",
+			args: args{
+				nums:   []int{0, 0, 0},
+				target: 1,
+			},
+			want: 0,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			assert.Equalf(t, tt.want, ThreeSumClosest(tt.args.nums, tt.args.target), "ThreeSumClosest(%v, %v)", tt.args.nums, tt.args.target)
+		})
+	}
+}
