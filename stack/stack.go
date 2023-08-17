@@ -58,13 +58,6 @@ func (s *MinStack) GetMin() int {
 	return s.minStack[len(s.minStack)-1]
 }
 
-func min(a, b int) int {
-	if a < b {
-		return a
-	}
-	return b
-}
-
 // ValidateStackSequences returns true if this could have been the result of
 // a sequence of push and pop operations on an initially empty stack,
 // or false otherwise. Elements are distinct in each sequence.

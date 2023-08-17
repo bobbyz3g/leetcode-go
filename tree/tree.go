@@ -84,19 +84,6 @@ func abs(x int) int {
 	}
 	return x
 }
-func max(x, y int) int {
-	if x > y {
-		return x
-	}
-	return y
-}
-
-func min(x, y int) int {
-	if x < y {
-		return x
-	}
-	return y
-}
 
 func IsSymmetric(root *Node) bool {
 	return isSymmetric(root, root)

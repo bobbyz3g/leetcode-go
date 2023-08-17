@@ -160,13 +160,6 @@ func LengthOfLongestSubstring(s string) int {
 	return ans
 }
 
-func max(a, b int) int {
-	if a > b {
-		return a
-	}
-	return b
-}
-
 // LengthOfLastWord returns the length of the last word in the string.
 // A word is a maximal substring consisting of non-space characters only.
 func LengthOfLastWord(s string) int {

@@ -5,8 +5,6 @@ import (
 	"sort"
 	"strings"
 	"time"
-
-	"github.com/Kaiser925/leetcode-go/algebra"
 )
 
 // PairSum groups these integers into n pairs (a1, b1), (a2, b2), ..., (an, bn)
@@ -36,11 +34,11 @@ func LengthOfLIS(nums []int) int {
 
 		for j := 0; j < i; j++ {
 			if nums[i] > nums[j] {
-				dp[i] = algebra.MaxInt(dp[i], dp[j]+1)
+				dp[i] = max(dp[i], dp[j]+1)
 			}
 		}
 
-		result = algebra.MaxInt(result, dp[i])
+		result = max(result, dp[i])
 	}
 	return result
 }
@@ -181,7 +179,7 @@ func FindMaxLength(nums []int) (maxL int) {
 			cnt--
 		}
 		if v, ok := mp[cnt]; ok {
-			maxL = algebra.MaxInt(maxL, i-v)
+			maxL = max(maxL, i-v)
 		} else {
 			mp[cnt] = i
 		}
@@ -709,19 +707,6 @@ func MovesToMakeZigzag(nums []int) int {
 
 	}
 	return min(s[0], s[1])
-}
-
-func max(a, b int) int {
-	if a > b {
-		return a
-	}
-	return b
-}
-func min(a, b int) int {
-	if a < b {
-		return a
-	}
-	return b
 }
 
 func MergeSimilarItems(items1 [][]int, items2 [][]int) [][]int {
