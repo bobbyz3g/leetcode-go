@@ -752,3 +752,24 @@ func MostFrequentEven(nums []int) int {
 	}
 	return res
 }
+
+// MergeOverlapping merges all overlapping intervals,
+// and returns an array of the non-overlapping intervals that
+// cover all the intervals in the input.
+func MergeOverlapping(intervals [][]int) [][]int {
+	sort.Slice(intervals, func(i, j int) bool {
+		return intervals[i][0] < intervals[j][0]
+	})
+	res := make([][]int, 0, len(intervals))
+	s, e := intervals[0][0], intervals[0][1]
+	for i := 1; i < len(intervals); i++ {
+		if intervals[i][0] > e {
+			res = append(res, []int{s, e})
+			s, e = intervals[i][0], intervals[i][1]
+			continue
+		}
+		e = max(e, intervals[i][1])
+	}
+	res = append(res, []int{s, e})
+	return res
+}

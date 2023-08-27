@@ -1049,3 +1049,44 @@ func TestMostFrequentEven(t *testing.T) {
 		})
 	}
 }
+
+func TestMergeOverlapping(t *testing.T) {
+
+	tests := []struct {
+		name      string
+		intervals [][]int
+		want      [][]int
+	}{
+		{
+			name:      "case1",
+			intervals: [][]int{{1, 3}, {2, 6}, {8, 10}, {15, 18}},
+			want:      [][]int{{1, 6}, {8, 10}, {15, 18}},
+		},
+		{
+			name:      "case2",
+			intervals: [][]int{{1, 4}, {4, 5}},
+			want:      [][]int{{1, 5}},
+		},
+		{
+			name:      "case3",
+			intervals: [][]int{{1, 2}},
+			want:      [][]int{{1, 2}},
+		},
+		{
+			name:      "case4",
+			intervals: [][]int{{1, 4}, {0, 4}},
+			want:      [][]int{{0, 4}},
+		},
+		{
+			name:      "case5",
+			intervals: [][]int{{1, 4}, {2, 3}},
+			want:      [][]int{{1, 4}},
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			assert.Equalf(t, tt.want, MergeOverlapping(tt.intervals), "MergeOverlapping(%v)", tt.intervals)
+		})
+	}
+}
