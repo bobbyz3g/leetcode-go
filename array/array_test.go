@@ -1090,3 +1090,45 @@ func TestMergeOverlapping(t *testing.T) {
 		})
 	}
 }
+
+func TestEliminateMaximum(t *testing.T) {
+	type args struct {
+		dist  []int
+		speed []int
+	}
+	tests := []struct {
+		name string
+		args args
+		want int
+	}{
+		{
+			name: "case1",
+			args: args{
+				dist:  []int{1, 3, 4},
+				speed: []int{1, 1, 1},
+			},
+			want: 3,
+		},
+		{
+			name: "case2",
+			args: args{
+				dist:  []int{1, 1, 2, 3},
+				speed: []int{1, 1, 1, 1},
+			},
+			want: 1,
+		},
+		{
+			name: "case3",
+			args: args{
+				dist:  []int{3, 2, 4},
+				speed: []int{5, 3, 2},
+			},
+			want: 1,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			assert.Equalf(t, tt.want, EliminateMaximum(tt.args.dist, tt.args.speed), "EliminateMaximum(%v, %v)", tt.args.dist, tt.args.speed)
+		})
+	}
+}

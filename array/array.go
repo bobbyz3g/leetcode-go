@@ -773,3 +773,18 @@ func MergeOverlapping(intervals [][]int) [][]int {
 	res = append(res, []int{s, e})
 	return res
 }
+
+func EliminateMaximum(dist []int, speed []int) int {
+	n := len(dist)
+	arrive := make([]int, n)
+	for i := range dist {
+		arrive[i] = (dist[i]-1)/speed[i] + 1
+	}
+	sort.Ints(arrive)
+	for i := 0; i < n; i++ {
+		if arrive[i] <= i {
+			return i
+		}
+	}
+	return n
+}
