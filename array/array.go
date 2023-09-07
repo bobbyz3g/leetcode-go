@@ -788,3 +788,26 @@ func EliminateMaximum(dist []int, speed []int) int {
 	}
 	return n
 }
+
+func NextPermutation(nums []int) {
+	n := len(nums)
+	if n <= 1 {
+		return
+	}
+
+	i, j := n-2, n-1
+	for ; i >= 0 && nums[i] >= nums[j]; i, j = i-1, j-1 {
+	}
+
+	k := n - 1
+	if i >= 0 {
+		for nums[i] >= nums[k] {
+			k--
+		}
+		nums[i], nums[k] = nums[k], nums[i]
+	}
+
+	for i, j := j, n-1; i < j; i, j = i+1, j-1 {
+		nums[i], nums[j] = nums[j], nums[i]
+	}
+}
