@@ -831,3 +831,20 @@ func MaxSubarraySum(nums []int) int {
 	}
 	return res
 }
+
+func RepairCars(ranks []int, cars int) int64 {
+	minR := ranks[0]
+	for _, v := range ranks {
+		if v < minR {
+			minR = v
+		}
+	}
+
+	return int64(sort.Search(minR*cars*cars, func(i int) bool {
+		s := 0
+		for _, v := range ranks {
+			s += int(math.Sqrt(float64(i / v)))
+		}
+		return s >= cars
+	}))
+}

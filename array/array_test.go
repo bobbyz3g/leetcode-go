@@ -1203,3 +1203,37 @@ func TestMaxSubarraySum(t *testing.T) {
 		})
 	}
 }
+
+func TestRepairCars(t *testing.T) {
+	type args struct {
+		ranks []int
+		cars  int
+	}
+	tests := []struct {
+		name string
+		args args
+		want int64
+	}{
+		{
+			name: "case1",
+			args: args{
+				ranks: []int{4, 2, 3, 1},
+				cars:  10,
+			},
+			want: 16,
+		},
+		{
+			name: "case2",
+			args: args{
+				ranks: []int{5, 1, 8},
+				cars:  6,
+			},
+			want: 16,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			assert.Equalf(t, tt.want, RepairCars(tt.args.ranks, tt.args.cars), "RepairCars(%v, %v)", tt.args.ranks, tt.args.cars)
+		})
+	}
+}
