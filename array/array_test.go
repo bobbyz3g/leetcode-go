@@ -1295,3 +1295,30 @@ func TestInsertAndMergeOverlapping(t *testing.T) {
 		})
 	}
 }
+
+func TestJump(t *testing.T) {
+	type args struct {
+		nums []int
+	}
+	tests := []struct {
+		name string
+		args args
+		want int
+	}{
+		{
+			name: "case1",
+			args: args{nums: []int{2, 3, 1, 1, 4}},
+			want: 2,
+		},
+		{
+			name: "case2",
+			args: args{nums: []int{2, 3, 0, 1, 4}},
+			want: 2,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			assert.Equalf(t, tt.want, Jump(tt.args.nums), "Jump(%v)", tt.args.nums)
+		})
+	}
+}

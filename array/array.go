@@ -871,3 +871,17 @@ func InsertAndMergeOverlapping(intervals [][]int, newInterval []int) [][]int {
 	}
 	return res
 }
+
+func Jump(nums []int) int {
+	end := 0
+	next := 0
+	steps := 0
+	for i := 0; i < len(nums)-1; i++ {
+		next = max(next, i+nums[i])
+		if i == end {
+			end = next
+			steps++
+		}
+	}
+	return steps
+}
