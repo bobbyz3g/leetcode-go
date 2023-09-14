@@ -885,3 +885,14 @@ func Jump(nums []int) int {
 	}
 	return steps
 }
+
+func CanJump(nums []int) bool {
+	j := 0
+	for i := 0; i < len(nums); i++ {
+		if i > j {
+			return false
+		}
+		j = max(j, nums[i]+i)
+	}
+	return true
+}
