@@ -483,3 +483,32 @@ func parseDay(s string) int {
 	}
 	return e
 }
+
+// AddString return the sum of num1 and
+// num2, also represented as a string.
+func AddString(num1 string, num2 string) string {
+	if num1 == "0" {
+		return num2
+	}
+	if num2 == "0" {
+		return num1
+	}
+
+	sum := ""
+	k := 0
+	for i, j := len(num1)-1, len(num2)-1; i >= 0 || j >= 0 || k != 0; i, j = i-1, j-1 {
+		a, b := 0, 0
+		if i >= 0 {
+			a = int(num1[i] - '0')
+		}
+		if j >= 0 {
+			b = int(num2[j] - '0')
+		}
+
+		s := a + b + k
+		k = s / 10
+		sum = strconv.Itoa(s%10) + sum
+	}
+
+	return sum
+}

@@ -615,3 +615,45 @@ func TestCountDaysTogether(t *testing.T) {
 		})
 	}
 }
+
+func TestAddString(t *testing.T) {
+	type args struct {
+		num1 string
+		num2 string
+	}
+	tests := []struct {
+		name string
+		args args
+		want string
+	}{
+		{
+			name: "case1",
+			args: args{
+				num1: "2",
+				num2: "3",
+			},
+			want: "5",
+		},
+		{
+			name: "case2",
+			args: args{
+				num1: "123",
+				num2: "456",
+			},
+			want: "579",
+		},
+		{
+			name: "case3",
+			args: args{
+				num1: "123",
+				num2: "0",
+			},
+			want: "123",
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			assert.Equalf(t, tt.want, AddString(tt.args.num1, tt.args.num2), "AddString(%v, %v)", tt.args.num1, tt.args.num2)
+		})
+	}
+}
