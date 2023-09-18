@@ -436,3 +436,34 @@ func TestThreeSumClosest(t *testing.T) {
 		})
 	}
 }
+
+func TestIntegerBreak(t *testing.T) {
+	type args struct {
+		n int
+	}
+	tests := []struct {
+		name string
+		args args
+		want int
+	}{
+		{
+			name: "case1",
+			args: args{
+				n: 2,
+			},
+			want: 1,
+		},
+		{
+			name: "case2",
+			args: args{
+				n: 10,
+			},
+			want: 36,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			assert.Equalf(t, tt.want, IntegerBreak(tt.args.n), "IntegerBreak(%v)", tt.args.n)
+		})
+	}
+}
