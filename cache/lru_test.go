@@ -6,7 +6,7 @@ import (
 )
 
 func TestLRUCache(t *testing.T) {
-	l := NewLRUCache(2)
+	l := NewLRUCache[int, int](2)
 	l.Put(2, 1)
 	l.Put(1, 1)
 	l.Put(2, 3)

@@ -4,43 +4,45 @@ import (
 	"container/list"
 )
 
-type elem struct {
-	key int
-	val int
+type elem[K comparable, V any] struct {
+	key K
+	val V
 }
-type LRUCache struct {
-	data     map[int]*list.Element
+type LRUCache[K comparable, V any] struct {
+	data     map[K]*list.Element
 	list     *list.List
 	capacity int
 }
 
-func NewLRUCache(capacity int) *LRUCache {
-	return &LRUCache{
+func NewLRUCache[K comparable, V any](capacity int) *LRUCache[K, V] {
+	return &LRUCache[K, V]{
 		capacity: capacity,
 		list:     list.New(),
-		data:     make(map[int]*list.Element),
+		data:     make(map[K]*list.Element),
 	}
-}
-func (l *LRUCache) Get(key int) (int, bool) {
-	node := l.data[key]
-	if node == nil {
-		return 0, false
-	}
-	l.list.MoveToFront(node)
-	return node.Value.(elem).val, true
 }
 
-func (l *LRUCache) Put(key, value int) {
+func (l *LRUCache[K, V]) Get(key K) (V, bool) {
+	node := l.data[key]
+	if node == nil {
+		var v V
+		return v, false
+	}
+	l.list.MoveToFront(node)
+	return node.Value.(elem[K, V]).val, true
+}
+
+func (l *LRUCache[K, V]) Put(key K, value V) {
 	if node, ok := l.data[key]; ok {
-		node.Value = elem{key, value}
+		node.Value = elem[K, V]{key, value}
 		l.list.MoveToFront(node)
 		return
 	}
 
-	l.data[key] = l.list.PushFront(elem{key, value})
+	l.data[key] = l.list.PushFront(elem[K, V]{key, value})
 	if len(l.data) > l.capacity {
 		oldest := l.list.Back()
 		l.list.Remove(oldest)
-		delete(l.data, oldest.Value.(elem).key)
+		delete(l.data, oldest.Value.(elem[K, V]).key)
 	}
 }
