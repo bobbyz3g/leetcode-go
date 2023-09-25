@@ -1,4 +1,4 @@
-package lru
+package cache
 
 import (
 	"github.com/stretchr/testify/assert"
@@ -11,6 +11,8 @@ func TestLRUCache(t *testing.T) {
 	l.Put(1, 1)
 	l.Put(2, 3)
 	l.Put(4, 1)
-	assert.Equal(t, -1, l.Get(1), "LRUCache.Get(%v)")
-	assert.Equal(t, 3, l.Get(2), "LRUCache.Get(%v)")
+	_, ok := l.Get(1)
+	assert.Equal(t, false, ok, "LRUCache.Get(%v)")
+	v, _ := l.Get(2)
+	assert.Equal(t, 3, v, "LRUCache.Get(%v)")
 }

@@ -1,4 +1,4 @@
-package lru
+package cache
 
 import (
 	"container/list"
@@ -21,13 +21,13 @@ func NewLRUCache(capacity int) *LRUCache {
 		data:     make(map[int]*list.Element),
 	}
 }
-func (l *LRUCache) Get(key int) int {
+func (l *LRUCache) Get(key int) (int, bool) {
 	node := l.data[key]
 	if node == nil {
-		return -1
+		return 0, false
 	}
 	l.list.MoveToFront(node)
-	return node.Value.(elem).val
+	return node.Value.(elem).val, true
 }
 
 func (l *LRUCache) Put(key, value int) {
