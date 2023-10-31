@@ -354,13 +354,6 @@ func floodFillDfs(image [][]int, x, y, color, newColor int) {
 // link：https://leetcode-cn.com/problems/max-area-of-island
 func MaxAreaOfIsland(grid [][]int) int {
 	res := 0
-
-	max := func(a, b int) int {
-		if a > b {
-			return a
-		}
-		return b
-	}
 	for i, s := range grid {
 		for j := range s {
 			res = max(maxAreaOfIslandDfs(grid, i, j), res)
@@ -498,14 +491,14 @@ func ContainsNearbyDuplicate(nums []int, k int) bool {
 // performing the operations. Penalty is the maximum number of
 // balls in a bag.
 func MinimumSize(nums []int, maxOperations int) int {
-	max := 0
+	maxVal := 0
 	for _, v := range nums {
-		if v > max {
-			max = v
+		if v > maxVal {
+			maxVal = v
 		}
 	}
 
-	return sort.Search(max, func(i int) bool {
+	return sort.Search(maxVal, func(i int) bool {
 		if i == 0 {
 			return false
 		}
@@ -594,12 +587,6 @@ func FourSum(nums []int, target int) [][]int {
 func LongestWPI(hours []int) int {
 	s := 0
 	pos := make(map[int]int)
-	max := func(a, b int) int {
-		if a > b {
-			return a
-		}
-		return b
-	}
 	res := 0
 	for i, v := range hours {
 		if v > 8 {
