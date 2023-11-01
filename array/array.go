@@ -960,3 +960,30 @@ func SearchRotated(nums []int, target int) int {
 	}
 	return -1
 }
+
+// MinPathSum returns minimizes the sum of
+// all numbers along path that from top left to
+// bottom right
+func MinPathSum(grid [][]int) int {
+	m, n := len(grid), len(grid[0])
+	dp := make([][]int, m)
+	for i := range dp {
+		dp[i] = make([]int, n)
+	}
+
+	for i := range grid {
+		for j := range grid[i] {
+			switch {
+			case i == 0 && j == 0:
+				dp[i][j] = grid[i][j]
+			case i == 0:
+				dp[i][j] = grid[i][j] + dp[i][j-1]
+			case j == 0:
+				dp[i][j] = grid[i][j] + dp[i-1][j]
+			default:
+				dp[i][j] = grid[i][j] + min(dp[i-1][j], dp[i][j-1])
+			}
+		}
+	}
+	return dp[m-1][n-1]
+}

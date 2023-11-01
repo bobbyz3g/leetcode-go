@@ -1445,3 +1445,53 @@ func TestSearchRotated(t *testing.T) {
 		})
 	}
 }
+
+func TestMinPathSum(t *testing.T) {
+	type args struct {
+		grid [][]int
+	}
+	tests := []struct {
+		name string
+		args args
+		want int
+	}{
+		{
+			name: "case1",
+			args: args{grid: [][]int{
+				{1, 3, 1},
+				{1, 5, 1},
+				{4, 2, 1},
+			}},
+			want: 7,
+		},
+		{
+			name: "case2",
+			args: args{grid: [][]int{
+				{1, 2, 3},
+				{4, 5, 6},
+			}},
+			want: 12,
+		},
+		{
+			name: "case3",
+			args: args{grid: [][]int{
+				{1, 3, 1},
+				{1, 5, 1},
+				{1, 2, 1},
+			}},
+			want: 6,
+		},
+		{
+			name: "case4",
+			args: args{grid: [][]int{
+				{1},
+			}},
+			want: 1,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			assert.Equalf(t, tt.want, MinPathSum(tt.args.grid), "MinPathSum(%v)", tt.args.grid)
+		})
+	}
+}
