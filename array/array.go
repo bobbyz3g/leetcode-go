@@ -69,21 +69,21 @@ outer:
 // RemoveDuplicates1 removes the duplicates in-place,
 // such that each element appears only once and returns the new length.
 // Given nums is sorted.
-func RemoveDuplicates1(nums []int) int {
+func RemoveDuplicates1[T comparable](nums []T) int {
 	return RemoveDuplicates(nums, 1)
 }
 
 // RemoveDuplicates2 removes the duplicates in-place such that duplicates appeared at most twice
 // and returns the new length slice.
 // Given nums is sorted.
-func RemoveDuplicates2(nums []int) int {
+func RemoveDuplicates2[T comparable](nums []T) int {
 	return RemoveDuplicates(nums, 2)
 }
 
 // RemoveDuplicates removes the duplicates in-place,
 // such that duplicates appeared at most appearNum and returns the new length.
 // Given nums is sorted.
-func RemoveDuplicates(nums []int, appearNum int) int {
+func RemoveDuplicates[T comparable](nums []T, appearNum int) int {
 	if len(nums) < appearNum || appearNum < 1 {
 		return len(nums)
 	}
@@ -246,14 +246,21 @@ func SortedSquares(nums []int) []int {
 // relative order of the non-zero elements.
 // link: https://leetcode-cn.com/problems/move-zeroes/
 func MoveZeroes(nums []int) {
-	n := len(nums)
-	for i := range nums {
-		if nums[i] == 0 {
-			left := i
+	match := func(a int) bool {
+		return a == 0
+	}
+	MoveToEnd(nums, match)
+}
 
+// MoveToEnd moves match element to end.
+func MoveToEnd[T any](arr []T, match func(T) bool) {
+	n := len(arr)
+	for i := range arr {
+		if match(arr[i]) {
+			left := i
 			for right := i + 1; right < n; right++ {
-				if nums[right] != 0 {
-					nums[left], nums[right] = nums[right], nums[left]
+				if !match(arr[right]) {
+					arr[left], arr[right] = arr[right], arr[left]
 					break
 				}
 			}
@@ -417,14 +424,14 @@ func MaxProfit(prices []int) int {
 }
 
 // MajorityElement returns the majority element which appears more than ⌊n / 2⌋ times.
-func MajorityElement(nums []int) int {
-	winner := nums[0]
+func MajorityElement[T any](s []T, eq func(a, b T) bool) T {
+	winner := s[0]
 	count := 0
-	for i := 0; i < len(nums); i++ {
-		if winner == nums[i] {
+	for i := 0; i < len(s); i++ {
+		if eq(winner, s[i]) {
 			count++
 		} else if count == 0 {
-			winner = nums[i]
+			winner = s[i]
 			count++
 		} else {
 			count--

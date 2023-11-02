@@ -527,9 +527,10 @@ func TestMajorityElement(t *testing.T) {
 			want: 5,
 		},
 	}
+	eq := func(a, b int) bool { return a == b }
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, MajorityElement(tt.args.nums), "MajorityElement(%v)", tt.args.nums)
+			assert.Equalf(t, tt.want, MajorityElement(tt.args.nums, eq), "MajorityElement(%v)", tt.args.nums)
 		})
 	}
 }
