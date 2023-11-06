@@ -15,20 +15,20 @@
 
 package tree
 
-type Node struct {
-	Val   int
-	Left  *Node
-	Right *Node
+type Node[T any] struct {
+	Val   T
+	Left  *Node[T]
+	Right *Node[T]
 }
 
 // FromSortedArray returns a binary search tree from given sorted array.
-func FromSortedArray(nums []int) *Node {
+func FromSortedArray[T any](nums []T) *Node[T] {
 	n := len(nums)
 	if n == 0 {
 		return nil
 	}
 	if n == 1 {
-		return &Node{Val: nums[0]}
+		return &Node[T]{Val: nums[0]}
 	}
 
 	mid := 0
@@ -38,33 +38,33 @@ func FromSortedArray(nums []int) *Node {
 		mid = n / 2
 	}
 
-	root := &Node{Val: nums[mid]}
+	root := &Node[T]{Val: nums[mid]}
 
 	if mid > 0 {
-		root.Left = FromSortedArray(nums[:mid])
+		root.Left = FromSortedArray[T](nums[:mid])
 	}
 
-	root.Right = FromSortedArray(nums[mid+1:])
+	root.Right = FromSortedArray[T](nums[mid+1:])
 	return root
 }
 
-func IsSameTree(p *Node, q *Node) bool {
+func IsSameTree[T any](p *Node[T], q *Node[T], eq func(a, b T) bool) bool {
 	if p == nil && q == nil {
 		return true
 	}
 	if p == nil || q == nil {
 		return false
 	}
-	if p.Val != q.Val {
+	if !eq(p.Val, q.Val) {
 		return false
 	}
-	return IsSameTree(p.Left, q.Left) && IsSameTree(p.Right, q.Right)
+	return IsSameTree(p.Left, q.Left, eq) && IsSameTree(p.Right, q.Right, eq)
 }
 
 // IsBalanced return true if given tree is balanced.
-func IsBalanced(root *Node) bool {
-	var height func(*Node) int
-	height = func(root *Node) int {
+func IsBalanced[T any](root *Node[T]) bool {
+	var height func(*Node[T]) int
+	height = func(root *Node[T]) int {
 		if root == nil {
 			return 0
 		}
@@ -85,25 +85,25 @@ func abs(x int) int {
 	return x
 }
 
-func IsSymmetric(root *Node) bool {
-	return isSymmetric(root, root)
+func IsSymmetric[T any](root *Node[T], eq func(a, b T) bool) bool {
+	return isSymmetric(root, root, eq)
 }
 
-func isSymmetric(p, q *Node) bool {
+func isSymmetric[T any](p, q *Node[T], eq func(a, b T) bool) bool {
 	if p == nil && q == nil {
 		return true
 	}
 	if p == nil || q == nil {
 		return false
 	}
-	return p.Val == q.Val && isSymmetric(p.Left, q.Right) && isSymmetric(p.Right, q.Left)
+	return eq(p.Val, q.Val) && isSymmetric(p.Left, q.Right, eq) && isSymmetric(p.Right, q.Left, eq)
 }
 
 // InorderTraversal returns inorder traversal of its nodes' values.
-func InorderTraversal(root *Node) []int {
-	var res []int
-	var inorder func(*Node)
-	inorder = func(n *Node) {
+func InorderTraversal[T any](root *Node[T]) []T {
+	var res []T
+	var inorder func(*Node[T])
+	inorder = func(n *Node[T]) {
 		if n == nil {
 			return
 		}
@@ -116,10 +116,10 @@ func InorderTraversal(root *Node) []int {
 }
 
 // PreorderTraversal returns preorder traversal of its nodes' values.
-func PreorderTraversal(root *Node) []int {
-	var res []int
-	var preorder func(*Node)
-	preorder = func(n *Node) {
+func PreorderTraversal[T any](root *Node[T]) []T {
+	var res []T
+	var preorder func(*Node[T])
+	preorder = func(n *Node[T]) {
 		if n == nil {
 			return
 		}
@@ -133,10 +133,10 @@ func PreorderTraversal(root *Node) []int {
 
 // PostorderTraversal returns postorder traversal of
 // its nodes' values.
-func PostorderTraversal(root *Node) []int {
-	var res []int
-	var stack []*Node
-	var prevWalked *Node
+func PostorderTraversal[T any](root *Node[T]) []T {
+	var res []T
+	var stack []*Node[T]
+	var prevWalked *Node[T]
 	for root != nil || len(stack) > 0 {
 		for root != nil { // push all left sub-nodes of current node into stack
 			stack = append(stack, root)
@@ -159,12 +159,12 @@ func PostorderTraversal(root *Node) []int {
 	}
 	return res
 }
-func MaxDepth(root *Node) int {
+func MaxDepth[T any](root *Node[T]) int {
 	depth := 0
 	return getMaxDepth(root, depth)
 }
 
-func getMaxDepth(root *Node, depth int) int {
+func getMaxDepth[T any](root *Node[T], depth int) int {
 	if root == nil {
 		return depth
 	}
@@ -184,7 +184,7 @@ func getMaxDepth(root *Node, depth int) int {
 // The minimum depth is the number of nodes
 // along the shortest path from the root node
 // down to the nearest leaf node.
-func MinDepth(root *Node) int {
+func MinDepth[T any](root *Node[T]) int {
 	if root == nil {
 		return 0
 	}
@@ -200,7 +200,7 @@ func MinDepth(root *Node) int {
 // HasPathSum returns true if the tree has a
 // root-to-leaf path such that adding up all
 // the values along the path equals targetSum.
-func HasPathSum(root *Node, targetSum int) bool {
+func HasPathSum(root *Node[int], targetSum int) bool {
 	if root == nil {
 		return false
 	}
@@ -214,7 +214,7 @@ func HasPathSum(root *Node, targetSum int) bool {
 }
 
 // Invert inverts tree, and returns its root.
-func Invert(root *Node) *Node {
+func Invert[T any](root *Node[T]) *Node[T] {
 	if root == nil {
 		return root
 	}
@@ -224,11 +224,11 @@ func Invert(root *Node) *Node {
 	return root
 }
 
-func MaxAncestorDiff(root *Node) int {
+func MaxAncestorDiff(root *Node[int]) int {
 	return walk(root, root.Val, root.Val)
 }
 
-func walk(root *Node, mi, ma int) int {
+func walk(root *Node[int], mi, ma int) int {
 	if root == nil {
 		return 0
 	}

@@ -16,13 +16,18 @@
 package tree
 
 import (
-	"github.com/stretchr/testify/assert"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
+
+func eq(a, b int) bool {
+	return a == b
+}
 
 func TestInorderTraversal(t *testing.T) {
 	type args struct {
-		root *Node
+		root *Node[int]
 	}
 	tests := []struct {
 		name string
@@ -32,11 +37,11 @@ func TestInorderTraversal(t *testing.T) {
 		{
 			name: "1,null,2,3",
 			args: args{
-				&Node{
+				&Node[int]{
 					Val: 1,
-					Right: &Node{
+					Right: &Node[int]{
 						Val:  2,
-						Left: &Node{Val: 3},
+						Left: &Node[int]{Val: 3},
 					},
 				},
 			},
@@ -55,14 +60,14 @@ func TestInorderTraversal(t *testing.T) {
 func TestMaxDepth(t *testing.T) {
 	tests := []struct {
 		name string
-		root *Node
+		root *Node[int]
 		want int
 	}{
 		{
 			name: "first",
-			root: &Node{
-				Left:  &Node{},
-				Right: &Node{Left: &Node{}},
+			root: &Node[int]{
+				Left:  &Node[int]{},
+				Right: &Node[int]{Left: &Node[int]{}},
 			},
 			want: 3,
 		},
@@ -81,35 +86,35 @@ func TestFromSortedArray(t *testing.T) {
 	tests := []struct {
 		name string
 		args args
-		want *Node
+		want *Node[int]
 	}{
 		{
 			name: "1",
 			args: args{
 				nums: []int{1},
 			},
-			want: &Node{Val: 1},
+			want: &Node[int]{Val: 1},
 		},
 		{
 			name: "[1,2]",
 			args: args{
 				nums: []int{1, 2},
 			},
-			want: &Node{Val: 1, Right: &Node{Val: 2}},
+			want: &Node[int]{Val: 1, Right: &Node[int]{Val: 2}},
 		},
 		{
 			name: "[-10,-3,0,5,9]",
 			args: args{
 				nums: []int{-10, -3, 0, 5, 9},
 			},
-			want: &Node{
-				Left: &Node{
-					Right: &Node{Val: -3},
+			want: &Node[int]{
+				Left: &Node[int]{
+					Right: &Node[int]{Val: -3},
 					Val:   -10,
 				},
 				Val: 0,
-				Right: &Node{
-					Right: &Node{
+				Right: &Node[int]{
+					Right: &Node[int]{
 						Val: 9,
 					},
 					Val: 5,
@@ -119,8 +124,10 @@ func TestFromSortedArray(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			bst := FromSortedArray(tt.args.nums)
-			equal := IsSameTree(bst, tt.want)
+			bst := FromSortedArray[int](tt.args.nums)
+			equal := IsSameTree(bst, tt.want, func(a, b int) bool {
+				return a == b
+			})
 			assert.Equalf(t, true, equal, "FromSortedArray(%v)", tt.args.nums)
 		})
 	}
@@ -128,8 +135,8 @@ func TestFromSortedArray(t *testing.T) {
 
 func TestIsSameTree(t *testing.T) {
 	type args struct {
-		p *Node
-		q *Node
+		p *Node[int]
+		q *Node[int]
 	}
 	tests := []struct {
 		name string
@@ -139,16 +146,16 @@ func TestIsSameTree(t *testing.T) {
 		{
 			name: "same",
 			args: args{
-				p: &Node{Val: 1},
-				q: &Node{Val: 1},
+				p: &Node[int]{Val: 1},
+				q: &Node[int]{Val: 1},
 			},
 			want: true,
 		},
 		{
 			name: "not same",
 			args: args{
-				p: &Node{Val: 1},
-				q: &Node{Val: 1, Left: &Node{Val: 2}},
+				p: &Node[int]{Val: 1},
+				q: &Node[int]{Val: 1, Left: &Node[int]{Val: 2}},
 			},
 			want: false,
 		},
@@ -163,14 +170,14 @@ func TestIsSameTree(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, IsSameTree(tt.args.p, tt.args.q), "IsSameTree(%v, %v)", tt.args.p, tt.args.q)
+			assert.Equalf(t, tt.want, IsSameTree(tt.args.p, tt.args.q, eq), "IsSameTree(%v, %v)", tt.args.p, tt.args.q)
 		})
 	}
 }
 
 func TestIsBalanced(t *testing.T) {
 	type args struct {
-		root *Node
+		root *Node[int]
 	}
 	tests := []struct {
 		name string
@@ -187,14 +194,14 @@ func TestIsBalanced(t *testing.T) {
 		{
 			name: "3,9,20,null,null,15,7",
 			args: args{
-				root: &Node{
-					Right: &Node{
-						Right: &Node{Val: 7},
+				root: &Node[int]{
+					Right: &Node[int]{
+						Right: &Node[int]{Val: 7},
 						Val:   20,
-						Left:  &Node{Val: 15},
+						Left:  &Node[int]{Val: 15},
 					},
 					Val:  3,
-					Left: &Node{Val: 9},
+					Left: &Node[int]{Val: 9},
 				},
 			},
 			want: true,
@@ -202,20 +209,20 @@ func TestIsBalanced(t *testing.T) {
 		{
 			name: "1,2,2,3,3,null,null,4,4",
 			args: args{
-				root: &Node{
-					Right: &Node{
+				root: &Node[int]{
+					Right: &Node[int]{
 						Val: 2,
 					},
 					Val: 1,
-					Left: &Node{
-						Right: &Node{
+					Left: &Node[int]{
+						Right: &Node[int]{
 							Val: 3,
 						},
 						Val: 2,
-						Left: &Node{
-							Right: &Node{Val: 4},
+						Left: &Node[int]{
+							Right: &Node[int]{Val: 4},
 							Val:   3,
-							Left:  &Node{Val: 4},
+							Left:  &Node[int]{Val: 4},
 						},
 					},
 				},
@@ -232,7 +239,7 @@ func TestIsBalanced(t *testing.T) {
 
 func TestMinDepth(t *testing.T) {
 	type args struct {
-		root *Node
+		root *Node[int]
 	}
 	tests := []struct {
 		name string
@@ -249,10 +256,10 @@ func TestMinDepth(t *testing.T) {
 		{
 			name: "[1,2,3,4]",
 			args: args{
-				root: &Node{
-					Right: &Node{Val: 3, Left: &Node{Val: 4}},
+				root: &Node[int]{
+					Right: &Node[int]{Val: 3, Left: &Node[int]{Val: 4}},
 					Val:   1,
-					Left:  &Node{Val: 2},
+					Left:  &Node[int]{Val: 2},
 				},
 			},
 			want: 2,
@@ -260,15 +267,15 @@ func TestMinDepth(t *testing.T) {
 		{
 			name: "[2,null,3,null,4,null,5,null,6]",
 			args: args{
-				root: &Node{
+				root: &Node[int]{
 					Val: 1,
-					Left: &Node{
+					Left: &Node[int]{
 						Val: 2,
-						Left: &Node{
+						Left: &Node[int]{
 							Val: 3,
-							Left: &Node{
+							Left: &Node[int]{
 								Val:   4,
-								Right: &Node{Val: 5},
+								Right: &Node[int]{Val: 5},
 							},
 						},
 					},
@@ -286,7 +293,7 @@ func TestMinDepth(t *testing.T) {
 
 func TestHasPathSum(t *testing.T) {
 	type args struct {
-		root      *Node
+		root      *Node[int]
 		targetSum int
 	}
 	tests := []struct {
@@ -305,10 +312,10 @@ func TestHasPathSum(t *testing.T) {
 		{
 			name: "[1,2,3]",
 			args: args{
-				root: &Node{
-					Left:  &Node{Val: 2},
+				root: &Node[int]{
+					Left:  &Node[int]{Val: 2},
 					Val:   1,
-					Right: &Node{Val: 3},
+					Right: &Node[int]{Val: 3},
 				},
 				targetSum: 5,
 			},
@@ -317,8 +324,8 @@ func TestHasPathSum(t *testing.T) {
 		{
 			name: "[1,2]",
 			args: args{
-				root: &Node{
-					Left: &Node{Val: 2},
+				root: &Node[int]{
+					Left: &Node[int]{Val: 2},
 					Val:  1,
 				},
 				targetSum: 1,
@@ -328,22 +335,22 @@ func TestHasPathSum(t *testing.T) {
 		{
 			name: "[5,4,8,11,null,13,4,7,2,null,null,null,1]",
 			args: args{
-				root: &Node{
-					Left: &Node{
-						Left: &Node{
-							Left:  &Node{Val: 7},
+				root: &Node[int]{
+					Left: &Node[int]{
+						Left: &Node[int]{
+							Left:  &Node[int]{Val: 7},
 							Val:   11,
-							Right: &Node{Val: 2},
+							Right: &Node[int]{Val: 2},
 						},
 						Val: 4,
 					},
 					Val: 5,
-					Right: &Node{
-						Left: &Node{Val: 13},
+					Right: &Node[int]{
+						Left: &Node[int]{Val: 13},
 						Val:  8,
-						Right: &Node{
+						Right: &Node[int]{
 							Val:   4,
-							Right: &Node{Val: 1},
+							Right: &Node[int]{Val: 1},
 						},
 					},
 				},
@@ -361,7 +368,7 @@ func TestHasPathSum(t *testing.T) {
 
 func TestPreorderTraversal(t *testing.T) {
 	type args struct {
-		root *Node
+		root *Node[int]
 	}
 	tests := []struct {
 		name string
@@ -371,17 +378,17 @@ func TestPreorderTraversal(t *testing.T) {
 		{
 			name: "[1]",
 			args: args{
-				root: &Node{Val: 1},
+				root: &Node[int]{Val: 1},
 			},
 			want: []int{1},
 		},
 		{
 			name: "[1,null,2,3]",
 			args: args{
-				root: &Node{
-					Right: &Node{
+				root: &Node[int]{
+					Right: &Node[int]{
 						Val:  2,
-						Left: &Node{Val: 3},
+						Left: &Node[int]{Val: 3},
 					},
 					Val: 1,
 				},
@@ -398,7 +405,7 @@ func TestPreorderTraversal(t *testing.T) {
 
 func TestPostorderTraversal(t *testing.T) {
 	type args struct {
-		root *Node
+		root *Node[int]
 	}
 	tests := []struct {
 		name string
@@ -408,17 +415,17 @@ func TestPostorderTraversal(t *testing.T) {
 		{
 			name: "[1]",
 			args: args{
-				root: &Node{Val: 1},
+				root: &Node[int]{Val: 1},
 			},
 			want: []int{1},
 		},
 		{
 			name: "[1,null,2,3]",
 			args: args{
-				root: &Node{
-					Right: &Node{
+				root: &Node[int]{
+					Right: &Node[int]{
 						Val:  2,
-						Left: &Node{Val: 3},
+						Left: &Node[int]{Val: 3},
 					},
 					Val: 1,
 				},
@@ -435,41 +442,41 @@ func TestPostorderTraversal(t *testing.T) {
 
 func TestInvert(t *testing.T) {
 	type args struct {
-		root *Node
+		root *Node[int]
 	}
 	tests := []struct {
 		name string
 		args args
-		want *Node
+		want *Node[int]
 	}{
 		{
 			name: "4,2,7,1,3,6,9",
 			args: args{
-				root: &Node{
-					Right: &Node{
-						Right: &Node{Val: 9},
+				root: &Node[int]{
+					Right: &Node[int]{
+						Right: &Node[int]{Val: 9},
 						Val:   7,
-						Left:  &Node{Val: 6},
+						Left:  &Node[int]{Val: 6},
 					},
 					Val: 4,
-					Left: &Node{
-						Right: &Node{Val: 3},
+					Left: &Node[int]{
+						Right: &Node[int]{Val: 3},
 						Val:   2,
-						Left:  &Node{Val: 1},
+						Left:  &Node[int]{Val: 1},
 					},
 				},
 			},
-			want: &Node{
-				Left: &Node{
-					Left:  &Node{Val: 9},
+			want: &Node[int]{
+				Left: &Node[int]{
+					Left:  &Node[int]{Val: 9},
 					Val:   7,
-					Right: &Node{Val: 6},
+					Right: &Node[int]{Val: 6},
 				},
 				Val: 4,
-				Right: &Node{
-					Left:  &Node{Val: 3},
+				Right: &Node[int]{
+					Left:  &Node[int]{Val: 3},
 					Val:   2,
-					Right: &Node{Val: 1},
+					Right: &Node[int]{Val: 1},
 				},
 			},
 		},
@@ -483,7 +490,7 @@ func TestInvert(t *testing.T) {
 
 func TestMaxAncestorDiff(t *testing.T) {
 	type args struct {
-		root *Node
+		root *Node[int]
 	}
 	tests := []struct {
 		name string
@@ -493,11 +500,11 @@ func TestMaxAncestorDiff(t *testing.T) {
 		{
 			name: "case1",
 			args: args{
-				root: &Node{
-					Right: &Node{
-						Right: &Node{
+				root: &Node[int]{
+					Right: &Node[int]{
+						Right: &Node[int]{
 							Val: 0,
-							Left: &Node{
+							Left: &Node[int]{
 								Val: 3,
 							},
 						},
@@ -511,21 +518,21 @@ func TestMaxAncestorDiff(t *testing.T) {
 		{
 			name: "case2",
 			args: args{
-				root: &Node{
-					Right: &Node{
-						Right: &Node{Val: 14,
-							Left: &Node{Val: 13},
+				root: &Node[int]{
+					Right: &Node[int]{
+						Right: &Node[int]{Val: 14,
+							Left: &Node[int]{Val: 13},
 						},
 						Val: 10},
 					Val: 8,
-					Left: &Node{
-						Right: &Node{
-							Right: &Node{Val: 7},
+					Left: &Node[int]{
+						Right: &Node[int]{
+							Right: &Node[int]{Val: 7},
 							Val:   6,
-							Left:  &Node{Val: 4},
+							Left:  &Node[int]{Val: 4},
 						},
 						Val:  3,
-						Left: &Node{Val: 1},
+						Left: &Node[int]{Val: 1},
 					},
 				},
 			},
