@@ -467,3 +467,30 @@ func TestIntegerBreak(t *testing.T) {
 		})
 	}
 }
+
+func TestSplitNum(t *testing.T) {
+	type args struct {
+		num int
+	}
+	tests := []struct {
+		name string
+		args args
+		want int
+	}{
+		{
+			name: "case1",
+			args: args{num: 4325},
+			want: 59,
+		},
+		{
+			name: "case2",
+			args: args{num: 687},
+			want: 75,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			assert.Equalf(t, tt.want, SplitNum(tt.args.num), "SplitNum(%v)", tt.args.num)
+		})
+	}
+}

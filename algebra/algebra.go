@@ -4,6 +4,7 @@ import (
 	"errors"
 	"math"
 	"sort"
+	"strconv"
 	"strings"
 )
 
@@ -401,4 +402,20 @@ func IntegerBreak(n int) int {
 		dp[i] = curMax
 	}
 	return dp[n]
+}
+
+func SplitNum(num int) int {
+	nstr := []byte(strconv.Itoa(num))
+	sort.Slice(nstr, func(i, j int) bool {
+		return nstr[i] < nstr[j]
+	})
+	a, b := 0, 0
+	for i := 0; i < len(nstr); i++ {
+		if i%2 == 0 {
+			a = a*10 + int(nstr[i]-'0')
+		} else {
+			b = b*10 + int(nstr[i]-'0')
+		}
+	}
+	return a + b
 }
