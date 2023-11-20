@@ -512,3 +512,39 @@ func AddString(num1 string, num2 string) string {
 
 	return sum
 }
+
+// MinDistance returns the minimum number of
+// operations required to convert word1 to word2.
+func MinDistance(word1 string, word2 string) int {
+	n, m := len(word1), len(word2)
+	// word1 or word2 was "".
+	if n*m == 0 {
+		return n + m
+	}
+
+	dp := make([][]int, n+1)
+	for i := range dp {
+		dp[i] = make([]int, m+1)
+	}
+
+	for i := 0; i < n+1; i++ {
+		dp[i][0] = i
+	}
+	for j := 0; j < m+1; j++ {
+		dp[0][j] = j
+	}
+
+	for i := 1; i < n+1; i++ {
+		for j := 1; j < m+1; j++ {
+			left := dp[i-1][j] + 1
+			down := dp[i][j-1] + 1
+			leftDown := dp[i-1][j-1]
+			if word1[i-1] != word2[j-1] {
+				leftDown += 1
+			}
+			dp[i][j] = min(left, min(down, leftDown))
+		}
+	}
+
+	return dp[n][m]
+}
