@@ -260,3 +260,71 @@ func TestMinPathSum(t *testing.T) {
 		})
 	}
 }
+
+func TestUniquePathsWithObstacles(t *testing.T) {
+	type args struct {
+		obstacleGrid [][]int
+	}
+	tests := []struct {
+		name string
+		args args
+		want int
+	}{
+		{
+			name: "case1",
+			args: args{
+				obstacleGrid: [][]int{
+					{0, 0, 0},
+					{0, 1, 0},
+					{0, 0, 0},
+				},
+			},
+			want: 2,
+		},
+		{
+			name: "case2",
+			args: args{
+				obstacleGrid: [][]int{
+					{0, 1},
+					{0, 0},
+				},
+			},
+			want: 1,
+		},
+		{
+			name: "case3",
+			args: args{
+				obstacleGrid: [][]int{
+					{0, 0, 1},
+					{0, 1, 0},
+					{0, 0, 0},
+				},
+			},
+			want: 1,
+		},
+		{
+			name: "case4",
+			args: args{
+				obstacleGrid: [][]int{
+					{1, 0},
+				},
+			},
+			want: 0,
+		},
+		{
+			name: "case5",
+			args: args{
+				obstacleGrid: [][]int{
+					{1, 1},
+					{1, 0},
+				},
+			},
+			want: 0,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			assert.Equalf(t, tt.want, UniquePathsWithObstacles(tt.args.obstacleGrid), "UniquePathsWithObstacles(%v)", tt.args.obstacleGrid)
+		})
+	}
+}
