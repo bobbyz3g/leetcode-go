@@ -49,33 +49,6 @@ func TestFindMaxLength(t *testing.T) {
 	}
 }
 
-func TestLengthOfLIS(t *testing.T) {
-	var tests300 = []struct {
-		nums []int
-		out  int
-	}{
-		{
-			nums: []int{10, 9, 2, 5, 3, 7, 101, 18},
-			out:  4,
-		},
-		{
-			nums: []int{0, 1, 0, 3, 2, 3},
-			out:  4,
-		},
-		{
-			nums: []int{7, 7, 7, 7, 7, 7, 7},
-			out:  1,
-		},
-		{
-			nums: []int{},
-			out:  0,
-		},
-	}
-	for _, v := range tests300 {
-		assert.Equal(t, v.out, LengthOfLIS(v.nums))
-	}
-}
-
 func TestRemoveDuplicates2(t *testing.T) {
 
 	var tests80 = []struct {
@@ -1173,38 +1146,6 @@ func TestNextPermutation(t *testing.T) {
 	}
 }
 
-func TestMaxSubarraySum(t *testing.T) {
-	type args struct {
-		nums []int
-	}
-	tests := []struct {
-		name string
-		args args
-		want int
-	}{
-		{
-			name: "case1",
-			args: args{nums: []int{-2, 1, -3, 4, -1, 2, 1, -5, 4}},
-			want: 6,
-		},
-		{
-			name: "case2",
-			args: args{nums: []int{1}},
-			want: 1,
-		},
-		{
-			name: "case3",
-			args: args{nums: []int{5, 4, -1, 7, 8}},
-			want: 23,
-		},
-	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, MaxSubarraySum(tt.args.nums), "MaxSubarraySum(%v)", tt.args.nums)
-		})
-	}
-}
-
 func TestRepairCars(t *testing.T) {
 	type args struct {
 		ranks []int
@@ -1443,56 +1384,6 @@ func TestSearchRotated(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			assert.Equalf(t, tt.want, SearchRotated(tt.args.nums, tt.args.target), "SearchRotated(%v, %v)", tt.args.nums, tt.args.target)
-		})
-	}
-}
-
-func TestMinPathSum(t *testing.T) {
-	type args struct {
-		grid [][]int
-	}
-	tests := []struct {
-		name string
-		args args
-		want int
-	}{
-		{
-			name: "case1",
-			args: args{grid: [][]int{
-				{1, 3, 1},
-				{1, 5, 1},
-				{4, 2, 1},
-			}},
-			want: 7,
-		},
-		{
-			name: "case2",
-			args: args{grid: [][]int{
-				{1, 2, 3},
-				{4, 5, 6},
-			}},
-			want: 12,
-		},
-		{
-			name: "case3",
-			args: args{grid: [][]int{
-				{1, 3, 1},
-				{1, 5, 1},
-				{1, 2, 1},
-			}},
-			want: 6,
-		},
-		{
-			name: "case4",
-			args: args{grid: [][]int{
-				{1},
-			}},
-			want: 1,
-		},
-	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, MinPathSum(tt.args.grid), "MinPathSum(%v)", tt.args.grid)
 		})
 	}
 }

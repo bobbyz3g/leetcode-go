@@ -53,32 +53,7 @@ func TestLongestCommonPrefix(t *testing.T) {
 	}
 }
 
-func TestLongestPalindrome(t *testing.T) {
-
-	var tests5 = []struct {
-		s   string
-		out string
-	}{
-		{
-			s:   "babad",
-			out: "bab",
-		},
-		{
-			s:   "cbbd",
-			out: "bb",
-		},
-		{
-			s:   "ac",
-			out: "a",
-		},
-	}
-	for _, v := range tests5 {
-		assert.Equal(t, v.out, LongestPalindrome(v.s))
-	}
-}
-
 func TestPartition(t *testing.T) {
-
 	var tests131 = []struct {
 		s   string
 		out [][]string
@@ -654,40 +629,6 @@ func TestAddString(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			assert.Equalf(t, tt.want, AddString(tt.args.num1, tt.args.num2), "AddString(%v, %v)", tt.args.num1, tt.args.num2)
-		})
-	}
-}
-
-func TestMinDistance(t *testing.T) {
-	type args struct {
-		word1 string
-		word2 string
-	}
-	tests := []struct {
-		name string
-		args args
-		want int
-	}{
-		{
-			name: "case1",
-			args: args{
-				word1: "horse",
-				word2: "ros",
-			},
-			want: 3,
-		},
-		{
-			name: "case2",
-			args: args{
-				word1: "intention",
-				word2: "execution",
-			},
-			want: 5,
-		},
-	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, MinDistance(tt.args.word1, tt.args.word2), "MinDistance(%v, %v)", tt.args.word1, tt.args.word2)
 		})
 	}
 }

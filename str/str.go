@@ -56,36 +56,6 @@ func LongestCommonPrefix(strs []string) string {
 	return result
 }
 
-// LongestPalindrome return the longest palindromic substring in s
-func LongestPalindrome(s string) string {
-	l := len(s)
-	if l < 2 {
-		return s
-	}
-
-	dp := make([][]bool, l)
-	for i := range dp {
-		dp[i] = make([]bool, l)
-		for j := range dp[i] {
-			dp[i][j] = true
-		}
-	}
-
-	begin, maxLen := 0, 1
-
-	for j := 1; j < l; j++ {
-		for i := 0; i < j; i++ {
-			dp[i][j] = s[i] == s[j] && dp[i+1][j-1]
-			if dp[i][j] && j-i+1 > maxLen {
-				begin = i
-				maxLen = j - i + 1
-			}
-		}
-	}
-
-	return s[begin : begin+maxLen]
-}
-
 // Partition returns all possible palindrome partitioning of s.
 func Partition(s string) [][]string {
 	l := len(s)
@@ -511,40 +481,4 @@ func AddString(num1 string, num2 string) string {
 	}
 
 	return sum
-}
-
-// MinDistance returns the minimum number of
-// operations required to convert word1 to word2.
-func MinDistance(word1 string, word2 string) int {
-	n, m := len(word1), len(word2)
-	// word1 or word2 was "".
-	if n*m == 0 {
-		return n + m
-	}
-
-	dp := make([][]int, n+1)
-	for i := range dp {
-		dp[i] = make([]int, m+1)
-	}
-
-	for i := 0; i < n+1; i++ {
-		dp[i][0] = i
-	}
-	for j := 0; j < m+1; j++ {
-		dp[0][j] = j
-	}
-
-	for i := 1; i < n+1; i++ {
-		for j := 1; j < m+1; j++ {
-			left := dp[i-1][j] + 1
-			down := dp[i][j-1] + 1
-			leftDown := dp[i-1][j-1]
-			if word1[i-1] != word2[j-1] {
-				leftDown += 1
-			}
-			dp[i][j] = min(left, min(down, leftDown))
-		}
-	}
-
-	return dp[n][m]
 }

@@ -20,30 +20,6 @@ func PairSum(nums []int) int {
 	return result
 }
 
-// LengthOfLIS returns the length of the longest strictly increasing subsequence.
-func LengthOfLIS(nums []int) int {
-	l := len(nums)
-	if l == 0 {
-		return 0
-	}
-	dp := make([]int, l)
-	dp[0] = 1
-	result := 1
-
-	for i := range nums {
-		dp[i] = 1
-
-		for j := 0; j < i; j++ {
-			if nums[i] > nums[j] {
-				dp[i] = max(dp[i], dp[j]+1)
-			}
-		}
-
-		result = max(result, dp[i])
-	}
-	return result
-}
-
 // SubsetsWithDup returns all possible subsets (the power set).
 // The result is not contain duplicate subsets.
 func SubsetsWithDup(nums []int) [][]int {
@@ -807,26 +783,6 @@ func NextPermutation(nums []int) {
 	}
 }
 
-// MaxSubarraySum returns max sum of subarray.
-func MaxSubarraySum(nums []int) int {
-	dp := make([]int, len(nums))
-	dp[0] = nums[0]
-	for i := 1; i < len(nums); i++ {
-		if dp[i-1] >= 0 {
-			dp[i] = nums[i] + dp[i-1]
-		} else {
-			dp[i] = nums[i]
-		}
-	}
-	res := dp[0]
-	for i := 1; i < len(dp); i++ {
-		if dp[i] > res {
-			res = dp[i]
-		}
-	}
-	return res
-}
-
 func RepairCars(ranks []int, cars int) int64 {
 	minR := ranks[0]
 	for _, v := range ranks {
@@ -966,31 +922,4 @@ func SearchRotated(nums []int, target int) int {
 		}
 	}
 	return -1
-}
-
-// MinPathSum returns minimizes the sum of
-// all numbers along path that from top left to
-// bottom right
-func MinPathSum(grid [][]int) int {
-	m, n := len(grid), len(grid[0])
-	dp := make([][]int, m)
-	for i := range dp {
-		dp[i] = make([]int, n)
-	}
-
-	for i := range grid {
-		for j := range grid[i] {
-			switch {
-			case i == 0 && j == 0:
-				dp[i][j] = grid[i][j]
-			case i == 0:
-				dp[i][j] = grid[i][j] + dp[i][j-1]
-			case j == 0:
-				dp[i][j] = grid[i][j] + dp[i-1][j]
-			default:
-				dp[i][j] = grid[i][j] + min(dp[i-1][j], dp[i][j-1])
-			}
-		}
-	}
-	return dp[m-1][n-1]
 }

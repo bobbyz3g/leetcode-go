@@ -6,19 +6,6 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestNthUglyNumber(t *testing.T) {
-	var tests264 = []struct {
-		n   int
-		num int
-	}{
-		{10, 12},
-		{1, 1},
-	}
-	for _, v := range tests264 {
-		assert.Equal(t, v.num, NthUglyNumber(v.n))
-	}
-}
-
 func TestIsUgly(t *testing.T) {
 	var tests263 = []struct {
 		n  int
@@ -433,37 +420,6 @@ func TestThreeSumClosest(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			assert.Equalf(t, tt.want, ThreeSumClosest(tt.args.nums, tt.args.target), "ThreeSumClosest(%v, %v)", tt.args.nums, tt.args.target)
-		})
-	}
-}
-
-func TestIntegerBreak(t *testing.T) {
-	type args struct {
-		n int
-	}
-	tests := []struct {
-		name string
-		args args
-		want int
-	}{
-		{
-			name: "case1",
-			args: args{
-				n: 2,
-			},
-			want: 1,
-		},
-		{
-			name: "case2",
-			args: args{
-				n: 10,
-			},
-			want: 36,
-		},
-	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, IntegerBreak(tt.args.n), "IntegerBreak(%v)", tt.args.n)
 		})
 	}
 }
