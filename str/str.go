@@ -482,3 +482,23 @@ func AddString(num1 string, num2 string) string {
 
 	return sum
 }
+
+func SimplifyPath(path string) string {
+	names := strings.Split(path, "/")
+	p := make([]string, 0, len(names))
+
+	for _, v := range names {
+		switch v {
+		case "", ".":
+			continue
+		case "..":
+			if len(p) == 0 {
+				continue
+			}
+			p = p[:len(p)-1]
+		default:
+			p = append(p, v)
+		}
+	}
+	return "/" + strings.Join(p, "/")
+}
