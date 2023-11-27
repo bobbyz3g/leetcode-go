@@ -212,3 +212,34 @@ func TestKWeakRows(t *testing.T) {
 		assert.Equal(t, tt.row, KWeakRows(tt.mat, tt.k))
 	}
 }
+
+func TestSetZeroes(t *testing.T) {
+	type args struct {
+		matrix [][]int
+	}
+	tests := []struct {
+		name string
+		args args
+		want [][]int
+	}{
+		{
+			name: "case1",
+			args: args{matrix: [][]int{
+				{1, 1, 1},
+				{1, 0, 1},
+				{1, 1, 1},
+			}},
+			want: [][]int{
+				{1, 0, 1},
+				{0, 0, 0},
+				{1, 0, 1},
+			},
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			SetZeroes(tt.args.matrix)
+			assert.Equal(t, tt.want, tt.args.matrix, "want %v, got %v", tt.want, tt.args.matrix)
+		})
+	}
+}

@@ -194,3 +194,45 @@ func KWeakRows(mat [][]int, k int) []int {
 	}
 	return ret
 }
+
+func SetZeroes(matrix [][]int) {
+	n, m := len(matrix), len(matrix[0])
+	var rowZero, colZero bool
+
+	for i := 0; i < len(matrix[0]) && !rowZero; i++ {
+		rowZero = matrix[0][i] == 0
+	}
+
+	for i := 0; i < len(matrix) && !colZero; i++ {
+		colZero = matrix[i][0] == 0
+	}
+
+	for i := 1; i < n; i++ {
+		for j := 1; j < m; j++ {
+			if matrix[i][j] == 0 {
+				matrix[i][0] = 0
+				matrix[0][j] = 0
+			}
+		}
+	}
+
+	for i := 1; i < n; i++ {
+		for j := 1; j < m; j++ {
+			if matrix[i][0] == 0 || matrix[0][j] == 0 {
+				matrix[i][j] = 0
+			}
+		}
+	}
+
+	if rowZero {
+		for j := 0; j < m; j++ {
+			matrix[0][j] = 0
+		}
+	}
+
+	if colZero {
+		for _, r := range matrix {
+			r[0] = 0
+		}
+	}
+}
