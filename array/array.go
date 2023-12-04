@@ -923,3 +923,20 @@ func SearchRotated(nums []int, target int) int {
 	}
 	return -1
 }
+
+func SortColors(nums []int) {
+	rIdx, wIdx := 0, 0
+	for i, c := range nums {
+		if c == 0 {
+			nums[i], nums[rIdx] = nums[rIdx], nums[i]
+			if rIdx < wIdx {
+				nums[i], nums[wIdx] = nums[wIdx], nums[i]
+			}
+			rIdx++
+			wIdx++
+		} else if c == 1 {
+			nums[i], nums[wIdx] = nums[wIdx], nums[i]
+			wIdx++
+		}
+	}
+}

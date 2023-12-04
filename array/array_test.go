@@ -1387,3 +1387,28 @@ func TestSearchRotated(t *testing.T) {
 		})
 	}
 }
+
+func TestSortColors(t *testing.T) {
+	tests := []struct {
+		name string
+		args []int
+		want []int
+	}{
+		{
+			name: "case1",
+			args: []int{2, 0, 2, 1, 1, 0},
+			want: []int{0, 0, 1, 1, 2, 2},
+		},
+		{
+			name: "case2",
+			args: []int{2, 0, 1},
+			want: []int{0, 1, 2},
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			SortColors(tt.args)
+			assert.Equal(t, tt.want, tt.args)
+		})
+	}
+}
