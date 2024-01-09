@@ -945,7 +945,7 @@ func SortColors(nums []int) {
 // by buying and selling stocks from the given prices array.
 // It uses dynamic programming to compute the value.
 // The function returns the maximum profit.
-// origin: leetcode 121
+// origin: leetcode 122
 func MaxProfit2(prices []int) int {
 	n := len(prices)
 	if n < 2 {
