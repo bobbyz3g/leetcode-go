@@ -940,3 +940,24 @@ func SortColors(nums []int) {
 		}
 	}
 }
+
+// MaxProfit2 calculates the maximum profit that can be achieved
+// by buying and selling stocks from the given prices array.
+// It uses dynamic programming to compute the value.
+// The function returns the maximum profit.
+// origin: leetcode 121
+func MaxProfit2(prices []int) int {
+	n := len(prices)
+	if n < 2 {
+		return 0
+	}
+	dp := make([][2]int, n)
+	dp[0][0] = 0
+	dp[0][1] = -prices[0]
+
+	for i := 1; i < n; i++ {
+		dp[i][0] = max(dp[i-1][0], dp[i-1][1]+prices[i])
+		dp[i][1] = max(dp[i-1][1], dp[i-1][0]-prices[i])
+	}
+	return dp[n-1][0]
+}
