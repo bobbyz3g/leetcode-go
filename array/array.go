@@ -961,3 +961,14 @@ func MaxProfit2(prices []int) int {
 	}
 	return dp[n-1][0]
 }
+
+func AddMinimum(word string) int {
+	dp := make([]int, len(word)+1)
+	for i := 1; i <= len(word); i++ {
+		dp[i] = dp[i-1] + 2
+		if i > 1 && word[i-1] > word[i-2] {
+			dp[i] = dp[i-1] - 1
+		}
+	}
+	return dp[len(word)]
+}

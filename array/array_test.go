@@ -1444,3 +1444,33 @@ func TestMaxProfit2(t *testing.T) {
 		})
 	}
 }
+
+func TestAddMinimum(t *testing.T) {
+	tests := []struct {
+		name string
+		word string
+		want int
+	}{
+		{
+			name: "case1",
+			word: "b",
+			want: 2,
+		},
+		{
+			name: "case2",
+			word: "aaa",
+			want: 6,
+		},
+		{
+			name: "case3",
+			word: "abc",
+			want: 0,
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			assert.Equalf(t, tt.want, AddMinimum(tt.word), "AddMinimum(%v)", tt.word)
+		})
+	}
+}
