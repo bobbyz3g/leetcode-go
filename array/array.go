@@ -972,3 +972,18 @@ func AddMinimum(word string) int {
 	}
 	return dp[len(word)]
 }
+
+func Subset[T any](a []T) [][]T {
+	count := 1 << len(a)
+	subset := make([][]T, 0, len(a))
+	for i := 0; i < count; i++ {
+		sub := make([]T, 0)
+		for j := 0; j < len(a); j++ {
+			if (i>>j)&1 == 1 {
+				sub = append(sub, a[j])
+			}
+		}
+		subset = append(subset, sub)
+	}
+	return subset
+}

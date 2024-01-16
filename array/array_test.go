@@ -1474,3 +1474,30 @@ func TestAddMinimum(t *testing.T) {
 		})
 	}
 }
+
+func TestSubset(t *testing.T) {
+	type test[T any] struct {
+		name  string
+		input []T
+		want  [][]T
+	}
+
+	tests := []test[int]{
+		{
+			name:  "case1",
+			input: []int{0},
+			want:  [][]int{{}, {0}},
+		},
+		{
+			name:  "case2",
+			input: []int{1, 2, 3},
+			want:  [][]int{{}, {1}, {2}, {1, 2}, {3}, {1, 3}, {2, 3}, {1, 2, 3}},
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			assert.Equalf(t, tt.want, Subset(tt.input), "Subset(%v)", tt.input)
+		})
+	}
+
+}
