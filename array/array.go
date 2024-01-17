@@ -973,6 +973,28 @@ func AddMinimum(word string) int {
 	return dp[len(word)]
 }
 
+// Subset generates all possible subsets of a given slice.
+// It returns a slice of slices, where each element is a subset of the input slice.
+// The order of the elements in the resulting subsets is not guaranteed.
+// The function uses the binary counting method to generate the subsets.
+// It iterates through all the possible binary numbers of length n,
+// where n is the length of the input slice.
+// For each binary number, the function checks which bits are set to 1,
+// and includes the corresponding elements from the input slice in the subset.
+// The function then appends the generated subset to the list of subsets.
+// Finally, it returns the list of subsets.
+//
+// For example, given the input slice [1, 2, 3],
+// the function will generate the following subsets:
+// [], [1], [2], [1, 2], [3], [1, 3], [2, 3], [1, 2, 3]
+//
+// The function has a type parameter T which represents the type of elements in the input slice.
+// The function signature is `func Subset[T any](a []T) [][]T`.
+//
+// Usage example:
+// input := []int{1, 2, 3}
+// subsets := Subset(input)
+// // subsets = [][]int{{}, {1}, {2}, {1, 2}, {3}, {1, 3}, {2, 3}, {1, 2, 3}}
 func Subset[T any](a []T) [][]T {
 	count := 1 << len(a)
 	subset := make([][]T, 0, len(a))
@@ -986,4 +1008,21 @@ func Subset[T any](a []T) [][]T {
 		subset = append(subset, sub)
 	}
 	return subset
+}
+
+// MaximumNumberOfStringPairs counts the number of pairs of strings in the given slice
+// where swapping the first and second characters of a pair creates a duplicate pair.
+// It returns the count of such pairs.
+func MaximumNumberOfStringPairs(words []string) int {
+	var count int
+	exists := [26][26]bool{}
+	for _, s := range words {
+		x, y := s[0]-'a', s[1]-'a'
+		if exists[y][x] {
+			count++
+		} else {
+			exists[x][y] = true
+		}
+	}
+	return count
 }

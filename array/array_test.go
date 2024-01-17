@@ -1501,3 +1501,35 @@ func TestSubset(t *testing.T) {
 	}
 
 }
+
+func TestMaximumNumberOfStringPairs(t *testing.T) {
+	type args struct {
+		words []string
+	}
+	tests := []struct {
+		name string
+		args args
+		want int
+	}{
+		{
+			name: "case1",
+			args: args{words: []string{"cd", "ac", "dc", "ca", "zz"}},
+			want: 2,
+		},
+		{
+			name: "case2",
+			args: args{words: []string{"ab", "ba", "cc"}},
+			want: 1,
+		},
+		{
+			name: "case3",
+			args: args{words: []string{"aa", "ab"}},
+			want: 0,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			assert.Equalf(t, tt.want, MaximumNumberOfStringPairs(tt.args.words), "MaximumNumberOfStringPairs(%v)", tt.args.words)
+		})
+	}
+}
