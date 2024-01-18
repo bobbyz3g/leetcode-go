@@ -1037,7 +1037,7 @@ func MaximumNumberOfStringPairs(words []string) int {
 // The function keeps track of the minimum number of removals in the `removal` variable.
 // Finally, it returns the value of `removal` as the result.
 //
-// origin: leetcode problem 1961
+// origin: leetcode problem 2171
 func MinimumRemoval(beans []int) int64 {
 	sort.Ints(beans)
 	var total int64
