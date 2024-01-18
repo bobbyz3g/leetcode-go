@@ -1533,3 +1533,34 @@ func TestMaximumNumberOfStringPairs(t *testing.T) {
 		})
 	}
 }
+
+func TestMinimumRemoval(t *testing.T) {
+	type args struct {
+		beans []int
+	}
+	tests := []struct {
+		name string
+		args args
+		want int64
+	}{
+		{
+			name: "case1",
+			args: args{
+				beans: []int{4, 1, 6, 5},
+			},
+			want: 4,
+		},
+		{
+			name: "case2",
+			args: args{
+				beans: []int{2, 10, 3, 2},
+			},
+			want: 7,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			assert.Equalf(t, tt.want, MinimumRemoval(tt.args.beans), "MinimumRemoval(%v)", tt.args.beans)
+		})
+	}
+}

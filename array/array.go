@@ -1026,3 +1026,28 @@ func MaximumNumberOfStringPairs(words []string) int {
 	}
 	return count
 }
+
+// MinimumRemoval calculates the minimum number of removals required to obtain an array
+// where each element is its index multiplied by the total sum of the array.
+// It takes in an integer array `beans` and returns the minimum number of removals as an int64.
+// The function first sorts the array in ascending order using the `sort.Ints` function.
+// It calculates the total sum of all elements in the array using a loop and stores it in `total`.
+// Then, it iterates over each element in the sorted array and calculates the number of removals
+// required by subtracting the current element multiplied by the remaining number of elements from the total sum.
+// The function keeps track of the minimum number of removals in the `removal` variable.
+// Finally, it returns the value of `removal` as the result.
+//
+// origin: leetcode problem 1961
+func MinimumRemoval(beans []int) int64 {
+	sort.Ints(beans)
+	var total int64
+	for _, v := range beans {
+		total += int64(v)
+	}
+	removal := total
+	n := len(beans)
+	for i, bean := range beans {
+		removal = min(removal, total-int64(bean)*int64(n-i))
+	}
+	return removal
+}
