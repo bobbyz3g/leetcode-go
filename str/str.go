@@ -502,3 +502,35 @@ func SimplifyPath(path string) string {
 	}
 	return "/" + strings.Join(p, "/")
 }
+
+// SplitWordsBySeparator splits the words in the input slice by the given
+// separator character.
+// It returns a new slice containing the split words.
+// If a word is empty after splitting, it is not included in the result.
+// Example usage:
+//
+//	words := []string{"one.two.three", "four.five", "six"}
+//	separator := '.'
+//	result := SplitWordsBySeparator(words, separator)
+//
+//	// result will be []string{"one", "two", "three", "four", "five", "six"}
+func SplitWordsBySeparator(words []string, separator byte) []string {
+	res := make([]string, 0, len(words))
+	for _, word := range words {
+		newWord := &strings.Builder{}
+		for _, char := range word {
+			if byte(char) == separator {
+				if newWord.Len() != 0 {
+					res = append(res, newWord.String())
+				}
+				newWord.Reset()
+			} else {
+				newWord.WriteByte(byte(char))
+			}
+		}
+		if newWord.Len() != 0 {
+			res = append(res, newWord.String())
+		}
+	}
+	return res
+}

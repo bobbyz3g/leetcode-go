@@ -668,3 +668,45 @@ func TestSimplifyPath(t *testing.T) {
 		})
 	}
 }
+
+func TestSplitWordsBySeparator(t *testing.T) {
+	type args struct {
+		words     []string
+		separator byte
+	}
+	tests := []struct {
+		name string
+		args args
+		want []string
+	}{
+		{
+			name: "case1",
+			args: args{
+				words:     []string{"one.two.three", "four.five", "six"},
+				separator: '.',
+			},
+			want: []string{"one", "two", "three", "four", "five", "six"},
+		},
+		{
+			name: "case2",
+			args: args{
+				words:     []string{"$easy$", "$problem$"},
+				separator: '$',
+			},
+			want: []string{"easy", "problem"},
+		},
+		{
+			name: "case3",
+			args: args{
+				words:     []string{"|||"},
+				separator: '|',
+			},
+			want: []string{},
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			assert.Equalf(t, tt.want, SplitWordsBySeparator(tt.args.words, tt.args.separator), "SplitWordsBySeparator(%v, %v)", tt.args.words, tt.args.separator)
+		})
+	}
+}
