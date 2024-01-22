@@ -37,3 +37,32 @@ func TestCanCompleteCircuit(t *testing.T) {
 		})
 	}
 }
+
+func TestMaximumSwap(t *testing.T) {
+	type args struct {
+		num int
+	}
+	tests := []struct {
+		name string
+		args args
+		want int
+	}{
+		{
+			name: "case1",
+			args: args{num: 2376},
+			want: 7326,
+		},
+		{
+			name: "case2",
+			args: args{num: 9953},
+			want: 9953,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := MaximumSwap(tt.args.num); got != tt.want {
+				t.Errorf("MaximumSwap() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
