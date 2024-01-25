@@ -384,3 +384,22 @@ func SplitNum(num int) int {
 	}
 	return a + b
 }
+
+func SumIndicesWithKSetBits(nums []int, k int) int {
+	var sum int
+	for i, v := range nums {
+		if bitCount(i) == k {
+			sum += v
+		}
+	}
+	return sum
+}
+
+func bitCount(x int) int {
+	var count int
+	for x != 0 {
+		count += x & 1
+		x = x >> 1
+	}
+	return count
+}

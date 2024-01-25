@@ -450,3 +450,37 @@ func TestSplitNum(t *testing.T) {
 		})
 	}
 }
+
+func TestSumIndicesWithKSetBits(t *testing.T) {
+	type args struct {
+		nums []int
+		k    int
+	}
+	tests := []struct {
+		name string
+		args args
+		want int
+	}{
+		{
+			name: "case1",
+			args: args{
+				nums: []int{5, 10, 1, 5, 2},
+				k:    1,
+			},
+			want: 13,
+		},
+		{
+			name: "case2",
+			args: args{
+				nums: []int{4, 3, 2, 1},
+				k:    2,
+			},
+			want: 1,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			assert.Equalf(t, tt.want, SumIndicesWithKSetBits(tt.args.nums, tt.args.k), "SumIndicesWithKSetBits(%v, %v)", tt.args.nums, tt.args.k)
+		})
+	}
+}
