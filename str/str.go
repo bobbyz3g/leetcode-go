@@ -534,3 +534,40 @@ func SplitWordsBySeparator(words []string, separator byte) []string {
 	}
 	return res
 }
+
+func RomanToInt(s string) int {
+	var sum int
+	preNum := romanRuneToInt(rune(s[0]))
+	for _, r := range s[1:] {
+		num := romanRuneToInt(r)
+		if preNum < num {
+			sum -= preNum
+		} else {
+			sum += preNum
+		}
+		preNum = num
+	}
+	sum += preNum
+	return sum
+}
+
+func romanRuneToInt(r rune) int {
+	switch r {
+	case 'I':
+		return 1
+	case 'V':
+		return 5
+	case 'X':
+		return 10
+	case 'L':
+		return 50
+	case 'C':
+		return 100
+	case 'D':
+		return 500
+	case 'M':
+		return 1000
+	default:
+		return 0
+	}
+}
