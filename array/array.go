@@ -1051,3 +1051,28 @@ func MinimumRemoval(beans []int) int64 {
 	}
 	return removal
 }
+
+func GroupAnagrams(strs []string) [][]string {
+	key := func(s string) string {
+		b := []byte(s)
+		sort.Slice(b, func(i, j int) bool {
+			return b[i] < b[j]
+		})
+		return string(b)
+	}
+
+	m := make(map[string][]string)
+
+	for _, s := range strs {
+		k := key(s)
+		m[k] = append(m[k], s)
+	}
+
+	res := make([][]string, 0, len(m))
+
+	for _, s := range m {
+		res = append(res, s)
+	}
+
+	return res
+}
